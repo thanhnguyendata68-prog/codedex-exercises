@@ -1,0 +1,79 @@
+Build a Discord Bot with Python
+
+# Introduction
+# Requirements
+
+Python 3 installed.
+pip (package installer) installed.
+A Discord account.
+A Discord server with "Manager Server" permissions.
+
+# How Does a Discord Bot Work
+From the crude drawing above (I'm an engineer, not an artist), we can see how users and bots connect to the Discord backend. Each user interacts with the Discord backend to write and read messages. Then, the Discord backend servers will broadcast an event to any program listening that a new message has been posted. All we have to do is write our program to respond to message events (named bot.py here) and connect it to the Discord backend by using their API.
+
+API (Application Programming Interface) is just a fancy terminology to define how one program talks to another program. In our case, Discord's API allows us to read and send messages to its backend servers.
+
+# Setting Up Discord Developer Portal
+## Step 1. Go to Developer Portal
+## Step 2. Create a New Application
+- Click "New Application" on the top right.
+
+## Step 3. Add a Bot to Your Application
+Find the "Bot" tab in the left panel:
+And click "Add Bot":
+
+## Step 4. Get the Token for Your Application
+Click "Reset Token", write it down somewhere safe and definitely don't put it in any public place.
+
+Lastly, while we're still on the "Bot" tab, scroll down until you find a section about "Privileged Gateway Intents." In order for our Discord bot to receive messages, we'll need to toggle the "Message Content Intent" under this section:
+
+## Step 5. Invite Application to Your Server
+- Click Bot and Send Messages
+
+https://discord.com/oauth2/authorize?client_id=1519815763643470045&permissions=2048&integration_type=0&scope=bot
+
+# Writing the Python Code
+## Installing discord.py
+The code that we will write, will be responsible for the creation of the bot that will connect to the Discord backend using Discord APIs.
+
+The complicated part about writing this program is how we're going to interact with the Discord API. While we can read the API documentation and send HTTP requests directly to Discord, we have an easier way.
+
+If you are using Windows, then the following command should be used instead:
+python -m pip install -U discord.py
+
+## Log Into the Discord Server with the Bot
+import discord
+
+class MyClient(discord.Client):
+  async def on_ready(self):
+    print('Logged on as {0}!'.format(self.user))
+
+intents = discord.Intents.default()
+intents.message_content = True
+
+client = MyClient(intents=intents)
+client.run('Your Token Here') # Replace with your own token.
+
+An event is something you listen for and then respond to. For example, when a message happens, you will receive an event about it that you can respond to.
+
+## Running the Bot
+python3 bot.py
+
+If you see this output in your terminal, then your Discord bot has successfully logged into your Discord server.
+Logged on as MemeBot#3995!
+
+## Responding to Messages
+We are first checking if message.author == self.user, if the bot is the one sending the message in the chat. We don’t want the bot to keep responding to its own messages.
+Then, we have some code to respond to a special keyword $hello.
+
+## How to Respond with Memes
+ https://github.com/D3vd/Meme_Api.
+
+## Integrating the Meme API
+import requests
+import json
+
+def get_meme():
+  response = requests.get('https://meme-api.com/gimme')
+  json_data = json.loads(response.text)
+  return json_data['url']

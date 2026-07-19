@@ -1,0 +1,81 @@
+II. Aggregates
+09. Music Playlist
+
+- SQL databases are notorious for having a ton of numbers in them! In this chapter, we’ll learn to use aggregates to analyze them.
+
+- Aggregate functions are used to perform calculations and return a single value.
+The most common aggregate functions are:
+
+COUNT(): returns the number of rows.
+MAX(): returns the largest value in a column.
+MIN(): returns the smallest value in a column.
+SUM(): returns the total sum in a column.
+AVG(): returns the average value in a column.
+
+10. Counting Rows
+# COUNT()
+
+The COUNT() function counts the number of rows:
+SELECT COUNT(*)
+FROM table_name;
+
+--> This returns the total number of rows within a table.
+
+Notice how the COUNT(*) has the asterisk * within the parentheses, this is because we are counting every row.
+
+11. Old & New
+# Big & Small
+- MIN() and MAX() are exactly how they sound: they return the minimum and maximum value in a column, respectively.
+
+For example, this returns the smallest value in the plays column:
+SELECT MIN(plays)
+FROM playlist;
+
+This finds the most popular song in the table:
+SELECT title, artist, MAX(plays)
+FROM playlist;
+
+--> Notice how we are returning three columns here! So we know exactly whose song got the most plays ("Circles" by Post Malone with 2,441,849,638). Over two billion! 😮
+
+12. Total Playtime
+# SUM()
+The SUM() aggregate function takes a column and returns the total sum of the values in it.
+SELECT SUM(plays)
+FROM playlist;
+
+13. Billboard Hot 100
+# AVG()
+
+Use the AVG() function to calculate the average value of a column.
+SELECT AVG(plays)
+FROM playlist;
+
+--> This will go through the plays column and calculate the average (a single number).
+
+
+14. GROUP BY
+# GROUP BY
+- Now, knowing aggregate functions like COUNT() and AVG(), it’s time to bring GROUP BY into the fold. This is one of the most useful tools in SQL.
+
+The GROUP BY statement groups rows of data with the same values into buckets. It’s often used with aggregate functions to group the result by one or more columns.
+
+SELECT genre, COUNT(*) 
+FROM playlist 
+GROUP BY genre;
+
+---> What this does is we are grouping together all the different genres and displaying two columns: the genre and the count of that genre.
+
+SELECT genre, AVG(duration)
+FROM playlist 
+GROUP BY genre;
+---> Here, we are grouping together all the different genres and displaying two columns – the genre and the average of the song length for that genre.
+
+15. Video Games
+# Congrats!
+
+COUNT() returns the number of rows.
+MIN() returns the smallest value in a column.
+MAX() returns the largest value in a column.
+SUM() returns the total sum in a column.
+AVG() returns the average value in a column.
+GROUP BY groups the result using the common values in a column.

@@ -1,0 +1,206 @@
+01. Introduction
+# Gitting Started
+- A few years later, the web platform GitHub launched called "Google Drive for code,"
+
+In this chapter, we’ll learn the basic Git commands, take some code from our computer, and upload it to GitHub into something called a repository!
+
+Command Prompt on Windows: git --version
+
+--------------------------------------
+02. Repositories
+# GitHub Repos
+
+Hold on, so what's the difference between Git and GitHub again?
+
+- Git is the tool that allows software engineers to track changes, while GitHub is the website that hosts Git repositories. Simply put, GitHub was built on top of Git, so we cannot use GitHub without Git. 
+
+- Code is stored in repositories or repos on GitHub, which are like folders for your files and assets (e.g. images, videos, audios, fonts). 📁
+
+1. Find the "New" button anywhere on your GitHub dashboard or profile.
+2. Once you've clicked "New", you'll be directed to the Create a new repository page.
+3. Here, name your repo with anything you'd like (i.e., first-repo)! For now, we'll keep the repo public and not include a README file. 🤫
+4. Click “Create Repository” and you'll see a page that includes next-step instructions! Don't worry about all these commands, we'll cover them in the next exercises.
+
+-----------------------------------------
+03. Git Commands
+# Remote & Local
+- The GitHub repo we created is empty and sad right now, so let's work on adding some files.
+- Think of something that you can share online, it could be some code (like a .html, .css, .js, .py, .cpp, .java file) from one of our courses, a personal project, or a homework assignment.
+
+
+To get our code online, we have to work with two types of repos that connect with one another:
++ ☁️ Remote repository: a GitHub repo stored somewhere on the internet (for the latest version).
++ 🏡 Local repository: a Git repo that lives on your own computer (for drafts).
+
+
+We have the empty remote repo on GitHub, so now we need a local repo.
+- Let's go over some basic Git terminal commands to create a local repo and connect it to the remote repo.
+
+## Git Init
+- The git init command initializes a new Git repo (local repo). 
+It's the first command you run when you have a new project and want to start tracking changes. The history of your project starts here!
+
+		git init
+
+- When you run this command, Git will create a new directory named .git in your project folder. This directory contains all the information about your project's history and configuration.
+
+The terminal will return something like this once done successfully: 
+--> Initialized empty Git repository in /Users/username/Desktop/python/.git
+
+Think of this like turning a normal computer folder into a Git-tracked project.
+
+## Git Remote
+- Local repo? Check. Remote repo? Check. Now, we can connect our local repo with our remote repo.
+
+- The git remote command manages connections to remote repos. We can add a connection by:
+
+		git remote add origin <repository_url>
+
++ add: Add a new remote connection.
++ origin: Give a nickname for the remote repo's URL (origin is a common one).
++ <repository_url>: Placeholder for the remote repo's URL.
+
+Our example would be:
+	git remote add origin https://github.com/codedex-io/first-repo.git
+
+Here we're telling Git: "Yo, connect my local repo to the first-repo remote repo, and I’ll call the URL origin."
+
+--> Now, we have our local and remote repos connected! 🤝
+
+## Git Branch
+- Let's now rename the branch to main. This will be the branch we push code to, and will be default branch.
+
+		git branch -M main
+
+- The uppercase -M flag means "move" (or "rename"). We'll discuss what branches are later in the chapter.
+
+----------------------------------------------
+04. Git Workflow 
+# Working Directory & Staging
+- Now that we've connected our local & remote repos, let's turning the project folder into the local repo.
+
+The two main Git commands that we will use are git add and git commit.
+
+But first, we have to make a distinction between the working directory and the staging area:
++ 💻 Working directory is the project folder on your computer! When you make changes to the files, Git tracks them, and you can move selected changes to the staging area using the git add command.
+
++ 📋 Staging area is where we prep changes, like "I'm almost ready! One more min!" It's a temporary area where you choose what files you want to "commit" to the local repo with git commit.
+
+
+## Git Add
+- The git add command tells Git which changes you want to include in the next commit. Think of it like packing your suitcase before a trip – it's choosing what to bring.
+
+Here are three variations...
+1️⃣ Add one file
+- To add a single file to the staging area:
+			git add example.txt
+
+--> Here, the command will only add the example.txt file.
+
+🔡 Add all files
+- To add all the changed files to the staging area:
+			git add .
+
+--> Here, any new file added or changed to the working directory will be included.
+
+*️⃣ Add all files with an extension
+- To only stage files with a specified extension:
+			git add *.html
+
+--> Here, the command will only add .html files.
+
+
+## Git Commit
+- Committing files are about saving a "snapshot" of the current code. 💾 Each commit captures a moment in time and includes a helpful message to explain what changed. This helps you track your progress and separate different actions in your code.
+
+Now that we are ready to commit your staged files, use the following command:
+			git commit -m 'Your commit message here!'
+
+
+The lowercase -m flag means "message".
+
+Here's what some commit messages might look like for a typical project:
++ 'Initial commit'
++ 'Add pics to homepage'
++ 'Fixed again fr this time!!'
+
+
+Note: Commit messages get silly when you're working on your own for a while 😛, but short, clear, and descriptive messages are needed when working on a team! We want messages to help you (and your team) understand what changed and why.
+
+If the commit is successful, you should see a message appear in the terminal, something like:
+
+git commit -m 'Updated index.html with a new line'
+
+[main 09f4acd] Updated index.html with a new line
+ 1 file changed, 1 insertion(+)
+
+--> Pretty useful, right? Commit messages are almost like journal entries.
+
+--------------------------------------------------
+05. Local Push
+# Finally...
+- We are almost done! It's time to move our code from the local repo to the remote repo on GitHub.
+
+But before we push our code to GitHub, we need to make sure we have the correct files commited!
+
+
+## Git Status
+- The git status command is used to check the status of your files. It is a handy command that will show you which files are staged, unstaged, and untracked.
+	+ Staged files are ready to be committed.
+	+ Unstaged files are not yet ready to be committed.
+	+ Untracked files are new files that Git has not seen before.
+
+Simply run the following command to check the status of your files:
+			git status
+
+In short, you are saying, "Hey Git, what's the situation right now?"
+
+An example response would be:
+On branch main
+
+No commits yet
+
+Untracked files:
+  .DS_Store
+  test.py
+  output.gif
+
+---> Use git status anytime you're confused about the state of your repo.
+
+## Git Push
+- Let's now use the command we'll use to finally "push" or publish our code! This is the last step.
+
+-- The git push command is used to send your locally committed changes to your remote repository. You'll see all the changes you've made on GitHub.
+
+1️⃣ First time
+- The very first time you push to a branch, the command usually looks like this:
+			git push -u origin main
+
+The -u flag stands for "upstream". This links your local branch to the remote branch so that future push commands will automatically apply to this branch without needing to specify it each time. ✨
+
+
+2️⃣ Every other time
+- Once that's set, any commits you push to this branch will just require:
+			git push
+
+When that's done, you'll be able to refresh your GitHub repository URL, and see your changes online!
+
+-------------------------------
+06. Read Me
+
+git init for creating a new repository on our local machine.
+git remote for connecting our local repository to GitHub.
+git branch for renaming our branch.
+git add and git commit for staging and committing our changes.
+git status for checking the status of our files.
+git push for pushing our code to GitHub.
+
+This is a lot to digest! 😵‍💫 So make sure to save this:
+
+git init
+git remote add origin <repository_url>
+git branch -M main
+git add .
+git commit -m 'Your commit message here!'
+git status
+git push -u origin main

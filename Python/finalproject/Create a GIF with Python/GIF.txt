@@ -1,0 +1,6 @@
+# ImageIO Library
+pip3 install imageio
+
+Press enter, and this message should appear: Successfully installed imageio-2.19.3
+
+USING : import imageio.v3 as iio

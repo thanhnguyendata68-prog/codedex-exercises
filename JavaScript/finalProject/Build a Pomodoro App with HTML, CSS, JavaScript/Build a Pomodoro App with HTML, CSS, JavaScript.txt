@@ -1,0 +1,41 @@
+# Introduction
+# What is the Pomodoro Technique?
+- The Pomodoro Technique is a time management method developed in the late 80s by Francesco Cirillo.
+- The idea is to break down work into short intervals, usually 25 minutes, with short breaks in between sessions, usually 5 to 10 minutes
+
+# Setting Up
+
+## HTML
+- Three <link> elements are for importing specific fonts from Google Fonts.
+- A <div> element that reads "press start to begin".
+A <div> element with an "app-circle" class made of two pieces:
+A "circle-shape" for the timer, that's made of two semi circles for the "left-side" and "right-side".
+The "app-counter-box" with <div> elements for the minutes and seconds of the timer (starting at 25 minutes).
+A <button> element to start the timer. 
+
+## CSS
+- move all word inside the circle
+## JavaScript
+
+const appTimer = () => {
+  const sessionAmount = Number.parseInt(session.textContent);
+
+  if (state) {
+    state = false;
+    let totalSeconds = sessionAmount * 60;
+
+    const updateSeconds = () => {
+      // Function code here.
+    };
+    myInterval = setInterval(updateSeconds, 1000);
+  } else {
+    alert("Session has already started.");
+  }
+};
+
+- We are grabbing the text "25" in our session variable and converting it to a Number and assigning that number to sessionAmount
+- If our state is True, we do the following:
+	+ Convert the sessionAmount, the time left, to just seconds.
+	+ Define a function called updateSeconds(), (more on that, shortly).
+ 	+ Use the setInverval() Web API function to run our updateSeconds() function every 	1 second (or 1000 milliseconds). This is assigned to our myInterval function from 	earlier, so it can be turned off when the timer reaches 0.
+- Else, if the state is False, we alert the user that the "Session has already started". This prevents the user from repeatedly clicking on the start button which would cause multiple calls to the updateSeconds() function and would cause the timer to count at an irregular speed.

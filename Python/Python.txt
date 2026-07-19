@@ -1,0 +1,429 @@
+PYTHON
+
+I. Python
+
+1. Hello World
+print()
+
+2. Variables
+- Variables are used for storing data values
+- Think of it like a box: slap on a label, and it can store stuff
+
+- Data Types : 
++ Integer or int, is a whole number Like : year = 2023
++ Float or float, is floating-point number Like : pi = 3.14159
++ String or str, is used for storing text, and is warpped in double quotes " " Like message = "good nite" 
++ Boolean or bool, is stores a value that can only be either true or false
+For example : late_to_class = False, cranky = True
+
+- Temperature
++ Operators : + (addition) -(Subtraction) *(multiplication) /(Division)
+
+- BMI
++ Modulo (%) 
+- The % modulo operation doesn't give you the result of a division - it gives you the remainder
+score = 5 % 3       # score is 2
+score = 5 % 2       # score is now 1
+score = 5 % 1       # score is now 0
+
++ Exponents
+Python can also perform exponentiation such as 2³ or 10².
+score = 2 ** 2      # score is 4
+score = 2 ** 3      # score is now 8
+score = 2 ** 4      # score is now 16
+
+print(score)        # Output: 16
+
+- Pythagorean Theorem
++ User Input
+username = input('Enter your name: ')
+
+print(username)
+
++ Int()
+age = int(input('What is your age? '))
+
+print(age)
+
+- Currency
+Data types: int, float, str, bool.
+Arithmetic operators: +, -, *, /.
+The % modulo finds the remainder.
+The ** exponentiation finds the exponent.
+The input() function is used to get user input.
+The int() function converts a value into an integer number.
+
+- Errors in Python 
+
++ SyntaxError : This occurs when invalid Python code is present
+print(Hello, World!
+# SyntaxError: invalid syntax
+
++ NameError: This occurs when you're trying to use a variable without declaring it first
+print(greetings)
+# NameError: name 'greetings' is not defined
+
++ TypeError : This occurs when the data type you're using doesn't suit what you're trying to do 
+message = 'The air quality is '
+print(message + 28)
+# TypeError: can only concatenate str (not "int") to str
+
+
+3. Control Flow
+- Control Flow
+import random
+
+num = random.randint(0, 1)   # Roll a random number that's either 0 or 1
+if num > 0.5:
+  print('Heads')
+else:
+  print('Tails')
+
+- Grades
++ If statement
+if condition:
+  # code inside
+if grade > 60:
+  print('You passed!')
+
++ Else
+if grade > 60:
+  print('You passed.')
+else:
+  print('You failed.')
+
+- pH Levels
+
+== equal to
+!= not equal to
+> greater than
+< less than
+>= greater than or equal to
+<= less than or equal to
+
++ Elif
+if grade > 90:
+  print('A')
+elif grade > 80:
+  print('B')
+elif grade > 70:
+  print('C')
+elif grade > 60:
+  print('D')
+else:
+  print('F')
+
++ Random
+
+- Logical Operators
++ Logical operators, also known as Boolean operates, combine and evaluate two conditions
+and returns True if both conditions are True, and returns False otherwise.
+or returns True if at least one of the conditions is True, and False otherwise.
+not returns True if the condition is False, and vice versa.
+
+if hunger > 4 and anger > 1:
+  print('Hangry')
+if coffee > 0 or bubble_tea > 0:
+  print('😊')
+if not tired:
+  print('Time to code!')
+
+- Sorting Hat
+Control flow is the order in which the program's code executes.
+if statement tests a condition for truth and executes the code if it's True.
+elif clause can be added between if and else.
+else executes the code if none of the above is True.
+Relational operators are used to compare two values: ==, !=, >, >=, <, <=.
+Logical operators are used to combine two or more conditions: and, or, not.
+
+4. Loops
++ Enter Pin
+	Loop - while 
+Put while with the purpose is do again or one more try
+print('BANK OF CODÉDEX')
+
+pin = int(input('Enter your PIN: '))
+
+while pin != 1234:
+  pin = int(input('Incorrect PIN. Enter your PIN again: '))
+
+if pin == 1234:
+  print('PIN accepted!')
++ Guess Number
+	- While Loop
+while condition:
+  # code inside
+
++ Detention
+ - Range() : using 	for
+for i in range(6):
+  print(i)
+
++ 99 Bottles
+- Squares
+# String concatenation
+for i in range(5):
+  print('The square of ' + str(i) + ' is ' + str(i*i))
+
+- String Interpolation
+# String interpolation
+
+for i in range(5):
+  print(f'The square of {i} is {i*i}')
+
+for i in range(99, 0, -1):
+
++ Fizz Buzz
+------------------------------------------------------
+V. Lists
+
+22.Grocery
+# Lists
+📦 = ⚽️🏀⚾️🥎🏐🏈
+list_name = [item1, item2, item3, item4]
+
+temp = [86, 80, 82, 87, 79, 80, 82]
+ph = [7.2, 7.1, 7.0, 7.0, 7.2, 7.1]
+now_playing = ['Barbie', 'Oppenheimer', 'Talk to Me', 'Blue Beetle']
+
+List items allow duplicate values.
+Lists can have values with different data types.
+There's no limit to how much data a list can hold.
+
+23. To-Do List
+# Index
+vowels = ['a', 'e', 'i', 'o', 'u']
+- Index:   0    1    2    3    4
+- Index:  -5   -4   -3   -2   -1 (negative index)
+
+# Slicing
+vowels = ['a', 'e', 'i', 'o', 'u']
+
+print(vowels[0 : 3])
+print(vowels[1 : 3])
+vowels = ['a', 'e', 'i', 'o', 'u']
+	output:
+print(vowels[0 : 3])
+print(vowels[1 : 3])
+# IndexError
+For example, when we try to do vowels[5], we will get something like:
+Traceback (most recent call last):
+    print(vowels[5])
+IndexError: list index out of range
+
+24. Inventory
+# Built-in functions
+The len() function returns the total length of a list.
+The max() function returns the maximum value in a list.
+The min() function returns the minimum value in a list.
+
+25. Reading List
+# List Methods
+List Method	Description
+.append()	Add an item to the end of the list
+.clear()	Remove all items from the list
+.copy()		Return a shallow copy of the list
+.count()	Return the number of times the value appears in the list
+.extend()	Appends another list to the current list by extending it
+.index()	Returns the index of a value inside the list
+.insert()	Insert an item at a specified position in the list
+.pop()		Remove an item from a specified position in the list
+.remove()	Remove an item from the list based on the value of the item
+.reverse()	Reverses the list in place
+.sort()		Sorts the list in place
+
+26. Mixtape
+# Iterate Over a List
+# For-in
+snowfall = [0.3, 0.0, 0.0, 1.2, 3.9, 2.2, 0.8]
+
+for i in snowfall:
+  print(i)
+
+## for-in with range() and len()
+range() function returns a sequence of numbers, from 0 to a number.
+len() function returns the length of the list.
+
+snowfall = [0.3, 0.0, 0.0, 1.2, 3.9, 2.2, 0.8]
+
+for i in range(len(snowfall)):
+  print(snowfall[i])
+
+27. Bucket List
+Lists are used to store different items in a single variable.
+An index is an item's position in a list. Python lists are 0-indexed.
+Slicing can access certain parts of a list with name[start:end].
+Python has built-in functions like len(), max(), min().
+Lists have built-in methods like .append(), .insert(), .remove(), .pop().
+We can iterate over a list using for-in.
+
+Nested Lists
+list = ['a', 'b', 'c', 1, 2, 3]
+print(list[3][1])
+
+----
+VI. Functions
+28. D.R.Y (“Don't Repeat Yourself” (DRY) )
+- Function is a reusable block of code that performs a specific task.
+print()
+input()
+len()
+
+29. Fortune Cookie
+# Define a Function
+1) Define and 2) Call
+def name():
+  # The code inside
+
+The def keyword.
+The function name, followed by a pair of parentheses ().
+The colon :
+
+The code inside the function is called the body of the function. And just like if statements and while loops, the code inside a function must be indented.
+
+# Call a Function
+def say_hello():
+  print('Howdy! 🤠')
+  print('How are you?')
+
+say_hello()
+
+30. Mars Orbiter
+# Parameters and Arguments
+So far, the functions we've created don't take in any input(s)
+- Parameters are just a fancy word for input. They are variables that a functions takes in.
+
+The difference between a parameter and an argument:
++ The parameter is the variable listed inside the parenthesis in the function definition(when we define the function).
++ The argument is the value sent to the function (when we call the function) 
+
+31. Calculator
+# Return Value
+def function_name():
+  # The code inside
+  return value
+- When we don't add it, Python will implicitly return the default value, None. as the return value.
+def add(x, y):
+  answer = x + y
+  return answer
+- So a return keyword is added, plus the variable we want to output.
+
+# Print vs. Return
+- Weell, print() functions can be anywhere in the program - inside or outside of a function, whereas return is the output of a function; 
+
+- As a rule of thumb:
++ Use return in a function when you want to send value(s) from one point in the code to another
++ Use print() in a function when you want to display some text to the user
+# Write code below 💖
+
+def add(a, b):
+  answer = a + b
+  return answer
+
+def subtract(a, b):
+  answer = a - b
+  return answer
+
+def multiply(a, b):
+  answer = a * b
+  return answer
+
+def divide(a, b):
+  answer = a / b
+  return answer
+
+def exp(a, b):
+  answer = a ** b
+  return answer
+
+print(add(1, 2))
+print(subtract(2, 3))
+print(multiply(4, 5))
+print(divide(5, 10))
+print(2, 3)
+
+32. Stonks
+# Scope
+def add(x, y):
+  answer = x + y
+  return answer
+
+print(answer)
+- When we run this code, we will get an error: NameError: name 'answer' is not defined
+This is due to sth called scope
+
+Scope determines where in the program a variable is visible and can be used.
+
+33. Drive-Thru
+The "Don't Repeat Yourself" methodology.
+We've been using built-in functions like print() and input() all along.
+How to define and call a function – the two-step process.
+Inputs with parameters and arguments.
+Outputs with the return keyword.
+Function scope vs. global scope.
+
+def function_name(parameter1, parameter2):
+  # The code inside
+  return value
+# Write code below 💖
+
+def get_item(number):
+  if number == 1:
+    return ('🍔 Cheeseburger')
+  elif number == 2:
+    return ('🍟 Fries')
+  elif number == 3:
+    return ('🥤 Soda')
+  elif number == 4:
+    return ('🍦 Ice Cream')
+  elif number == 5:
+    return ('🍪 Cookie')
+  else:
+    return ("No choice!")
+
+def welcome():
+  option = [
+    '1)🍔 Cheeseburger',
+    '2)🍟 Fries\n',
+    '3)🥤 Soda\n',
+    '4)🍦 Ice Cream\n',
+    '5)🍪 Cookie'
+  ]
+  print(option)
+
+welcome()
+customer = int(input("Please order your food: "))
+print(get_item(customer))
+
+----------Intro to Lambdo
+# The function with no name
+- The syntax for lambda functions is as follows: : lambda arguments: expression
++ First, we use the reserved lambda keyword to begin defining the function. Then, we can use one or more arguments (separated by commas), followed by a : colon. On the other side of the colon is the expression that may use the arguments to produce an output.
+
+def double(x):
+  return x * 2
+
+to Lambda function :
+double = lambda x: x * 2
+
+print(double(4))
+# Output: 8
+
+# Use Cases
+Lambdas are particularly useful in situations where a small, one-time-use function is needed.
+- When using functions like map() and filter() to perform operations on collections like lists, they require a function as one of their parameters!
+numbers = [1, 2, 3, 4, 5]
+
+tripled_numbers = list(map(lambda x: x * 3, numbers))
+
+odd_numbers = list(filter(lambda x: x % 2 == 1, numbers))
+
+print(tripled_numbers)  # Output: [3, 6, 9, 12, 15]
+print(odd_numbers)      # Output: [1, 3, 5]
+
+# Using Multiple Arguments
+compound_word = lambda str1, str2: str1 + str2
+
+word = compound_word('fire', 'fly')
+
+print(f'The compound word is: {word}')

@@ -1,0 +1,410 @@
+			JavaScript
+I. The Console 
+
+01. Setting up
+console.log("Hello internet!");
+
+02. The Console
++ The Web Console is a feature in your browser that can run JavaScript code
+console.log("Hello internet!");
+
++ Console Log 
+- They can be double quotes " or single quotes ', but the opening and closing quote marks have to match
+
+03. Letter Tree
++ Line By Line
+
+04. Secret Recipe
++ Comments are used to document what our code does
++ Single Line Comments  // console.log("Nada");
++ Multi-line Comments 
+  - We can create a multi-line comment using /* to start the comment and */ to end it:
+
+05. Receipt
+The console.log() method outputs messages to the Console window.
+JavaScript code runs one line at a time, from top to bottom.
+Single line comments are created using the // forward slashes.
+Multi-line comments are started by /* and closed with */.
+
+II. Variables
+06. Let & Const
++ Variables
+- In Js, variables are used for storing data values that can be used later in the program
+- let is used for variables where the value will change (probably change if having a new value)
+- const is used for variable where the value will stay constant (can't be change)
+const userId = "1618033988";
+let userName = "Leeroy Jenkins";
+
+07. Data Types 
++ Number : It can be used to represent whole numbers, fractions or precise measurements
+	let age = 28;
+	const pi = 3.14;
++ String : A string is used for storing text or sequence of characters. wrapped in double quotes or sing qoutes
+	let message = "good nite";
+	let user = '@zuck';
+	const company = "Codédex";
++ Boolean : A boolean daat type, or bool, stored a value that can only be either true or false. In Js, it's lowercased true or false.
+	let hungry = true;
+	let lateToMeeting = false;
+	const earthIsFlat = false;
++ Undefined
+- Any variable that is declared but hasn't yet received a value is undefined
+	let startDate = "01/23/2022";
+	let endDate;
+
+	console.log(startDate);  // 01/23/2022
+	console.log(endDate);    // undefined
+
+08. Temperature
++ Operators
+	+ Addition
+	- Subtraction
+	* Multiplication
+	/ Division
+	% Modulo (returns the remainder)
+	** Exponent (covered in the next exercise)
+let score = 0;        // Declare score and initialize it
+
+score = 4 + 3;        // score is now 7
+score = 4 - 3;        // score is now 1
+score = 4 * 3;        // score is now 12
+score = 4 / 3;        // score is now 1.3333
+score = 4 % 3;        // score is now 1
+
+console.log(score);   // Output: 1
+
+09. BMI
++ Exponents :JavaScript can also perform exponentiation such as 2³ or 10².
+
+let score = 0;
+
+score = 2 ** 2;      // score is 4
+score = 2 ** 3;      // score is now 8
+score = 2 ** 4;      // score is now 16
+score = 2 ** 5;      // score is now 32
+
+console.log(score);  // Output: 32
+
+10. Planet Weight
+let and const keywords.
+Data types: Numbers, Strings, Boolean, Null, and Undefined.
+Arithmetic operators: +, -, *, /.
+% modulo operator finds the remainder of division between two numbers.
+** exponent operator raises one number to the power of another number.
+
+Errors in JavaScript
++ SyntaxError: happens when invalid JavaScript code is present while the program is running.
+console.log("Hello, World! 🌍"
+                    ^^^^^^^^^^^^^^^^^^
+
+SyntaxError: missing ) after argument list
+
++ ReferenceError: happens when you try to use a variable that isn't defined.
+let score = x + 2;
+                 ^
+
+ReferenceError: x is not defined
+
++ TypeError: happens when a data type is being misused during an operation.
+meaningOfLife = 43;
+              ^
+
+TypeError: Assignment to constant variable.
+
+III. Conditionals
+
+11. Coin Flip
++ Control Flow
+let num = Math.random();
+
+if (num > 0.5) {
+  console.log("Heads");
+} else {
+  console.log("Tails");
+}
+
+12. Good Morning
++ If statement
+if (grade > 60) {
+  console.log("You passed!");
+}
+
+13. Good Afternoon
++ Else Clause
+if (condition) {
+  // Do something
+} else {
+  // Do something else 
+}
+
++ Comparison Operators
+=== strict equal
+!== strict not equal
+> greater than
+>= greater than or equal
+< less than
+<= less than or equal
+
+14. pH Levels
++ else if
+if (conditionA) {
+  // Do this
+} else if (conditionB) {
+  // Do this, instead
+} else {
+  // Do this if none of the above are true
+}
+
+15. Magic 8 Ball
++ Math.random()
+console.log(Math.random());
+
+To get a random integer between 0 to 9:
+Math.floor(Math.random() * 10);
+
+16. Air Quality Index
++ Logical Operators
+The AND logical operator && returns true if both conditions are true, and returns false otherwise.
+The OR logical operator || returns true if at least one of the conditions is true, and false otherwise.
+The NOT logical operator ! returns true if the condition is false, and vice versa.
+
+17. Rock Paper Scissors
+Conditionals control the order in which the program's code executes.
+if statement checks a condition for truth and executes the code if it is.
+else executes the code if none of the above is True.
+One or more else ifs can be added between if and else.
+Comparison operators compare two values: ===, !==, >, >=, <, <=.
+Logical operators combine two or more conditions: &&, ||, !.
+
+IV. Loops
+18. Duck Duck Goose
+
+let randomNumber = Math.floor(Math.random() * 10);
+
+while (randomNumber !== 7) {
+  console.log("Duck 🦆");
+  randomNumber = Math.floor(Math.random() * 10);
+}
+
+console.log("Goose! 🦢");
+
+19. Lucky Number
+# While Loops
+
+while (condition) {
+  // Code here
+}
+
+20. Not Tell Lies
+# Iterators in Loops
+let i = initialValue;
+
+while (condition) {
+  // Update the i iterator variable
+}
+
+# for Loops
+for (let i = initialValue; condition; updateIterator) {
+  // Code here
+}
+for (let i = 1; i <= 10; i++) {
+  console.log(i);
+}
+
+21. Even The Odds
+# continue
+for (let i = 0; i < 5; i++) {
+  if (i == 1) {
+    continue;
+  }
+  console.log(i);
+}
+continue skips the rest of the current iteration and jumps straight to the next one.
+
+# break
+for (let i = 0; i < 5; i++) {
+  if (i == 3) {
+    break;
+  }
+  console.log(i);
+}
+break stops the entire loop immediately, preventing any further iterations.
+// Write code below 💖
+
+for (i = 1; i <= 50; i++){
+  if (i % 2 !== 0){
+    continue;
+  }
+  console.log(i)
+
+  if (i == 42){
+    break;
+  }
+}
+
+
+22. Based Numbers
+You can use loops to perform the same operations over and over.
+A while loop runs as long as a condition is true.
+A for loop runs a certain amount of times, based on an iterator variable.
+The continue keyword ends the current iteration in a loop, given a true condition.
+The break keyword exits the loop entirely, given a true condition.
+
+Nested Loops
+-----------------------------------------------------
+V. Arrays
+23. Five Boroughs 
+# Arrays
+- array = ["Leonardo", "Michaelangelo", "Donatello", "Raphael"];
+
+24. Grocery Trip
+# Index
+- An index is an element's position in an array.
+let fruits = ["strawberries 🍓", "blueberries 🫐", "bananas 🍌"];
+console.log(fruits[0]);
+
+25. Times Table
+# The .length Property
+arrayName.length;
+
+Note: The .length property is used with a period, or dot notation.
+const testScores = [78, 96, 100, 88, 85, 81, 79];
+const numberOfScores = testScores.length;
+
+console.log(numberOfScores); // Output: 7
+
+# Looping Over Arrays
+const musicNotes = ["Do", "Re", "Mi", "Fa", "So", "La", "Ti"];
+
+for (let i = 0; i < musicNotes.length; i++) {
+  console.log(musicNotes[i]);
+}
+
+or 
+const musicNotes = ["Do", "Re", "Mi", "Fa", "So", "La", "Ti"];
+let counter = 0;
+
+while (counter < musicNotes.length) {
+  console.log(musicNotes[counter]);
+  counter++;
+}
+
+26. Music Playlist
+# Adding Elements
+const bandMembers = ["J.C.", "Joey", "Chris", "Lance", "Justin"];
+
+bandMembers[1] = "Nick";
+
+console.log(bandMembers);
+// Output: ["J.C.", "Nick", "Chris", "Lance", "Justin"]
+
+For example, you can add new elements to the beginning and end of an array with the .unshift() and .push() methods, respectively:
+myArray.unshift(newValue);
+
+myArray.push(newValue);
+
+# Removing Elements
+- Not only can we add elements to an array, we can also remove them as well with the .shift() and .pop() methods.
+const greeks = ["Zeus", "Hera", "Poseidon", "Apollo", "Hermes", "Dionysus", "Hades"];
+
+const shiftedElement = greeks.shift();
+const poppedElement = greeks.pop();
+
+console.log(shiftedElement);
+console.log(poppedElement);
+console.log(greeks);
+
+/*
+Output:
+Zeus
+Hades
+["Hera", "Poseidon", "Apollo", "Hermes", "Dionysus"]
+*/
+The .shift() method removes and returns the first element in an array, shifting the indices of the remaining elements back by 1.
+
+
+Remember: the .push() and .pop() methods are for the end of the array; the .unshift() and .shift() methods are for the beginning of the array.
+
+const musicPlaylist = [
+  "Tom Sawyer",
+  "Sabotage",
+  "I Wanna Dance With Somebody",
+  "Don't Speak",
+  "Bulls On Parade",
+  "Thriller",
+  "The Breaks",
+  "Brick",
+  "Aeroplane Over the Sea",
+  "Tubthumping"
+];
+
+// Remove first element
+musicPlaylist.shift();
+
+// Remove last element
+musicPlaylist.pop();
+
+// Add to end of array
+musicPlaylist.push("Blue (Da Ba Dee)");
+
+// Add to start of array
+musicPlaylist.unshift("Gangnam Style", "Harlem Shake");
+
+console.log(musicPlaylist);
+
+27. Where's Waldo
+# Array Methods:
+
+# .indexOf()
+But what if we wanted to find out the index of a particular element's value? We can do that with the .indexOf() method:
+// Write code below 💖
+
+const stories = [
+  "Sorcerer's Stone",
+  "Chamber of Secrets",
+  "Prisoner of Azkaban",
+  "Goblet of Fire",
+  "Order of the Phoenix",
+  "Half-Blood Prince",
+  "Deathly Hallows"
+];
+
+console.log(stories.indexOf("Half-Blood Prince")); // Output: 5
+
+# .includes()
+- The .includes() method checks if an element with the value parameter exists in the array, and returns a Boolean true if it does or false otherwise. Here's an example:
+const myArray = [1, 2, 3];
+
+console.log(myArray.includes(3)); // output :true
+console.log(myArray.includes(42)); // output : false
+
+
+// Write code below 💖
+
+const characters = [
+  "The Wally Watchers",
+  "Wilma",
+  "Fritz",
+  "Wizard Whitebeard",
+  "Odlaw",
+  "Waldo",
+  "Woof"
+];
+// checks charcters array includes an element
+if (characters.includes("Waldo")){
+  // find and save "Waldo"
+  const waldoIndex = characters.indexOf("Waldo")
+  console.log(`Found Waldo at index ${waldoIndex}!`)
+} else {
+  console.log("Not found")
+}
+
+28. DNA
+Creating, accessing, and updating an array with square brackets.
+Looping over arrays with the .length property.
+Adding and removing array elements with various methods:
+.push()
+.unshift()
+.shift()
+.pop()
+Confirming if a given element or value exists in an array with the .includes() and .indexOf() methods.

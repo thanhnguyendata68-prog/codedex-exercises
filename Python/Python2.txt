@@ -1,0 +1,219 @@
+VIII. Classses & Object
+34. Restaurants
+# Classes 
+- Classes serve as a template for the objects created using that class. Simply put, a class is like a blueprint. It can make a bunch of objects with identical sets of attributes, similar to how a car manufacturer can use a model blueprint to build hundreds of cars with different colors, interiors, wheels.
+
+In our example, 📜 (class) ➡️ 👩🏼‍💻👨🏻‍💻👩🏽‍💻👩‍💻🧑🏾‍💻 (objects). 
+
+class Name:
+  # Attributes inside
+
+class Student:
+  name = ''
+  year = 0
+  gpa = 0.0
+  enrolled = False
+
+The Student class has four attributes:
+
+.name of the type str (text string)
+.year of the type int (integer number)
+.gpa of the type float (decimal number)
+.enrolled of the type bool (boolean value)
+
+-- With this class, we can represent each class attribute as a variable, and we will learn how to access or change them in later sections!
+
+# Object
+- An object is an "instance" of a class. A class is simply a template for creating objects, which are individual copies of the class with actual values. 
+
+The syntax for creating an object looks like this:
+wednesday = Student()
+Now that we have created an object of Student and saved it to wednesday, we can access and edit the class attributes by using the dot syntax, .attribute:
+wednesday.student_id = 1113
+wednesday.name = 'Wednesday Addams'
+wednesday.year = 11
+wednesday.gpa = 4.0
+wednesday.enrolled = True
+
+You can check all the attributes available on the wednesday object with the built-in vars() function, as follows:
+print(vars(wednesday))
+
+---> We don't have to stop there; we can create as many students as we want using just one Student class.
+
+36. Favorite Cities
+# The __init__() Method
+- The last method, we did too many steps. Using __init__() in our class definition lets us construct objects with unique attributes. We create a new Student() object, we can pass in values for each attribute to initialize the new object, all in a single line!
+class Student: 
+  def __init__(self, name, year, gpa, enrolled):
+    self.name = name
+    self.year = year
+    self.gpa = gpa
+    self.enrolled = enrolled
+
+daniel = Student('Daniel Li', 10, 4.0, True)
+
+Note that __init__() also uses a separate parameter called self. This represents the object we'll create out of Student()
+
+daniel.name = 'Daniel --------->  self.name = name.
+
+The __init__ might be more effort upfront, but it saves us so much time if we create hundreds or thousands of the Student objects.
+
+37. Bank Accounts
+# Instance Methods
+.insert()
+.append()
+.remove()
+
+- To implement a method, we need to define one inside the class. For example, if we want to create a method called .display_info(), we would define it like so:
+class Student: 
+  def __init__(self, name, year, enrolled, gpa):
+    self.name = name
+    self.year = year
+    self.enrolled = enrolled
+    self.gpa = gpa
+  
+  def display_info(self):
+    print('The student ' + self.name + '\'s GPA is ' + str(self.gpa) + '!')
+mitsuha = Student('宮水三葉', 11, False, 4.0)
+taki = Student('立花瀧', 11, True, 3.8)
+
+mitsuha.display_info()
+taki.display_info()
+
+# Output:
+# The student 宮水三葉's GPA is 4.0!
+# The student 立花瀧's GPA is 3.8!
+Note: Take a look at def display_info(self). Like what we learned about with the __init__() method, the first argument in the methods we make is always self. Every method has to have this self argument. The object attached to the method call is what self refers to. 
+
+38. Pokedex
+Create a class and initialize it with certain attributes.
+Create objects based on these classes and set values for these attributes.
+Create classes using the special __init__() method.
+Create instance methods that will update or use these class attributes.
+
+IV. Modules
+# Modules
+- A module is any file with a .py extension. But more ideally, a module contains statements, functions, and class definitions that revolve around a similar purpose.
+
+random module to generate a random number.
+math module to calculate the square root.
+datetime module to work with dates and times.
+
+# Random Choices
+import random
+
+dice = [1, 2, 3, 4, 5, 6]
+
+print(random.choices(dice, k=3))
+
+# Multiple Modules
+import random, math
+
+40. Solar System
+# The from Keyword
+from module_name import objects
+
+# The as Keyword
+import random as rd
+
+from random import sample as samp
+
+example = samp(['Stark', 'Targaryen', 'Baratheon', 'Greyjoy', 'Lannister'], 2)
+
+print('Example: ' + example[0] + ' ' + example[1])
+
+
+41. Countdown
+# Create Your Own Module
+import calculator
+import datetime
+
+calculator.add(3, 4)        # 7
+calculator.subtract(3, 4)   # -1
+calculator.multiply(3, 4)   # 12
+calculator.divide(3, 4)     # 0.75
+calculator.exp(3, 4)        # 81
+
+# datetime Module
+The datetime module specializes in dates and times. Just like random, it comes with Python by default and can simply be imported.
+
+The datetime module has a date object that accepts the following properties:
+
+.year: An integer between 1 and 9999.
+.month: An integer between 1 and 12.
+.day: An integer between 1 and the number of days in a given month.
+
+-- The syntax for a date is datetime.date(year, month, day), like so:
+import datetime
+
+release_date = datetime.date(1991, 2, 20)
+print(release_date)     # Output: 1991-02-20
+
+print(f'Python was released in {release_date.year}.')
+# Output: Python was released in 1991.
+
+datetime.date.today()
+
+## bday_messages.py
+## main.py
+
+import datetime
+import random
+
+# 1. Your list of messages
+bday_messages = [
+    'Hope you have a very Happy Birthday! 🎈',
+    "It's your special day – get out there and celebrate! 🎉",
+    'You were born and the world got better – everybody wins! 🥳',
+    'Have lots of fun on your special day! 🎂',
+    'Another year of you going around the sun! 🌞'
+]
+random_message = random.choice(bday_messages)
+
+# 2. Create the date objects
+today = datetime.date.today()
+next_birthday = datetime.date(2026, 8, 19)  # Make sure the year is in the future!
+
+# 3. Calculate the difference
+days_away = next_birthday - today
+
+# 4. Control flow
+if today == next_birthday:
+    print(random_message)
+else:
+    print(f'My next birthday is {days_away.days} days away!')
+
+42. Forty Two
+# Python Packages
+- Modules are the .py files that contain definitions for functions, classes, and variables. Packages are the folders that contain the modules.
+
+Here are some examples of packages and libraries in Python:
+
+🔢 NumPy, Pandas, SciPy for data analysis.
+📊 Matplotlib, Seaborn, Plotly for data visualization.
+🧠 Scikit-learn, TensorFlow for machine learning.
+🌐 Beautiful Soup for web scraping.
+👾 Pygame for mini-games.
+🤖 NLTK, OpenAI for chatbots.
+🛠️ OS, Requests for automation.
+
+# Installing with pip3
+pip3 install matplotlib
+
+The package can then be imported in a Python file, like so:
+import matplotlib
+
+And then to access the various modules, functions, and other tools, we use . dot notation. For example, we can now use Matplotlib's pyplot module:
+import matplotlib.pyplot
+
+43. Zen of Python
+Linking modules with the import keyword.
+Some built-in modules from the Python standard library.
+Importing specific tools from modules with the from and as keywords.
+Packages and installing them with pip.
+
+"Explicit is better than implicit." — This is why we explicitly write print() instead of just leaving strings floating in a file like we ran into earlier! Python loves clarity.
+
+"Simple is better than complex." — It's always better to write clean, readable code than over-engineered, confusing code just to look clever.
+
+"Readability counts." — We write code for humans to read, and only incidentally for computers to execute.

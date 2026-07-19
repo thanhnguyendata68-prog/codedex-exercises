@@ -1,0 +1,232 @@
+I. Elements
+
+1. Shooting Star
+- HTML is a markup language; it marks up every piece of content on a web page and defines its type.
+HTML : Create the website skeleton
+CSS : Modify the website appearance
+JavaScript : Make it interactive
+
+2. Elemental
+# Elements
+- An element usually consists of an opening tag, the content, and a closing tag. A tag is enclosed in angle brackets. 
+<p>Hello World!</p>
+
+<p> is the opening tag.
+Hello World! is the content.
+</p> is the closing tag.
+
+<body>
+  <p>👋 I'm a new web developer!</p>
+</body>
+<body> opening tag begins the "body".
+<p>👋 I'm a new web developer!</p> is some text in a paragraph element.
+</body> closing tag ends the "body".
+
+# Indentation
+- While indenting HTML code isn't required, doing so is good practice because it makes your code easier to read and visualize the nesting levels.
+--> We recommend two spaces for indentations.
+
+3. Newspaper
+# Headings - <h1>
+<h1>Heading level 1</h1>
+<h2>Heading level 2</h2>
+<h3>Heading level 3</h3>
+<h4>Heading level 4</h4>
+<h5>Heading level 5</h5>
+<h6>Heading level 6</h6>
+
+Note: Only one <h1> element should be used in a file.
+
+# Line Break
+- Suppose we also want to add a new line within a paragraph element. Pressing enter won't do us any good because HTML ignores multiple space and line breaks within elements.
+
+- So we must use the <br> break tag here!
+
+<body>
+  <h1>Breaking News</h1>
+  <p>Florida man robs convenience store with an alligator.<br>Leaves a baby Crocs behind.</p>
+</body>
+
+- A self-closing tag doesn't need to be closed manually by a closing tag.. it does not have a separate closing </tag>. The break tag is the first one we have encountered. 
+
+04. Corporate Talk
+# test Formatting
+<b> element to bold text.
+<i> element to italicize text.
+<u> element to underline text.
+<s> element to strikethrough text.
+
+5. Sous-Chef
+# Lists
+<ul> Unordered lists "." type <li></li>
+<ol> Ordered lists "1"
+
+6. Lost Pet
+# Links
+<a href="https://archive.org/web">Internet Archive</a>
+
+# Images
+<p>Here's a cute pic:</p>
+<img src="https://i.redd.it/5unn16axx1v81.jpg">
+
+07. Favorite Band
+HTML elements, tags, and indentation.
+Heading tags: <h1> - <h6>.
+Paragraph and line breaks: <p>, <br>.
+Text formatting: <b>, <i>, <u>, <s>.
+Unordered and ordered lists: <ul>, <ol>.
+Links and images: <a>, <img>.
+
+Developer Tools
+# Inspect
+- Developer Tools allow us to create, test, and debug web development software. Current web browsers provide integrated developer tools, which allow us to inspect a website.
+
+# Common Features
+------------
+II. Structure
+8. Blueprint
+# HTML Structure
+- The <!DOCTYPE html> is the document type declaration that appears at the top of a .html file and tells the browser that out file is written in HTML5. This is used with a <html> element containing all the code processed on the page.
+<!DOCTYPE html>
+<html>
+  Code goes here
+</html>
+
+- Notice how the <!DOCTYPE html> doesn’t have a closing tag, while <html> does.
+
+- Inside <html>, there should be two elements:
++ <head> contains all the info for your browser that's not visible on the page
++ <body> contains all of the content that you will end up seeing on the page. 
+<!DOCTYPE html>
+<html>
+  <head>
+    Some code goes here
+  </head>
+  <body>
+    A lot more goes here
+  </body>
+</html>
+
+- The <title> element goes in the <head> and assigns text to the browser tab.
+
+9. Family Tree
+# Parent & Children
+- The elements in our HTML file are arranged much like a family tree. Most individual elements can be parents with one or more child elements
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Website</title>
+  </head>
+  <body>
+    <p>Well, <i>howdy</i> there!</p>
+  </body>
+</html>
+
+<head> and <body> are children of <html>.
+<title> is the child of <head>.
+<i> is child of <p> and grandchild of <body>.
+
+# Siblings
+- Elements can also be siblings if they share a direct parent element. Take this unorder list, for instance: 
+<body>
+  <ul>
+    <li>🍄 Mario</li>
+    <li>🐢 Luigi</li>
+  </ul>
+</body>
+- The two <li> elements are siblings because both are children of the same parent, the <ul> element.
+
+10. Craigslist Ad
+# Comments
+- Comments are useful for taking notes about the logic and intentions behind different parts of our web page.
+<!-- I am a comment. -->
+<p>And I'm not a comment!</p>
+
+- Everything surrounded by the <!-- and --> comment markers is ignored and not rendered on the browser.
+
+# Inline vs. Multi-line
+<!--
+  This is also a comment.
+-->
+
+11. Wiki Article
+# Attributes
+- Attributes are additional settings that we can use to customize an element.
+<element name="value">Content</element> 
++ The name indicates the attribute we are setting for our element
++ The "value" for our attribute is surrounded by " double quotes
+
+<ol>
+  <li>Power ⚡</li>
+  <li>Courage 🔥</li>
+  <li>Wisdom 🦉</li>
+</ol>
+
+If we want to use lowercase letters instead:
+<ol type="a">
+  <li>Power ⚡</li>
+  <li>Courage 🔥</li>
+  <li>Wisdom 🦉</li>
+</ol>
+
+## Attributes in Image Tag
+<img src="https://www.codedex.io/images/tier1.png">
+
+## Attribute in Anchor Tag
+- We also came across attributes when learning about using links with <A> anchor tags: 
+<a href="https://www.codedex.io/">Codédex</a>
+
+- The href attribute is where we add a URL that can be visited when the hyperlinked twxt is clicked.
+- We can also use the target attribute and set it to "_blank" to make the link open in a new browser tab: 
+<a href="https://www.codedex.io/" target="_blank">Codédex</a> 
+
+12. Lorem Ipsum
+# Classes and IDs
+- The two attributes we'll come across most are the class and id attributes. While class and id are used for labeling elements, the two have important differences.
+
+- An element can be assigned multiple class values in the form of a space-separated list:
+<p class="first-value second-value third-value">Hello, World</p>
+
+- Each element can only have one id value with no spaces. Every id value should be unique in the entire page:
+<p id="value">Hello, World</p>
+
+Additionally, id can be used to link to another part of the same page, such as the heading! This can be matched with an <a> anchor element's href attribute via a # hashtag symbol, followed by the identifier used for the id:
+<a href="#medellin">Link to Medellín</a>
+
+<h2 class="city" id="medellin">Medellín 🇨🇴</h2>
+
+- The values for the class and id attributes must always be lowercase. If their name is made of multiple words, they should be separated by dashes -.
+
+# Division Element
+- One of the most common ways of creating sections for a page is with the <div> element (short for division)
+- The <div> element is kind of like a generic container with no particular meaning. This element and the class and id attributes can go hand in hand. 
+<div class="page-section" id="about-me">
+  <h2>About Me</h2>
+  <p>Ness is an aspiring web developer!</p>
+</div>
+
+<div class="page-section" id="social-media">
+  <h2>Social:</h2>
+  <ul>
+    <li>GitHub</li>
+    <li>Twitter</li>
+    <li>LinkedIn</li>
+  </ul>
+</div>
+
+13. Power Rangers
+# The style Attribute
+First, we can apply a style attribute to any HTML element to stylize certain aspects of that element, such as what color the text should be:
+<p>
+  Roses are <span style="color:red;">red</span>.<br />
+  Violets are <span style="color:blue;">blue</span>.
+</p>
+
+# The <style> Element
+
+14. Myspace Top 8
+Every HTML file should have a <!DOCTYPE html> declaration and an <html> element.
+The <head> element contains important info for our page, such as the <title>.
+Comments <!-- --> are great for documentation or excluding unwanted code.
+Attributes like class/id or src can enhance the way our elements are organized, present, and work on our page.
+We can add styles to our page using either the <style> element or the style attribute.

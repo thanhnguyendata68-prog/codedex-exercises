@@ -1,0 +1,166 @@
+01. In The Beginning...
+# A Brief History
+- The command line interface is a text-based program that lets you do all sorts of stuff with your computer system, like navigate it or move files and folders.
+
+They are known by different names:
++ On Mac, the command line is known as the Terminal.
++ On Windows, it is known as the Command Prompt.
+
+Even today, working on the command line has some advantages over working with GUI applications:
++ Automating common tasks can be done with 1 or 2 commands.
++ They use less of the computer's processing power.
++ Targeting files and folders is easier.
+
+
+On Mac, the command line can be accessed by opening Terminal.
+On Windows, download Git Bash to use the same commands used on Mac for this course
+
+Note: With Git Bash for Windows, always use a forward slash / character to navigate folders and files.
+
+The first command you'll use is the echo command, which prints whatever you type next to it.
+
+Try the following: $ echo Hi! My name is ...
+Note: Do not type the $ prompt symbol. It's meant to indicate which line is typed and which is the output.
+
+---------------------------------------
+02. Filesystem
+# Directories
+- Essentially, your computer is a filesystem made of folders and files:
+--> In the context of the command line, we refer to folders as directories.
+
+Inside any given directory could be the following:
++ More directories (also known as subdirectories).
++ Files that have content inside (text, image, or video files).
+
+# Print Working Directory: pwd
+- The filesystem of your computer can be intimidating at first, and it's easy to get lost.
+
+--> The working directory is wherever you are currently at within the filesystem.
+
+We can show this with the pwd command, which stands for "print working directory".
+
+$ pwd
+/Users/dwight-schrute
+
+--> This means that the working directory we are currently on is /Users/dwight-schrute, a dwight-schrute folder inside the Users folder.
+
+----------------------------------
+03. Moving Day
+# Change Directory: cd
+- So we can open the command line as well as view the current directory in our computer's filesystem.
+
+But how do we actually navigate the filesystem via the command line? We do this with the cd “change directory” command!
+$ cd directory-name
+
+The directory-name is the directory we want to change into (making this the new current directory).
+
+
+Let's say we're currently on the following working directory:
+$ pwd
+/Users/dwight-schrute/
+
+Your username is also a directory that contains more directories, including one for your computer's desktop! We can move to that Desktop directory with the cd command:
+$ cd Desktop
+$ pwd
+/Users/dwight-schrute/Desktop
+
+If you try to change into a non-existent directory, you'll get an error:
+$ cd something
+something: No such file or directory
+
+
+# List Content: ls
+But wait, how do you always know what you're typing next to cd is a valid directory name? There's a command to list out all subdirectories under our current directory!
+
+We can use the ls list command to show all directories and files that exist in your current working directory. Assuming we're on the dwight-schrute directory:
+$ ls
+Desktop
+Documents
+Images
+script.js
+dundie-awards.txt
+
+
+Running the ls command shows there are three subdirectories:
++ Desktop
++ Documents
++ Images
+
+---------------------------------------
+04. House Tour
+# Traversing the Filesystem
+- On the command line, typing cd followed by a valid directory name moves our current directory "forward" in the filesystem, as shown below:
+
+But that's not all the cd command can do! Oh no. It can also be used to go "backward" in the filesystem, using two periods. Assuming we're currently on the schrute-farms directory, here's what this looks like:
+
+$ pwd
+/Users/dwight-schrute/schrute-farms
+$ cd ..
+$ pwd
+/Users/dwight-schrute/
+
+Using the .. double period moves us back in our filesystem.
+
+Note: When moving forward in the filesystem, we go to a "child" directory. When moving backward, we go up to a "parent" directory.
+
+Even so, one directory at a time can get tiring really quickly. In this case, we use a forward slash / to move up or down multiple directories in a single command:
+
+$ pwd
+/Users/dwight-schrute/schrute-farms/
+$ cd ../..
+$ pwd
+/Users/
+
+# Viewing File Content
+If we want to see what is inside of a file (like a text-based .txt file or a Python .py file), we can do so with the cat command! 😻
+$ pwd
+/Users/dwight-schrute/schrute-farms/
+$ ls
+beets.txt
+$ cat beets.txt
+I have 100 beets!
+
+
+The cat command will print all text-based content from a file to the command line.
+Note: The echo command can also be used for viewing file content, but the cat command is more commonly used.
+
+
+05. Clean Slate
+# Clearing the Command Line
+- While this may not bother some, you may be wondering if there is a way to "clean the slate" and clear the command line. Well, there is!
+
+---> The clear command will clear everything from view on the command line.
+
+Note: This command does not reset your current working directory in the filesystem. It just makes the command line visibly cleaner.
+
+# Keyboard Shortcuts
+- As you can imagine, the command line is mostly worked with a keyboard. ⌨️
+
+## Command History
+- One of the most helpful shortcuts is using your keyboard's ↑ and ↓ arrow keys to automatically bring up commands you'd previously written.
+
+## Tab
+There is also a keyboard shortcut for completing what you type on the command line!
+
+When typing on the command line, the tab key can be used for auto-completing the names of things such as:
++ The names of commands.
++ The names of existing files or directories.
+
+06. Scavenger Hunt
++ A brief history of the command line.
++ Print our input with the echo command.
++ What the filesystem is and how directories (folders) work.
++ View and traverse the filesystem with the ls and cd commands, respectively.
++ View a file's contents with the cat command.
++ Clear the command line and use keyboard shortcuts to revisit past commands.
+
+Command					Description
+echo output-here		Print what is typed next to this command
+pwd				Print the current working directory
+cat file-name.extension		Print the contents of a file
+ls				List the contents of the current directory
+cd directory-name		Change into an existing directory
+cd ..				Change backward into an existing directory
+cd directory-name/sub-directory-name		Change forward on multiple directories
+cd ../..			Change backward on multiple directories
+clear				Clear command line

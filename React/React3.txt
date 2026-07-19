@@ -1,0 +1,251 @@
+V. Forms
+21. Newsletter
+# Forms in React
+- One of the most integral parts of a website are forms.
+
+They're used for so many things such as:
++ Logging into an account online. 🔐
++ Subscribing to an email newsletter. 📰
++ Reviewing a restaurant you just tried out. 🍕
+
+With React, forms can track inputs the user gives them, improving the interactivity and functionality of a website.
+
+function FormExample() {
+  return (
+    <form>
+      <label htmlFor="name">Name: </label>
+      <input type="text" id="name" />
+      <button type="submit">Submit</button>
+    </form>
+  )
+}
+
+The <form> element can have the following child elements:
+
+A <label> element with an htmlFor prop to associate with a specific form input.
+An <input> element with a type prop and an id that matches its <label>.
+A <button> for submitting the form input.
+
+Note: You should use the <label>/<input> with htmlFor/id so users can access your form with screen readers and other assistive technologies.
+
+22. High Score I
+# Form Events
+
+# onChange
+- The onChange event captures the current value of a form input. Like most other events, this value can be handled in a function:
+
+function FormExample() {
+  function handleChange(e) {
+    alert(e.target.value);
+  }
+  return (
+    <form>
+      <label>Name: </label>
+      <input type="text" id="name" onChange={handleChange}/>
+      <button type="submit">Submit</button>
+    </form>
+  )
+}
+
+- The onChange event can be attached to an element like <input> and track what's typed in the form. In the handleChange() function, we use the e object to access the input value and display with the alert() function:
+
+
+
+++++But this is React! So that means we can update our state with onChange handlers:
+import { useState } from "react";
+
+function FormExample() {
+  const [input, setInput] = useState("");
+  
+  function handleChange(e) {
+    setInput(e.target.value);
+  }
+  
+  return (
+    <form>
+      <label>Name: </label>
+      <input type="text" id="name" onChange={handleChange}/>
+      <button type="submit">Submit</button>
+    </form>
+  )
+}
+
+
+Make sure to include the e parameter when defining the handleChange() function.
+---> We should add "e" parameter in ... component that makes it work normally. Like change a new value or edit something.
+
+
+23. High Score II
+# onSubmit
+
+- When you submit a form, you may want some kind of confirmation that the input was submitted successfully, and maybe have the form inputs reset. This can all be handled with the onSubmit event:
+
+function FormExample() {
+  function handleSubmit(e) {
+    console.log("Form submitted! 🎉");
+  }
+  
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>Name: </label>
+      <input type="text" id="name" />
+      <button type="submit">Submit</button>
+    </form>
+  )
+}
+
+---> In the return statement, the onSubmit handler goes in the opening <form> tag. We can then attach a handler function, which is usually defined above the return statement.
+
+# e.preventDefault()
+
+When you submit a form, the clicked button causes the page to reload (basically causing the flash). This default behavior makes it hard to do any kind of form validation since the input data is lost after the page load.
+
+To prevent this, use the e.preventDefault() method in the event handler function:
+function handleSubmit(e) { 
+  e.preventDefault();
+  console.log("Form submitted! 🎉");
+}
+
+
+Now there's no page reload when you submit the form! If you still want your inputs to clear after submitting, we can do so with the setInput() function:
+function FormExample() {
+  const [input, setInput] = useState("")
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("Form submitted! 🎉");
+    setInput("");
+  }
+}
+
+
+    // Reset form fields after submission
+    setActivities([]);
+    setInputData({
+      destination: "",
+      dates: "",
+      groupSize: 0,
+      travelPreferences: ""
+    })
+
+
+24. Animal Rescue
+# State in Forms
+
+- As your React forms grow in size and complexity, so, too, will your states. In fact, you may end up with several different state variables that all have to do with just your form!
+
+import { useState } from "react";
+
+function SignUpForm() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [age, setAge] = useState(0);
+
+  return (
+    <form>
+      {/* form JSX here */}
+    </form>
+  )
+}
+
+In the example above, there are three state definitions. And to update them, we'd need three separate event handlers. Is there a better way to do this?
+
+There is! We can replace these definitions with a single state object, like so:
+import { useState } from "react";
+
+function SignUpForm() {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    age: 0
+  })
+ 
+  return (
+    <form>
+      {/* form JSX here */}
+    </form>
+  )
+}
+
+Now, our form data can be handled with a single state object. But how do we handle it, exactly?
+
+- Let's say we defined a handleFormData() function that we attached to an onChange event for each input:
+
+function handleFormData(e) {
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value
+  });
+}
+
+return (
+  <form>
+    <label htmlFor="email">Email: </label>
+    <input type="email" name="email" onChange={handleFormData}/> <br/>
+
+    <label htmlFor="password">Password: </label>
+    <input type="password" id="password" name="password" onChange={handleFormData} /> <br/>
+
+    <label>Age: </label>
+    <input type="number" id="age" name="age" onChange={handleFormData} min={0} /> <br />
+    <button type="submit">Submit</button>
+  </form>
+)
+
+- Each <input> has a name prop that is utilized in the handleFormData() function.
+
+Inside handleFormData(), we update state with setFormData(). More specifically:
++ A spread operator (...) keeps the unchanged parts of the formData state.
++ With the help of the name props from the inputs, we dynamically update the parts of the state that have changed (i.e., [e.target.name]: e.target.value).
+
+# Controlled Components
+- With controlled components, form data is handled by React's state rather than the form itself. This way, any update we make to the form is reflected in our React state the moment we update it.
+
+- In the previous section, we were actually controlling our form data via the name prop we passed to the <input> elements... sort of. To truly control our form inputs, we must also use a value prop:
+<input type="email" id="email" value={formData.email} name="email" onChange={handleFormData}/>
+
+---> While the name prop is important for making our form labels and inputs accessible, it is the value prop that works with our onChange events to truly control our form state.
+
+25. Haiku
+#<select>
+- Form inputs aren't limited to the <input> element. In fact, there are two more elements that play a special role in React forms.
+
+Let's first explore the <select> element:
+<select value={selectedAdventure} onChange={handleAdventureChange}>
+  <option value="">Select an Adventure</option>
+  <option value="Space">Space Adventure 🚀</option>
+  <option value="Underwater">Underwater Expedition 🐠</option>
+  <option value="Jungle">Jungle Trek 🌴</option>
+  <option value="Desert">Desert Safari 🐪</option>
+</select>
+
+---> The <select> element gives us a list of <option> elements that we can choose from. Each option has a value prop that can be mapped onto the top value in the <select> element.
+
+We can also add an event to the <select> element that can handle any changes to a state variable (e.g., the onChange event).
+
+
+#<textarea>
+- Besides the <input> and <select> elements, there is also the <textarea> element.
+- While the <input> element is usually meant for a single line of input, the <textarea> element allows for multiple lines of input:
+
+<textarea
+  value={someValue}
+  onChange={handleChange}
+  placeholder="Write multiple lines of text here..."
+  rows={3}
+  cols={50}
+></textarea>
+
+---> A <textarea> element can have props like rows and cols, but they're not required. Like the other form elements, we can use events and a value prop to manage our React state.
+
+Together, both the <textarea> and <select> elements bring more diverse inputs to our React forms.
+
+26. Travel Log
+# Congrats!
+
+Let's recap what we learned about forms in React:
+
+The <input>, <select>, and <textarea> elements capture what a user puts on the form.
+To track form input as it changes, we use the onChange event.
+The onSubmit event is used for validating form data.
+We can use e.preventDefault() to stop the page from reloading when we submit the form.
+When we assign a value prop to a form element, its data is controlled and handled by state.

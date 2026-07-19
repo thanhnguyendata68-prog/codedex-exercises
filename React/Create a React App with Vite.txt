@@ -1,0 +1,55 @@
+Create a React App with Vite
+
+# Introduction
+
+## What is Vite?
+We can render our React code with Vite.
+
+- Vite is a tool that allows us to create and run light to mid-sized React applications.
+While there are other ways to launch a React app, Vite is the most straightforward.
+
+# Node
+- Vite can be installed as a package from a Node package manager. In this tutorial, we will use npm (or "node package manager").
+
+- Node.js is a special tool that lets you run your JavaScript code on a server, in addition to a browser. When Node is installed, you already have npm!
+
+To check if Node is installed, run the following command on the terminal:
+	node -v
+
+# Install Vite
+
+We can use npm to install Vite.
+npm install vite@latest
+
+# Setup React App
+Run the following command:
+npm create vite@latest
+
+# Run React App
+
+After this point, everything should be set and Vite will print directions for how to run your React app!
+First, use the cd command to change into the new Vite folder you made:
+cd my-first-app
+
+Next, run the following npm command:
+npm install
+
+--> Just like how we are using Vite as a tool, Vite itself uses tools, or dependencies, to work as expected. Similar to booting up a game console, running npm install starts up these dependencies so that Vite can work.
+
+Lastly, we will run this command:
+npm run dev
+
+# Vite App Structure
+If we open our my-first-app folder in an editor like VS Code, the following files and folders are usually found:
+
+📂 src/
+	📄 App.jsx: The code for the <App> component, written in JavaScript Syntax 	Extension (JSX).
+📄 index.css: The base styles for the React app.
+📄 index.html: The place where the root of the React app (i.e., <div id="root"></div>).
+📄 package.json: A list of the outside code used to make this app run, including react, react-dom, and vite.
+📄 vite.config.js: The settings for our Vite React app.
+
+The "react" package lets you write React code.
+The "react-dom" package lets you render that React code. 
+
+npm install react-router-dom 

@@ -1,0 +1,281 @@
+I. Selectors
+1. Picasso
+- CSS, or Cascading Style Sheets, is a styling language that paints a website with colors, fonts, layouts, and animations.
+
+2. Syntax
+- Inside, declarations are made of property: value pairs separated by a colon. Each line ends with a ; semicolon.
+
+3. Selectors Pt1
+div {
+  /* Styles go here. */
+}
+# Class and Id Selectors
+.class-name {
+  /* Styles go here. */
+}
+
+#id-name {
+  /* Styles go here. */
+}
+4. Selectors Pt2
+# Grouping
+ul {
+  border: 1px solid;
+  width: 50px;
+}
+
+ol {
+  border: 1px solid;
+  width: 50px;
+}
+--->
+ul, ol {
+  border: 1px solid;
+  width: 50px;
+}
+
+# Combining
+We can also get more specific by using the > symbol to select child elements, such as only <li> elements under unordered lists:
+ul > li {
+  border: 1px solid;
+  width: 50px;
+}
+5. Concert Flyer
+# Congrats!
+CSS code is used to style HTML pages via the <link> element.
+CSS syntax uses selectors and declarations with property/value pairs.
+We can select HTML elements by name or with a class or id.
+Grouping and combinators are used to select more specific elements.
+--------------------
+II. Properties
+6. RainBow
+# CSS Colors
+p {
+  color: red;
+}
+
+# RGB
+color: rgb(255, 0, 0);     /* Red */
+
+hexadecimals 
+color: #ff0000;    /* Red */
+
+7. Measurements
+# Sizing in CSS
+ the <img> element has a default width and height
+
+# Absolute vs. Relative Units
+Absolute units are usually expressed as numbers, with or without a decimal. They are fixed and do not change in size according to the size of its direct parent element.
+
+element {
+  width: 10px;
+  height: 10px;
+}
+
+- If we set an element's property with relative units, it will change if the size of something else changes, like its parent element or the computer screen itself!
+em measurements that are associated with the font size of either the parent element when applying font-size (more on that in the next challenge) or the element itself when setting the width.
+rem measurements that are associated with the font size of the root <html> element (16pt, by default).
+8. Five Families
+# CSS Fonts
+Serif
+Sans-serif
+Monospace
+Cursive
+Fantasy
+These fonts are con
+
+# Font Properties
+/* With Absolute Units */
+p {
+  font-size: 12px;
+}
+
+/* With Relative Units */
+p {
+  font-size: 12em;
+}
+
+Note: The font-size property should be applied in an accessible way. This means avoiding absolute units when possible and not making paragraph text as large as header text (or vice versa).
+
+We can also use the font-weight property to set the default "thickness" of a given element's text.
+p {
+  font-weight: 800;
+}
+
+If we use numeric values for the font-weight property, keep the following in mind:
+
+Anything less than 400 makes the font thinner or lighter.
+The 400-700 range is considered "normal" for most fonts.
+Anything above 700 usually makes the font bolder.
+
+9. Spellcheck
+# Alignment
+#left-align {
+ text-align: left;
+}
+
+# Decoration
+p {
+  text-decoration: underline;
+}
+
+
+10. Wallpaper
+# BG Color
+For this, we use the background-color property!
+/* With named colors */
+div {
+ background-color: red;
+}
+
+# BG Image
+div {
+  background-image: url('https://cdn.pixabay.com/photo/2017/08/10/19/13/city-skyline-2626619_960_720.jpg');
+}
+
+- Sometimes, the original size of the image might be too large for the background. This can be helped with the background-size property.
+background-size: contain;
+
+
+Background images may repeat if the container is larger than the image. To prevent this, and have only one image in the container, use the background-repeat property, followed by the no-repeat option:
+
+background-repeat: no-repeat;
+
+11. Shorthands
+# Shorthand Properties
+span {
+  border-width: 3px;
+  border-style: dashed;
+  border-color: #ff0000;
+}
+
+-> The rule above can be expressed with the shorthand border property!
+span {
+  border: 3px dashed #ff0000;
+}
+
+span {
+  font-family: Georgia, serif;
+  font-weight: 800;
+  font-size: 12px;
+}
+-> All of these can be expressed with a single, shorthand font property!
+span {
+  font: 800 12px Georgia, serif;
+}
+
+12. Invitation
+Color can be implemented in various ways, including by name, by rgb() function, and by hexadecimal.
+Elements can be sized with properties like width and height, using absolute and/or relative units.
+CSS supports five font families: cursive, fantasy, monospace, serif, and sans-serif.
+We can format our text in CSS, including alignment and decoration.
+Colors and images can be applied to the background of elements.
+We can combine common properties into one line with shorthand properties.
+------------------------
+III. Box Model
+13. Inspection
+# The Box Model
+Technically, everything on a web page is in a box. Every element on a page follows the box model:
+
+A content box for things like text and images.
+A padding box of space around the content.
+A border box that goes around the padding.
+A margin box of empty space that surrounds the whole element.
+
+14. Profile Status
+# The Border Box
+/* Both of these are the same */
+
+h1 {
+  border: 2px solid blue;
+}
+
+h1 {
+  border-width: 2px;
+  border-style: solid;
+  border-color: blue;
+}
+border-width determines the "thickness" of the border, and is usually set with absolute units (e.g., pixels).
+border-style includes values like solid, dashed, dotted.
+border-color can be set with a named color, an rgb() value, or a hexadecimal.
+
+h1 {
+  border-top: 5px dashed red;
+  border-right: 5px dotted purple;
+  border-bottom: 5px double yellow;
+  border-left: 5px solid green;
+}
+
+# Round Corners
+Another common practice for borders is rounding the corners using the border-radius property:
+
+h1 {
+  border: 2px solid blue;
+  border-radius: 5px;
+}
+
+15. Wiggle Room
+# The Padding Box
+- Padding is empty space just outside of an element's content.
+
+padding-top: 5px;
+padding-right: 10px;
+padding-bottom: 15px;
+padding-left: 20px;
+
+From left to right, the values represent the styles for the top, right, bottom, and left sides.
+-----------> padding: 5px 10px 15px 20px;
+
+16. Spaced Out
+# The Margin Box
+The outermost layer of an element's box model is the margin box. This layer that surrounds an element's border is what ultimately separates elements from one another on the page.
+margin-top: 20px;
+margin-right: 10px;
+margin-bottom: 20px;
+margin-left: 10px;
+
+Like the padding and border properties, margin is a shorthand for each side of the element:
+margin: 20px 10px 20px 10px;
+
+## Centering Content
+You can also horizontally center elements with the margin property, using auto.
+
+However, make sure to set a width property to the element you wish to center:
+
+17. Make it Count
+# Content Box vs. Border Box
+The box-sizing property tells our website how to calculate the width and height properties of a given element.
+
+The rendered output would look similar to this:
++ The default value is content-box, which adds the padding and border values to the final width of the element.
++ However, we can switch this to border-box, and make it so that padding and border are included in the final width, and the element maintains its expected size.
+
+
+For example, assume we have two <div> division elements that are 150x150 pixels in size. One has an id of “content-box” and the other with an id of ”border-box”.
+
+If both have the same width and padding and border properties defined, but with a different box-sizing property:
+#content-box {
+ text-align: center;
+ background-color: skyblue;
+ width: 150px;
+ height: 150px;
+ padding: 20px;
+ border: 2px;
+}
+
+#border-box {
+ text-align: center;
+ background-color: skyblue;
+ width: 150px;
+ height: 150px;
+ padding: 20px;
+ border: 2px;
+ box-sizing: border-box;
+}
+
+18. Local Library
+It describes the layers of boxes that surround each element on the page.
+The padding box is directly outside of the content.
+The border box is the outer edge of an element, and can be rounded or made visible.
+The margin box separates an element from other elements.
+There are two box-sizing modes, content-box and border-box, that determine how elements are sized by the width and height properties.

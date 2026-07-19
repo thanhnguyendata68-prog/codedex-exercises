@@ -1,0 +1,148 @@
+III. New Table
+16. Create Table
+# Introduction
+
+- We’ve been retrieving data from SQL tables left and right, but where do SQL tables come from?
+
+In this chapter, we will learn how to:
+
+Create a new table.
+Add new rows.
+Add new columns.
+Update an existing row.
+Delete a row.
+
+# CREATE TABLE
+- CREATE TABLE statement creates a brand new table in a database.
+
+- In the code editor, we are creating a new table called companies:
+CREATE TABLE companies (
+  id INTEGER,
+  name TEXT,
+  headquarters TEXT,
+  year INTEGER
+);
+
+- Here, we are creating a new table of companies with the following columns:
+
+id column of the data type INTEGER.
+name column of the data type TEXT.
+headquarters column of the data type TEXT.
+year column of the data type INTEGER.
+
+We are essentially creating an empty table that looks like this:
+
+id	name	headquarters	year
+ 	 	 	 
+
+--> It’s empty because we haven’t added any data yet!
+
+# Data Types
+- All the data stored in a database has a type
+- The data type lets the database know what to expect from each column and determines the kind of interactions that can happen.
+
+Some of the most common data types are:
+
+TEXT: a text string
+INTEGER: a positive or negative whole number
+REAL: a positive or negative decimal number
+DATE: a date format (YYYY-MM-DD)
+
+
+17. Insert Into
+# INSERT INTO
+When you create a new table, it’s empty. Now, time to add some rows to it!
+
+Use the INSERT statement to add a new row into a table:
+
+INSERT INTO companies (id, name, headquarters, year)
+VALUES (1, 'Twitter', 'San Francisco', 2006);
+
+Let’s break this down:
++ INSERT INTO is a clause that adds the specified row.
++ companies the name of the table the row is being added to.
++ (id, name, headquarters, year) is a parameter with the column names that data will be inserted to.
++ VALUES clause indicates the data being inserted.
++ (1, 'Twitter', 'San Francisco', 2006) are the values.
+
+
+After using this statement, there'll be be a new row in companies where:
+id is 1
+name is 'Twitter'
+headquarters is 'San Francisco'
+year is 2006
+
+INSERT INTO companies (id, name, headquarters, year)
+VALUES (1, 'Twitter', 'San Francisco 🌁', 2006);
+
+INSERT INTO companies (id, name, headquarters, year)
+VALUES (2, 'Duolingo', 'Pittsburgh 🐝', 2011);
+
+INSERT INTO companies (id, name, headquarters, year)
+VALUES (3, 'BeReal', 'Paris 🇫🇷', 2020);
+
+INSERT INTO companies (id, name, headquarters, year)
+VALUES (4, 'Codedex', 'New York 🗽', 2022);
+
+--- Here, we added four rows into the companies table.
+
+18. Alter Table
+# ALTER TABLE
+- ALTER TABLE/ADD COLUMN statement adds a new column to an existing table.
+
+ALTER TABLE companies
+ADD COLUMN about TEXT;
+
+- This statement adds a new TEXT column called about to the companies table.
+
+Ex: 
+ALTER TABLE companies
+ADD COLUMN website TEXT; 
+
+SELECT *
+FROM companies
+
+
+19. Update Set
+# UPDATE
+- Mistakes and outdated data happen, which means we need to go in and update some values in the table.
+
+- The UPDATE statement edits a row in a table.
+- Elon Musk changed Twitter’s name to X in 2023, let’s update the name:
+
+UPDATE companies
+SET name = 'X'
+WHERE name = 'Twitter';
+
+---> Here, we are updating the row where name = 'Twitter' and changing the name to 'X' instead.
+
+- We can also use WHERE for a different column:
+
+UPDATE companies
+SET headquarters = 'Brooklyn 🌉'
+WHERE id = 4;
+
+- Here, we are updating the row where id = 4 and changing the headquarters to Brooklyn 🌉.
+
+
+20. Delete From
+# DELETE FROM
+- DELETE FROM statement removes one or more rows from a table.
+
+Since BeReal got acquired in 2024, we can delete it from the companies table with:
+DELETE FROM companies
+WHERE name = 'BeReal';
+
+Here, we are deleting the whole row(s) WHERE name = 'BeReal';
+
+21. BFFs
+Here’s a recap:
+
+CREATE TABLE adds a new table.
+INSERT INTO adds a new row.
+ALTER TABLE/ADD COLUMN adds a new column.
+UPDATE/SET updates a row.
+DELETE FROM deletes a row(s).
+
+It’s 2024 and it’s so hard to keep track of all your friend’s birthdays and contact info!
+

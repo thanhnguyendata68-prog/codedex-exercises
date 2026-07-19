@@ -1,0 +1,181 @@
+Exploring Repos
+
+07. Git Clone
+# Working with a Team
+
+# Cloning
+Consider this: you want to work on a project that someone else has already started. You need a way to get a copy of their work onto your own computer so you can make changes, add features, or fix bugs.
+
+- This is where cloning comes into play! Cloning happens when a repository is already made on GitHub, and you copy that remote repository to your local machine.
+
+We're able to clone a repository using the git clone command, like this:
+		git clone https://github.com/YOUR_USERNAME/EXAMPLE_REPO.git
+
+- Where YOUR_USERNAME is your GitHub username and EXAMPLE_REPO is the name of the repository you want to clone.
+
+This link is quickly accessible to copy from the button labeled “Code” on a GitHub repository!
+
+Once cloned, there's a folder named after the repository now saved on your computer. You can use the cd command to access all the files inside of it and you'll be able to open the folder in a code editor (like VS Code) to start adding your changes!
+
+
+# Permissions
+- You're able to clone any repository, but to see changes reflected on the repositories, you'll need what's called, "write access".
+
+Write access is granted by the owner of the repository to allow you to make commits, create branches, and overall change the remote repository.
+
+Here are the common types of permissions that GitHub offers for repositories:
+Access Type			Description
+👀 Read				Users can view the repository and clone it.
+📝 Write			Users can read the repository and make changes, create branches, and push modifications.
+👑 Admin			Full control: manage settings, access permissions, and delete repo.
+
+
+# Forking
+- Wait… What if you don't have write access or you're not allowed to make changes? There's forking!
+
+- Forking is a process where you create a personal copy of someone else's repository on GitHub. 🍴
+
+Clicking on the "Fork" button, and following the steps, creates and moves a copy to your GitHub account.
+
+--------------------------------------------
+08. Branch Out
+# Branches
+- Whereas forks are copies of the code made outside the repository, branches are copies of the code made inside the repository. 🌿
+
+On GitHub, you may notice the word “main” (sometimes “master”) as the default branch name on a repository:
+
+The main branch is your "main timeline", or your primary branch. From this branch, we're able to create versions of the code within the same repository without changing the main branch.
+
+Branches can stem from either the main branch or other existing branches, and later lead back to the main branch with a "PR" (Pull Request). This allows you to work on different features or fixes without affecting the main code until you're ready to merge your changes.
+
+
+This is especially useful when working in a team, as it allows multiple people to work on different features simultaneously without interfering with each other's work.
+
+## Working on a Branch
+- By default, you'll be on the main branch unless specified otherwise on GitHub. You'll typically want to branch out from the main branch to work on your desired feature or version.
+
+We do so by using the following command:
+				git branch new-branch-name
+
+The git branch command creates a new branch from the branch you're currently on. You can switch to that branch with git switch:
+				git switch new-branch-name
+
+You can also create and switch to a new branch in a single command:
+				git checkout -b <new-branch-name>
+
+This branch now becomes your coding playground, where you can switch around and change code as needed and to your liking!
+
+----------------------------------------------
+09. Git & Teams
+# Maintaining Your Local Repo
+- When working with other developers on the same project, the code may frequently change from commits being made to the repository. Therefore, the repository you initially cloned might have changes to the main branch others made that you'll want to reflect on your branch.
+
+To keep your repository up to date, you're going to use the git pull command.
+
+This command updates the branch that you are currently working on, whether that be the default main branch, or a branch that you created. 
+
+To help understand the uses of the git pull command, let's walk through a scenario where git pull will be helpful for us to use, and you may find yourself in.
+
+
+# Teamwork in Action
+Sau khi bấm Commit trên giao diện web xong, nhiệm vụ yêu cầu bạn quay trở lại phần mềm Terminal/Git Bash trên máy tính cá nhân để kéo file này về máy.
+
+git pull origin main
+
+
+Lệnh này sẽ tải file README.md bạn vừa tạo trên mạng về máy tính của bạn. Bạn sẽ thấy kết quả hiển thị ra màn hình giống hệt như đoạn mã mẫu trong hướng dẫn của Codédex (1 file changed, 1 insertion(+)).
+
+
+----------------------------------------------------------------
+10. Merges  (Gộp nhánh)
+# Merging Branches
+- Emily and Melody are further along in their hackathon project. Melody has finished writing some code, and she wants to merge her branch to the main branch. Once merged, their project is almost complete!
+
+Emily now wants to make sure that another feature she's working on for the project is working properly with Melody's code that she just finished.
+
+Emily switches from her branch to the main branch. She uses the git pull command to update her local repository.
+
+			git checkout main
+			git pull
+
+The changes are reflected, and to use the new version of the main branch on Emily's branch, she switches back to her own branch.
+			git checkout emily-feature-branch
+
+Emily now wants to bring in the changes from the main branch into her own branch so that she can continue working with the latest code.
+			
+She does this by merging the main branch into her current branch.
+			git merge main
+
+--> Melody's changes from the main branch are now in her branch!
+	
+Emily can now continue working on her feature, knowing that it is up to date with the latest changes from the main branch.
+
+
+The scenario above describes how we can bring in changes from one branch to another, using the following command:
+			git merge <branch-name>
+
+----> The git merge command keeps our development workflow combined and up to date! We maintain a structured project history so we're able to avoid messy merge conflicts!
+
+# Merge Conflicts (Xung đột khi gộp)
+- A merge conflict happens when:
++ Changes are made to the same part of a file.
++ One branch has deleted a file while the other branch has modified it. 😐
+
+* Git doesn't know which changes it should keep, and it signals a conflict in the code as shown below. This can happen when using the git pull or git merge commands.
+			// Changes from the branch being merged
+
+To fix the conflicts, your code editor usually has shortcuts or highlighting for conflicts that make it easier for you to pick and choose which changes you want to keep. You'll have a few types of options to choose from when dealing with conflicts:
+
++ Accept Incoming Changes: Overwrites changes on the current branch with changes from the branch being merged in. (Bỏ code hiện tại của bạn, lấy hoàn toàn code mới gộp vào.)
++ Accept Current Changes: Keeps changes on the current branch, and ignores changes from the branch being merged in. (Giữ nguyên code của bạn, ngó lơ code mới gộp vào.)
++ Accept Both Changes: Keeps both branch versions of the changed lines or files.  (Giữ lại cả hai phiên bản code của cả hai người.)
+
+
+----> Once all of your changes are resolved, you can continue with committing your code and making a commit message that lets your team know that you have made a merge! After using the git add ., git commit -m 'message', and git push workflow, you can continue with development!
+
+-------------------------------------------------
+11. Pull Requests
+# Proposing Changes
+- During development or open source contribution, you're going to want to add changes from your created branches to the main branch.
+
+- A Pull request (PR) allows you to suggest changes to the repository and allows you to create edits from one branch to another. PRs are just merges, but instead of just allowing you to merge branches in the same repository, they also allow you to merge branches across repositories.
+
+- A pull request will show you what parts of the code you are comparing, changes made, and a list of your commit history, which helps you identify what exactly you'll be changing.
+
+Once the team successfully reviews your suggested code and approves any necessary changes, this pull request will be merged into the default branch!
+
+## Creating a PR
+- To create a pull request,
++ You should have pushed changes to the repository itself or a forked version of that repository.
++ You don't have any merge conflicts. You can make sure of this by having your local repository up to date with your remote repository.
+
+You can locate the pull requests at the top of the repository.
+
+- Once created, you or your code approvers, depending on your repository permissions, can approve, request changes, or add comments to your code! This allows you to merge your branch.
+
+## The PR Checklist
+- Pull requests are essential to the Git development workflow, and once you know you're ready to create a PR, review the following steps to ensure a smooth integration! ✅
+
+1. Pull the latest changes from the main, or default branch.
+		git pull origin main
+
+2. Test your code! Make sure that everything works or shows up as intended.
+
+3. Review your code! Make sure that when committing, everything is as you wrote, your code is polished, and anything not needed is removed (for example, console.logs or print statements)
+
+4. Fix any merge conflicts!
+
+----------------------------------------------
+12. Yearbook
+
++ Copies of repositories can be made remotely via forking or locally via cloning.
++ A repository is composed of a main branch from which several other branches can be made.
++ Working with others on the same repository requires pulling changes to your fork/clone.
++ However, working with others means there may be merge conflicts when updating your fork/clone.
++ After updating the code in your fork/clone, you can suggest these changes be made to the original repository with a Pull Request.
+
+git clone <repo-url>
+git pull origin main
+git branch new-branch-name
+git switch new-branch-name
+git merge main

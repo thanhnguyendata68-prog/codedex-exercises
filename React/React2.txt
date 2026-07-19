@@ -1,0 +1,373 @@
+III. Props & State
+11. Giving Props
+# One-Way Data
+
+- You can attach attribute-like data (e.g., className="example") to JSX elements and components. In React, "attributes" are more commonly known as props.
+
+- Props are pieces of data that are given to JSX elements for them to use or pass from parent to child component. You can use any data type for props, including objects and functions!
+
+function App () {
+  return <img src="selfie.png" alt="my selfie" />
+}
+
+In the example above, we passed data to the src and alt props of the <img> element.
+
+<div>
+  {catalogItems.map(function (item) {
+    return (
+      <div>
+        <h2>{item.name}</h2>
+        <h3>Specialty: {item.category}</h3>
+        <a href={/* website here */}>Learn more</a>
+      </div>
+    )
+  })}
+</div>
+
+12. Notifications 
+# Parents and Children
+
+- No matter how many components are in a React app, they all trace back to a single root.
+
+- Underneath, the root contains an <App> component, which also contains components. These components share a parent-child relationship.
+
+Parent components hold one or more child components In a React app, we can pass prop data down from parent to child component.
+
+# Component Props
+- The components we make can also receive props that we name ourselves! Going back to the selfie example, we could pass an object of image data to a custom <Selfie> component:
+
+function App() {
+  const imageData = { src: "selfie.png", alt: "my selfie" }
+  return <Selfie image={imageData} />
+}
+
+- In the <Selfie> component, we passed the imageData object to a named image prop.
+
+## Props Object
+- So we've seen how props are implemented on the parent-side
+
+Let's say we have an <App> component that passes some menu data to a child <CafeMenu> component:
+
+function App() {
+  const menuData = ["mac n' cheese", "caesar salad", "hot dog"];
+  return (
+    <CafeMenu menu={menuData} />
+  )
+}
+
+--> In the example above, we named a menu prop in the <CafeMenu> component.
+
+We can then access this prop via the props object in the component definition:
+
+function CafeMenu(props) {
+  console.log(props)
+  // (1) {menu: Array(3)}
+}
+
+---> This output tells us that the menu array was successfully passed into the props object and can be used in the <CafeMenu> component.
+
+import React from "react";
+
+export default function Notification(props) {
+  let classString = "";
+
+  if (props.isRead === false) {
+    classString = "not-read";
+  }
+  return <div className={classString}>{props.message}</div>;
+}
+
+
+13. Stopwatch
+# State
+- For React components, props are ideal if the data isn't expected to change after being set. 
+
+- A component's state is the data that can change over time.
+
+Some good examples of state, or data expected to change, include:
++ Whether a restaurant is open or closed.
++ A shopping cart with items added or removed from it.
++ The inputs on a form.
++ The number of likes in a post.
+
+# useState()
+- But how do we create state in a function component? We use a special function for this called useState().
+
+The useState() function returns an array with just two values:
+	+ The name for the state variable.
+	+ A function that updates the state.
+
+
+Just like the base React class, we import the useState() function from the "react" package:
+import { useState } from "react";
+
+- A special syntax is typically used to get the values returned from useState():
+function MyComponent() {
+  const [state, setState] = useState(value);
+}
+--> While not required, the returned function commonly starts with set followed by the name of the state it is paired with.
+
+- An initial value is passed to useState() and it can be any data type in JavaScript (e.g., string, number, boolean) and even data structures like Arrays or objects.
+
+
+Below is an example of a <TextMessage> component that stores a single message in a text state variable:
+
+import React, { useState } from "react";
+
+function TextMessage() {
+  // Define a state variable called "text" and a function to update it, "setText"
+  const [text, setText] = useState("Hello World!");
+
+  // This component simply displays the value of the state variable "text"
+  return (
+    <div>
+      <h1>Text: {text}</h1>
+      <p>This component does not use any events to update state.</p>
+    </div>
+  );
+};
+
+
+## Updating State
+We can't change state directly through reassignment:
+// This will not work
+text = "Catch ya next time! 👋";
+
+--> This is because direct updates to state may not always be reflected with an updated UI, resulting in inconsistent user experiences.
+
+In a React component, the special function used for updating its state can't just be called by itself. It has to be wrapped inside some kind of a process, like a control flow statement such as the following:
+
+if (text === "Hello World!") {
+  setText("Catch ya next time! 👋");
+}
+
+
+Anytime we use this special function from useState(), the component is re-rendered. In the following chapters, you will learn of other wonderful ways of using state besides with if statements.
+
+
+Note: setTimeout() is a regular JavaScript function. Feel free to learn more about this function, but all this code does is update our state with setSeconds() every 1000 milliseconds, or 1 second.
+
+import { useState } from "react";
+
+function MyComponent() {
+  const [state, setState] = useState(initialValue);
+}
+  setTimeout(function() {
+  	setSeconds(seconds + 1);
+    }, 1000);
+
+
+14. Quiz
+# State as Props
+- In addition to non-state values, a component's state can be passed as props to its child components.
+- This ensures that any component can be reused and only handles the state data that matters to it.
+
+- For example, say you had a parent <Game> component with a state array of scores for three players. With three <Player> components, each has a piece of the state array that represents their individual score:
+
+import { useState } from "react";
+
+function Game() {
+  const [scores, setScores] = useState([0, 0, 0]);
+
+  const emptyScores = JSON.stringify([0, 0, 0]);
+  let currentScores = JSON.stringify(scores);
+
+  return (
+    <div>
+      <Player score={scores[0]} />
+      <Player score={scores[1]} />
+      <Player score={scores[2]} />
+    </div>
+  )
+}
+
+- To update the state, this example uses another fun JavaScript function called JSON.stringify() which turns an Array into a string version of itself. This is done to allow for our state to update and render once:
+
+if (currentScores === emptyScores) {
+  setScores([100, 400, 250])
+ }
+
+The scores state is now [100, 400, 250] and here's what goes in the <Player> components now:
+
+<div>
+  <Player score={100} />
+  <Player score={400} />
+  <Player score={250} />
+</div>
+
+15. Trending Now 
+In this chapter, we learned the following:
+
+React apps are set up so that data flows from parent to child components.
+Props to React components are like attributes to HTML elements.
+Any child component can use a props object to get data passed to it.
+Any function component can have a state that changes over time.
+The state should never be directly updated; use setState() instead.
+State can be passed down as props from parent to child components.
+
+-------------------------------------------------
+IV. Events
+16. Online Shopping
+# Putting the "Reaction" in React
+- Events are actions that occur while you are on a website.
+
+You can write code that "listens" for these events and causes a reaction! These are called event handlers.
+
+## Event Types
+- In the world of web dev, there are lots of different types of events.
+
++ When the page first loads on the browser, that's an event.
++ When you write a comment on a thread, that's an event.
+
+## onClick event
+One of the most common things we do on a website is… click things!
+
+- Naturally, the first event handler you'll come across is the onClick event.
+Note: Like className, events are written in "camelCase" in React.
+
+function Example() {
+  function handleClick() {
+    alert("hi! you clicked me!");
+  }
+
+  return <h1 onClick={handleClick}>Click Me!</h1>;
+}
+
+- Inside the <Example> component:
+
++ We defined a handleClick() event handler function.
++ The onClick event was attached to the returned <h1> tag.
++ The handleClick handler was inserted as the value on onClick.
+
+
+17. Tooltips
+# Hover events
+- In React, this is handled by two events:
+
+onMouseOver: When a mouse/pointer hovers over an element on the site.
+onMouseLeave: When a mouse/pointer is no longer hovering over the element.
+
+export default function HoverExample() {
+  function handleMouseOver(e) {
+    e.target.style.backgroundColor = "yellow";
+  }
+
+  function handleMouseLeave(e) {
+    e.target.style.backgroundColor = "";
+  }
+
+  return <p onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}>Hover over me!</p>;
+}
+
+## event object
+- When an event happens, a e event object is created. Within its target property, we can access parts of the element through the event. You have to explicitly mention e as a parameter when defining a handler function.
+
+- In the example above, we targeted the <p> element's background color using e.target.style.backgroundColor. And because this is React, some of the styles are "camelCase" (instead of "snake-case" like in CSS).
+
+-----------------------------
+18. A Focus in Art
+# onFocus
+- More broadly, there are plenty of ways to "focus" on an element on a site:
++ Selecting an input to fill out.
++ Displaying auto-fill suggestions for an input.
++ Using a drop-down menu.
+
+- React uses the onFocus event. Here is an example of using onFocus for an input:
+function MyInput() {
+  function handleFocus(e) {
+    e.target.style.backgroundColor = "lightblue";
+  }
+  return (
+    <input
+      type="text"
+      onFocus={handleFocus}
+    />
+  );
+}
+
+# onBlur
+- Going back to the application analogy, you can only "focus" on one input at a time.
+- React features an onBlur event that happens whenever you are no longer focusing on an element.
+function MyInput() {
+  function handleFocus(e) {
+    e.target.style.backgroundColor = "lightblue";
+  }
+
+  function handleBlur(e) {
+    e.target.style.backgroundColor = "";
+  }
+
+  return (
+    <input
+      type="text"
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+    />
+  );
+} ----------> But now when we take the focus off of it, the onBlur event activates
+
+## Using With Images
+- You can apply the onFocus and onBlur events to an image, but there is an extra step.
+<img onFocus={handleFocus} onBlur={handleBlur} tabIndex={0} />
+
+--> By default, you can't focus on images on a website. But you can hack it by setting the tabIndex prop to zero.
+
+import ZoomableImage from "./ZoomableImage.js"
+
+export default function App() {
+  return <div>{<ZoomableImage imageURL="https://i.imgur.com/ZIBbN09.jpg" zoomFactor={10}/>}</div>;
+}
+s
+19. Noise Levels
+# onKeyDown
+- Thus far, we've explored events that mostly have to do with using a mouse. But what about the keyboard?
+- No worries, there are keyboard events too! First, let's explore onKeyDown.
+
+- When you type on a keyboard, and you press a single key, that key is considered to be "down".
+The onKeyDown event is typically used for user inputs:
+export default function App() {
+  function handleKeyDown(e) {
+    e.target.style.backgroundColor = "purple";
+    e.target.style.color = "white";
+  }
+  
+  return <input onKeyDown={handleKeyDown} />;
+}
+
+# onKeyUp
+- When a key is pressed and then released, it is now "up". And we can handle these events with onKeyUp. This is the opposite of the onKeyDown event.
+
+To change the colors back, we can use the onKeyUp event:
+export default function App() {
+  function handleKeyDown(e) {
+    e.target.style.backgroundColor = "purple";
+    e.target.style.color = "white";
+  }
+
+  function handleKeyUp(e) {
+    e.target.style.backgroundColor = "white";
+    e.target.style.color = "black";
+  }
+  
+  return <input onKeyDown={handleKeyDown} onKeyUp={handleKeyUp} />;
+}
+
+If we want the event handler to activate when we press a specific key, we can use the key prop from the e event object:
+function handleKeyDown(e) {
+  if (e.key === "H" || e.key === "h") {
+    e.target.style.backgroundColor = "purple";
+    e.target.style.color = "white";
+  }
+}
+
+Now, the handleKeyDown() function only works if you type the letter "H" (lower or upper case).
+
+20. WaterFest
+Some of the common event types.
+Using the onClick event.
+Causing changes with the onHover event.
+Applying onFocus/onBlur when using a component.
+Firing the onKeyDown/onKeyUp keyboard events.
+
+## onMouseEnter/onMouseLeave
+- While hovering the mouse over either of the buttons, they should "zoom in" a bit.

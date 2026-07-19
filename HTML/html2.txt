@@ -1,0 +1,256 @@
+IV. Forms
+15. Google
+# Forms
+- They're pretty straightforward:
+
+The user enters some information.
+The user presses a “Submit” button.
+The info gets sent somewhere and processed!
+
+<form action="" method="">
+  <!-- More code will go here -->
+</form>
+
+Two attributes are used with the <form> element:
+
+action specifies where the form data is sent after submission.
+method specifies how the form data is processed.
+
+It is usually either sent somewhere else via "post" or used with something else via "get".
+
+# Inputs
+- A text value that renders a plain textbox on the form
+<form>
+  <input type="text">
+</form>
+
+- A submit value that turns the <input> element into a button for submitting the form data.
+<form>
+  <input type="submit">
+</form>
+
+16. Sign Up v1
+# Input Types
+- We'll learn about two common ones: email and password.
+
+## Email
+<input type="email">
+- This tells the form to expect a text input in a typical email format (including the @ symbol).
+
+## Password
+<input type="password">
+- The text entered will be hidden and displayed as dots:
+
+17. Sign Up v2
+# Input Validation
+- But how do we make sure that the right data is going into the form? For example, if a form asks for an email, how can it tell that the input is a valid email that includes the @ symbol?
+
+For example, the "email" type checks if the submitted input is a valid email address:
+- Forms can also mask text input if the <input> element has a "password" type. We can even give it a minlength and maxlength attribute to further validate the input:
+<input type="password" minlength="4" maxlength="10">
+
+# Required Data
+- The required attribute can be applied to one or more form inputs to enforce this.
+
+<form method="dialog">
+  Name: <input type="text" required>
+  <br><br>
+  Favorite Color: <input type="text">
+  <input type="submit">
+</form>
+
+The<input> element for a "Name" is marked with the required attribute.
+
+18. RSVP
+# Input Type: Number
+- There may be times when numbers may be involved in forms. This could be anything from a person's age to the number of items bought at a store.
+<input type="number">
+
+By default, selecting these buttons moves the numeric value up or down by 1. However, a step attribute can be used to change this:
+<input type="number" step="2"> (step)
+
+# Input Type: Checkbox and Radio
+- There are also input types that allow us to make one or more choices from a list of options. Two of them are "checkbox" and "radio".
+- The "checkbox" type renders as a box that is ticked off to mark the input as "finished" or "complete."
+<h3>Favorite Movie Genres</h3>
+<input type="checkbox"> Action<br>
+<input type="checkbox"> Sci-Fi<br>
+
+
+Next, there's the "radio" button type. Like with checkboxes, radio buttons are lists of options. However, only one option can be selected.
+<h3>Which do you think?</h3>
+<input type="radio" name="option"> Yanny
+<br>
+<input type="radio" name="option"> Laurel
+
+19. Contact Us
+# Textareas
+The <textarea> element renders as a plain, mini-text editor on the web page.
+<textarea id="data-entry" rows="7" cols="42"  placeholder="Enter some data here!"></textarea>
+
+In addition to class and id, the <textarea> uses the following attributes:
+rows: The amount of visible rows, or text lines (defaulting at 2).
+cols: The number of visible columns in average character widths (defaulting at 20).
+placeholder: Some default text meant to explain what kind of data should be entered.
+
+# Form Labels
+- In HTML, labels can be used in forms to associate pieces of text with form controls and inputs.
+<form>
+  <label>Book Title: </label><input type="text">
+  <br><br>
+  <label>Author: </label><input type="text">
+  <br><br>
+  <input type="submit">
+</form>
+
+- In order to associate <label> elements to form inputs, its for attribute must match the id of a given <input> element:
+
+<form>
+  <label for="title">Book Title: </label><input type="text" id="title">
+  <br><br>
+  <label for="author" >Author: </label><input type="text" id="author">
+  <br><br>
+  <input type="submit">
+</form>
+
+- Alternatively, these associations can be implicitly defined:
+<form>
+  <label>Book Title: <input type="text"></label>
+  <label>Author: <input type="text"></label>
+</form>
+
+20. Welp?
+The <form> and <input> elements are for accepting (and eventually processing) user input.
+The <input> element comes with many types, including number, checkbox, and radio.
+We can also enter information for dates or color in the <input> element.
+The <textarea> is for longer text input and the <label> element helps organize a form.
+Forms have ways of validating user input, including requiring certain information to be submitted.
+Here is a basic <form> with all of the fun tools we learned about:
+<form>
+  <label></label>
+  <input type ="text" minlength="" maxlength="">
+  <input type ="number" min="" max="">
+	<input type="number" name="rating" min="1" max="5" required> rating
+  <input type ="checkbox">
+  <input type ="radio">
+	<input type="radio" name="try-again"> Maybe
+
+  <textarea></textarea>
+<textarea name="comments" rows="4" cols="50" maxlength="250" placeholder="Write your comments here..."></textarea>
+  
+  <input type="email" required>
+  <input type="password" required>
+  <input type="submit" required>
+</form>
+---------------------------
+IV. Semantic HTML
+21. Personal Blog 
+# HTML5
+- HTML5 is the version of HTML we use today. Prior to its release in 2008, it was less easy to tell the purpose or meaning of the different elements of a web page.
+
+# Semantic Elements
+They can be engaged with and accessed by a wider range of users, such as ones who use screen readers.
+The content within these elements are more discoverable for users through places like search engines.
+The actual HTML code becomes cleaner and easier for programmers to read and maintain.
+
+22. The Header
+# The Header
+- When you visit most sites nowadays, you may notice they have a space near the top for information like the following:
++ The website logo.
++ The title of the site.
++ A search bar.
++ Some links to other parts of the site.
++ A button to sign in.
+
+# Navigation
+Again, the header of a page usually features links for navigating to other places within the site.
+
+- The semantic element used for this is the <nav> element. This usually goes inside of a <header> element.
+
+<header>
+  <nav>
+    <!-- Links go here -->
+  </nav>
+</header>
+
+23. Main & Footer
+# The Main Content
+- Aside from a header/navigation area, many pages also feature an area where all of the main information goes.
+
+<body>
+  <main>
+    <!-- Main information goes here -->
+  </main>
+</body>
+
+- The content inside of the <main> element represents the main topics or ideas shown on the page.
+
+# The Footer
+- After we've populated our page with the content we want, it's time to finish with a <footer> element!
+
+The name of the company/creator.
+Some copyright information.
+Additional links to other sections or other sites.
+
+<footer>
+  <!-- Footer content goes here -->
+</footer>
+
+24. Blog Posts
+# Page Sections
+- Within the main section of a page are smaller, separate parts. The element we use for this is… you guessed it! The <section> element!
+
+<main>
+  <section>
+    <h2>Section A</h2>
+  </section>
+  <section>
+    <h2>Section B</h2>
+  </section>
+  <section>
+    <h2>Section C</h2>
+  </section>
+</main>
+
+Note: Unlike the <main> element, a page can have multiple <section> elements!
+- In many cases, it makes sense for a heading element (<h1>-<h6>) to be the first child of a <section> element.
+
+# Single Articles
+While the <section> element groups together pieces of related content, we use the <article> element for those singular pieces of content.
+
+<section>
+  <h2>Section Heading</h2>
+  <article>
+    <h3>Article Heading</h3>
+    Piece of content
+  </article>
+</section>
+
+25. Figures
+# Using Figures
+The first one is the <figure> element. A "figure" is usually a graphic, image, or diagram.
+<figure>
+  <!-- Figure content goes here -->
+</figure>
+
+# Captioning Figures
+Supportive text, or captions, are another way to add semantic meaning to figures in our pages.
+
+The <figcaption> element is used to describe what is in the <figure> element.
+<figure>
+  <img
+    width="500"
+    src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Tsunami_by_hokusai_19th_century.jpg/1024px-Tsunami_by_hokusai_19th_century.jpg"
+    alt="Great Wave off Kanagawa by Hokusai"
+  />
+  <figcaption>The Great Wave Off Kanagawa by Hokusai</figcaption>
+</figure>
+
+
+26. Final Touches
+The advent of semantic elements in HTML5.
+The <header> and <nav> elements.
+The <main> and <section> elements.
+The <article> element.
+The <figure> and <figcaption> elements.
+The <footer> element.

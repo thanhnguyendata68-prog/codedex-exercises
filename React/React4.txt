@@ -1,0 +1,397 @@
+VII. Hooks
+27. Cookie Clicker
+
+# Hooks
+- In React, hooks are functions that help you store and manage the state of functional components.
+
+Before hooks, you could only manage state with class components:
+// Class-based 
+import React, { Component } from "react";
+
+export default class Planet extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "Saturn"
+    };
+  }
+
+  render() {
+    return <h1>I'm {name}, the best planet! 🪐</h1>;
+  }
+}
+
+But since February 2019, you can now do the same thing in functional components with less code:
+// Function-based 
+import React, { useState } from "react";
+
+export default function Planet() {
+  const [name, setName] = useState("Earth");
+  return <h1>No, I AM. Go planet {name}! 🌍</h1>;
+}
+
+- Managing state in class-based components meant more code and a less intuitive way of maintaining it. With hooks, we can do the same thing in functional components with less code!
+
+Here's a classic example of the useState() hook setting and updating a counter:
+import React, { useState } from "react";
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+
+  function increment() {
+    setCount(function(prevCount) {
+    return prevCount + 1
+    });
+  };
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={increment}>Increment</button>
+    </div>
+  );
+}
+
+---> Alongside useState(), there are other hooks to handle various types of states that we'll learn about in the upcoming exercises!
+
+
+28. Color Effects I 
+# useEffect()
+- Sometimes in code, we want to create a "side effect" that let's us control the outcomes of certain components. The useEffect() hook does just the trick! 🪄
+
+After the document object model (DOM) updates, we may want to render new information like:
++ Showing pop-ups 🪟
++ Fetching external data 🦴
++ Setting timers ⏱️
+
+The syntax for useEffect() is as follows:
+import { useEffect } from "react";
+
+useEffect(function() {
+  // Your side effect code...
+}, [dependency]);
+
+After importing the useEffect() hook, we pass two arguments:
++ A function that contains the "side effect".
++ An optional dependency array that controls when the effect runs.
+
+--> While not needed, we usually add a dependency array to our hook so our effect runs when the value of one of its items changes. If there are no dependencies, the effect runs when the component first renders and after each re-render.
+
+# Adding State
+- When we want to create an effect based on state changes, we might see useEffect() used alongside useState().
+
+An example of this is shown here:
+import React, { useState, useEffect } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  useEffect(function() {
+    console.log("Count changed:", count);
+  }, [count]);
+
+function handleClick() {
+  setCount(count + 1)
+}
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={handleClick}>Increment</button>
+    </div>
+  );
+}
+
+
+--> Clicking the button triggers a state update, where count increments by 1. As a dependency, the updated count triggers the effect specified in the useEffect() hook, logging a message to the console.
+
+29. Color Effects II
+# Clean up!
+- Some effects are no longer needed after running them in useEffect(). These include:
++ Adding an event listener. 👂🏼
++ Creating new DOM elements. 🏭
++ Setting timers. ⏱
+
+--> If we don't clean up these effects, they'll run in the background and overuse our computer's resources (e.g, memory and performance). 🫢
+
+The first argument of useEffect() can return a cleanup function. It ensures the effect is properly tidied up before the component is removed from the DOM or dependencies change.
+
+Let's take a look at a simple timer using a cleanup function:
+import React, { useState, useEffect } from "react";
+
+function Timer() {
+  const [seconds, setSeconds] = useState(0);
+
+  useEffect(function() {
+    // Increment seconds every 1 second
+    const intervalId = setInterval(function() {
+      setSeconds(function(prevSeconds) { return prevSeconds + 1 });
+    }, 1000);
+
+    // Cleanup function to clear interval on component unmount
+    return function() {
+      clearInterval(intervalId);
+    };
+  }, []); // Empty dependency array runs effect only once
+  return (
+    <div>
+      <p>Elapsed Time: {seconds} seconds</p>
+    </div>
+  );
+}
+
+export default Timer;
+
+---> The clearInterval() function is responsible for clearing the interval that increments the timer when the component unmounts. This is how we cleanup our side effect!
+
+Example: 
+import React from "react";
+// Import useState and useEffect here 💖
+import {useState, useEffect} from "react";
+import "./styles.css";
+
+export default function App() {
+  // Add your state variables here 💖
+  const [toggle, setToggle] = useState(false);
+
+  useEffect(function () {
+    // Add your effect code here 💖
+    const intervalID = setToggle(function() {
+      if (toggle) {
+        const randomMath = "#" + Math.floor(Math.random() * 16777215).toString(16);
+        document.body.style.backgroundColor = randomMath;
+      }
+    }, 2000);
+    return function() {
+      clearInterval(intervalID);
+    }
+  }, [toggle]);
+
+  const handleToggle = function () {
+    setToggle(function (prevToggle) {
+      return !prevToggle;
+    });
+  };
+
+  return (
+    <div id="toggle">
+      <button onClick={handleToggle}>
+        {toggle ? "Stop" : "Start"} Color Changing
+      </button>
+    </div>
+  );
+}
+
+
+
+30. Barbenheimer
+# The Context
+- Managing data in React apps is essential to avoid a common React “ick” called prop drilling. The act of passing props through multiple layers of nested components can lead to performance issues and can be difficult to later change the code or keep track of it.
+
+- The useContext() hook is one of the easiest ways to manage and share state across components! React context provides a global state that you can access from anywhere in your component tree.
+
+ You'll use the hook typically when you want to create themes, authenticate users, API data fetching, and so much more.
+
+# createContext()
+To use the useContext() hook, you'll want to:
++ Create a context with createContext().
++ Define context data.
++ Provide the context.
+
+Creating a context looks like this:
+import { useState, useContext, createContext } from "react";
+export const ThemeContext = createContext();
+
+In this example, we're creating a context called ThemeContext for us to create a theme switcher. The export keyword is used to make the context available to other files.
+
+
+We can now create data that the context will use, for example, the color codes of a light and dark mode application:
+const themes = {
+  light: {
+    backgroundColor: "#ffffff",
+    color: "#000000",
+  },
+  dark: {
+    backgroundColor: "#333333",
+    color: "#ffffff",
+  },
+};
+
+We can use the useState() hook to keep track of the state of our theme and wrap our components around in the theme context.
+function App() {
+  const [theme, setTheme] = useState("light");
+
+  function toggleTheme() {
+     setTheme(function(prevTheme) {
+      return prevTheme === "light" ? "dark" : "light";
+    });
+  }
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <ThemeSwitcher />
+      <Home /> 
+    </ThemeContext.Provider>
+  );
+}
+In the code above, we're using the useState() hook to keep track of the theme state. We're also creating a function toggleTheme that will switch between the light and dark themes.
+
+We provide the context value using the ThemeContext.Provider component in the App component. The context value includes the current theme (theme) and a function to toggle the theme (toggleTheme). This is a special component because it is responsible for providing the context data to all the components that are descendants of it in the component tree! 🌳
+
+
+
+function ThemeSwitcher() {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
+  return (
+    <button onClick={toggleTheme}>
+      Switch to {theme === "light" ? "Dark" : "Light"} Mode
+    </button>
+  );
+}
+The <ThemeSwitcher> component is a custom toggle and <Home> is the homepage of this application that can be themed, which we can see with the code below:
+
+function Home() {
+  const { theme } = useContext(ThemeContext);
+
+  return (
+    <div style={themes[theme]}>
+      <h1>Hi!</h1>
+      <p>Welcome!</p>
+    </div>
+  );
+}
+
+In the Home component, we're consuming the theme from the ThemeContext and using it to style the background and text color of the div element! We're using the themes object to get the color codes for the theme, which we defined earlier.
+
+
+// Consume theme and toggleTheme from ThemeContext here 💖
+import { useContext } from "react";
+import { ThemeContext } from "./path-to-your-ThemeContext"; // adjust the path accordingly
+
+function ThemeSwitcher() {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  // Now you can use theme and toggleTheme here!
+}
+
+31. Kanban Board
+# Congrats!
+
+Congrats!! You got through the 6th chapter of React! 🙌🏼
+
+In this chapter, you got to learn about React hooks including:
+
+A reintroduction to useState(). 🌟
+Creating side effects with useEffect(). ✨
+Controlling those effects with dependencies and cleanup functions 🌸
+Toggling between themes with useContext(). 🌷
+
+
+
+useState(): Managing the state of the tasks and status
+useEffect(): Updating the color of the tasks when they are moved to "Done"
+useContext(): Sharing the state of the tasks and status across components
+
+
+----------------------------------------------------
+Super important part
+
+useRef()
+# References
+When building React applications, a component may need to work with a DOM element directly and frequently! However, excessive re-rendering can affect app performance. For example, needing to manipulate the scroll position of a page or control an image animation.
+
+- In such cases, useRef() becomes a powerful tool, creating a mutable reference (or "ref") object that is persistent throughout the component's entire lifecycle!
+
+# Refs in React
+- First, we must import useRef() and declare a ref variable:
+import { useRef } from "react";
+
+const myRef = useRef(null);
+
+- Storing mutable data (data that can be played around with and changed) with refs is pretty common! We can do this by accessing the value of the ref and updating it as needed.
+
+Take a look at the logical example below:
+import { useRef } from "react";
+
+export default function GenerateNum() {
+  // Initialize a ref with an initial value
+  const dataRef = useRef([]);
+
+  function addDataItem() {
+    // Access the current value of the ref and update it
+    dataRef.current.push(Math.random());
+   // Send an alert when triggered
+   alert("Data: " + dataRef.current)
+  };
+
+  return (
+    <div>
+      <h2>Generate Numbers</h2>
+      <button onClick={addDataItem}>Add Number</button>
+    </div>
+  );
+};
+
+To access a DOM element, we can initialize a ref with a null value and attach it to an <input> tag using the ref attribute:
+import { useRef } from "react";
+
+export default function Focus() {
+  const viewRef = useRef(null);
+
+  function handleClick() {
+    viewRef.current.focus();
+  }
+
+  return (
+    <div>
+      <input ref={viewRef} />
+      <button onClick={handleClick}>Focus Input</button>
+    </div>
+  );
+};
+
+
+# State v. Refs
+- You might notice that refs are very similar to state in terms of usage and logic. But unlike ref data, state data can always be accessed and used by a component. Remember the counter example with useState()?
+
+
+
+import { useState } from "react";
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    // logic here
+  }
+
+  return (
+    <button onClick={handleClick}>
+      You clicked {count} times
+    </button>
+  );
+}
+
+--> We know that with each click, we can see the number of times we have clicked rendered on our screen.
+
+
+If you decide to create the same counter with clicks,
+import { useRef } from "react";
+
+export default function Counter() {
+  let countRef = useRef(0);
+
+  function handleClick() {
+     // logic here
+  }
+
+  return (
+    <button onClick={handleClick}>
+      You clicked {countRef.current} times
+    </button>
+  );
+}
+--> The ref does not re-render the component and will also not update the text showing the amount of clicks. 😞
+
+# Conclusion
+useRef() is a React hidden gem that creates ref objects that make it easy for us to change and manipulate DOM elements and mutable data without causing a complete re-render of our application! The next time you're accessing element dimensions, animating elements, or manipulating scroll position, consider using a ref!

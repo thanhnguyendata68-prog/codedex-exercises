@@ -1,0 +1,359 @@
+VI. Functions
+29. Greetings
+# Functions
+- Functions are blocks of code that we write once and can use later on in our programs.
+function helloWorld() {
+  console.log("Hello, World!");
+}
+
+helloWorld();
+
+30. Blast Off
+# Function Syntax
+
+After we define a function, we can use it or "call it" later in our program by using its name with parentheses.
+
+# Return
+function helloWorld() {
+  return "Hello, World! 🌎";
+}
+
+helloWorld();
+
+31. E = mc^2
+# Parameters
+When defining a function, you can add one or more parameters inside the parentheses to signify what input(s) the function needs when called.
+
+function example(parameter) {
+  // Function code here
+}
+function greetings(name) {
+  console.log("Hi! My name is " + name + ".");
+}
+
+greetings("Marshall");
+
+# Arguments
+When calling a function, we call these values arguments that are passed to the function to return something.
+greetings("Cody");
+
+Note: If we do not pass an argument, an undefined value is used instead. (e.g., Hi! My name is undefined.)
+
+So to recap:
+
+Parameters are used when defining a function.
+Arguments are used when calling a function.
+
+32. Clout
+# Scope
+In programming, every function and variable has a "scope." This means that when we define a variable inside a function, that variable can only be used within that function and not outside of it.
+
+function add(x, y) {
+  let answer = x + y;
+  return answer;
+}
+
+console.log(answer);
+This code will throw a ReferenceError that states the answer variable is not defined. This is because we are trying to access a variable that was made in a function.
+
+
+function add(x, y) {
+  let answer = x + y;
+  return answer;
+}
+
+let answer = "This";
+console.log(answer); // Output: This
+
+We now have two answer variables in two different scopes:
+
+One defined inside the add() function as a number.
+One defined outside the add() function as a string (in the global scope).
+
+.reduce() loops through the array.
+
+33. Palindrome
+What functions are in JavaScript and why they're useful.
+How to define functions with the function keyword.
+How to produce results from the function with the return keyword.
+How parameters and arguments play a role in the definitions and execution of function.
+How variables defined within a function have a limited scope, and global variables are not limited in scope.
+
+
+Arrow Function
+# A Different Way to Function
+// Traditional function
+function greet(name) {
+  return "Hello, " + name + "!";
+}
+// Arrow function
+const greetArrow = (name) => "Hello, " + name + "!";
+
+console.log(greet("Brandon"));  // Output: Hello, Brandon!
+console.log(greetArrow("Kat")); // Output: Hello, Kat!
+
+# Syntax
+const add = (a, b) => {
+  return a + b;
+};
+const declares a constant variable named add, which is the function name.
+(a, b) are the parameters of the function.
+=> is the arrow notation, indicating that this is an arrow function.
+{} contains the function body where the actual logic goes.
+return a + b; is the statement inside the function, which in this case adds two numbers.
+
+---------------------------
+VIII. Object
+34. Pizza Party
+# Object
+- Objects are used for storing multiple values in a single variable. They are usually key:value pairs where they key and the value are separated by a : colon sign
+object = {
+  key1: value1,
+  key2: value2,
+  key3: value3
+}
+
+example : 
+const book = {
+  title: "The Hobbit",
+  author: "J.R.R. Tolkien",
+  year: 1937
+}
+
+# Properties
+- Property is the same thing as the key:value pair of an object
+const stadium = {
+  name: "Dodger Stadium",
+  location: "Los Angeles, CA",
+  capacity: 56000,
+  soldOut: false
+};
+This stadium object has four properties:
+
+.name
+.location
+.capacity
+.soldOut
+
+# Dot Notation
+
+36. Pokémon
+# Updating Properties
+const user = {
+  username: "@emmachamberlain",
+  location: "Los Angeles, CA",
+  followers: 15725078,
+  following: 3, 
+  verified: false
+};
+
+user.verified = true;
+user.location = "🌐";
+
+console.log(user);
+
+# Adding New Properties
+const fruit = {
+  name: "apple",
+  quantity: 10,
+}
+
+console.log(fruit);
+
+// Output: {name: 'apple', quantity: 10}
+
+fruit.organic = true;
+
+console.log(fruit);
+
+// Output: {name: 'apple', quantity: 10, organic: true}
+
+37. Animal Farm
+# Object Methods
+- A function that is inside an object is referred to as a method. Check out this phone object that features a ringtone property:
+
+const phone = {
+  model: "iPhone 11 Pro Max",
+  brand: "Apple",
+  version: 11.6,
+  owner: "John Appleseed",
+  ringtone: function () {
+    console.log("Ring, ring! Ring, ring! 📲")
+  }
+}
+
+phone.ringtone();
+
+
+or 
+  ringtone () {
+    console.log("Ring, ring! Ring, ring! 📲")
+  }
+
+- The syntax is a little weird (function () {...}). But that's ok; the method's name is the same as the property name!
+
+38. Round Trip
+What objects are and why they're useful.
+How to access object properties through dot notation.
+How to change existing properties and create new ones.
+How to write and use functions, or objects methods, as properties.
+// Output: Ring, ring! Ring, ring! 📲
+-------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+IX. Trifecta
+39. Green Light Go
+# The <script> Element
+
+40. The DOM
+# The DOM
+# The document Object
+- When we visit a site, a new DOM tree is created. Each element under the <head> and <body> elements is like a fruit hanging in the tree.
+
+
+## .querySelector()
+You'll find that the document is very powerful. With it, you can select anything in the HTML, via methods. One of those methods is .querySelector().
+
+// Select by element name
+document.querySelector("p");
+
+// Select by class name
+document.querySelector(".class-name");
+
+// Select by id name
+document.querySelector("#id-name");
+
+-> You pass a string into the .querySelector() method that represents an element and returns the first instance of that element. This string can either be the element name, a class name, or an id name.
+
+
+## .innerHTML
+Not only can you access elements with DOM methods, but you can also access the contents of those elements with properties like .innerHTML:
+document.querySelector("div").innerHTML;
+// <p>Howdy!</p>
+
+41. Hotline Bling
+# Selecting HTML Elements
+- The document object comes with methods and properties we can use for selecting one or more HTML elements.
+- Two of the most commonly used methods are the following:
+.getElementById()
+.getElementsByClassName()
+
+<div id="status-update" class="post">
+  <p>Just landed from my plane trip! ✈️</p>
+</div>
+
+<div id="posted" class="post">
+  <img src="https://cdn.pixabay.com/photo/2017/05/12/13/17/night-flight-2307018_640.jpg" alt="plane taking off from the runway" />
+  <p>I'm about to take off!</p>
+  <p> So excited! 😬</p>
+</div>
+
+## .getElementsByClassName()
+- We can select multiple elements if they share the same class attribute, using the .getElementsByClassName() method:
+console.log(document.getElementsByClassName("post"));
+
+-  This object is similar to an array. We can access an individual element from this object via indices:
+console.log(document.getElementsByClassName("class-example")[0]);
+// Output: <div id="status-update" class="post"><p>Just landed from my plane trip! ✈️</p></div>
+
+
+## .getElementById()
+- We can also select an element with a matching id attribute, using the .getElementById() method:
+console.log(document.getElementById("posted"));
+/* Output:
+<div id="posted" class="post">
+  <p>I'm about to take off for my flight!</p>
+  <p>So excited! 😬</p>
+</div>
+*/
+
+document.getElementById("posted").querySelector("p");
+// Output: <p>I'm about to take off!</p>
+
+# Updating HTML Elements
+Remember: some objects contain certain properties and methods. This includes the element objects returned by the document object methods!
+
+.innerText
+.src
+
+## .innerText
+The .innerText property returns the rendered text inside of a selected element, including any newlines.
+
+console.log(document.getElementById("posted").innerText);
+// Output: "I'm about to take off!\n\nSo excited! 😬"
+
+We can also change the text of a selected element by assigning a new string value with the .innerText property:
+
+let newText = document.getElementById("posted").querySelector("p").innerText = "I'm about to take off! It's an early flight, so I'm ready to sleep! 😴"
+
+console.log(newText);
+// Output: I'm about to take off! It's an early flight, so I'm ready to sleep! 😴
+
+
+## .src
+If we're working with an <img> image element, then we can access its src attribute with... you guessed it! The .src property!
+
+console.log(document.querySelector("img").src);
+// Output: 'https://cdn.pixabay.com/photo/2017/05/12/13/17/night-flight-2307018_640.jpg'
+
+And to change an image source, suppose we have a smiley face that’s using e:
+console.log(document.querySelector("img").src);
+// Output: 'smiley1.png'
+
+We can update the image .src property by assigning a new string:
+document.querySelector("img").src = "smiley2.png"
+
+
+42. Mood Ring
+# Changing CSS Styles
+Not only can we use DOM methods to manipulate our HTML content, but we can also change our CSS styles!
+
+document.getElementById("posted").style;
+
+
+CSS Property		DOM Property
+----------		-------------
+background-color	backgroundColor
+border			border
+border-radius		borderRadius
+font-size		fontSize
+margin			margin
+padding			padding
+text-align		textAlign
+
+Important: In the DOM, multiword CSS properties are in camelCase.
+document.getElementById("posted").style.textAlign = "center";
+
+
+43. Chill Pill
+# Events
+Clicking a button on the site.
+Hovering over something with the mouse.
+Filling out and submitting a form.
+Using one of the keys on your keyboard.
+
+- While HTML is where the events may take place, JavaScript is where we set them up. This is done with a DOM method called .addEventListener().
+
+let likeButton = document.getElementById("like-button");
+let likeCount = document.getElementById("like-count");
+
+let numberOfLikes = 0
+
+likeButton.addEventListener("click", function() {
+  numberOfLikes++;
+  likeCount.innerText = numberOfLikes;
+});
+
+In the example above, we are using .addEventListener() to attach a "click" event to the selected likeButton. When clicked, a function updates the .innerText of the selected likeCount element and increments it by 1, via the numberOfLikes variable.
+
+44. Cap That
+How the <script> element lets us connect our JavaScript with our HTML.
+The DOM and how we can access a site's elements with the document JavaScript object.
+Elements can be selected through the document object with methods like:
+.querySelector()
+.getElementById()
+.getElementsByClassName()
+We can dynamically update our selected elements with properties like .innerHTML, .innerText, and .src (e.g., for images).
+The .style property can change the CSS of selected elements, such as background color (i.e., .style.backgroundColor).
+Using events, we can even make it so a JavaScript function only runs when the user does something specific (e.g., clicking a button with the mouse).

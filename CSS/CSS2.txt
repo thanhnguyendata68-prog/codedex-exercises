@@ -1,0 +1,334 @@
+iv. Layout
+19. Lines & Blocks
+# Displaying Elements
+We can apply this concept to how elements are displayed on a site, from small ones like <a> and <p> to larger container-like ones such as <div>, <section>, or <body>.
+
+- Block elements take up the entire width of whatever they're inside of. However, this can be changed (as well as the height).
+<div></div>
+<p>Hello, World! What shall I research on Wikipedia today?</p>
+
+div {
+  width: 100%;
+  height: 100px;
+  background-color: red;
+}
+
+p {
+  border: 1px solid blue;
+}
+
+- Inline elements only take up as much space as needed, and other elements may appear beside them! The <a> anchor element is a very popular inline element because links are always being used within blocks of text (e.g., a Wikipedia article with lots of links to other places).
+
+When you set an element to display: inline-block, you get the best of both worlds:
+
+It can share the same line with other inline elements.
+Despite being inline, its width and height can be changed.
+
+#block {
+  background-color: lightcoral;
+  height: 100px;
+}
+
+#inline {
+  background-color: lightblue;
+}
+
+#inline-block {
+  background-color: lightgreen;
+}
+
+20. Go With The Flow
+# Normal Flow of Elements
+- When elements are displayed on the screen, they will appear as close to the top and left edges of their parent elements as possible. They will also appear either as blocks or inline elements. This is known as the normal flow of elements.
+
+- We can control how an element is normally positioned in this flow with the position property! By default, all elements have a static position:
+
+position: static;
+
+Note: It usually isn't necessary to set position to static since this is the default for all elements.
+
+21. It's All Relative
+# position: relative
+The relative position allows your element to be "moved" around the screen, away from where it would normally be on the screen.
+
+#div-b {
+  background-color: blue;
+  position: relative;
+  left: 25px;
+  top: 25px;
+}
+
+The top and left properties can also be set with relative units like 5em and 50%.
+
+# z-index
+- If you work with position: relative long enough, you'll notice how some elements will overlap other elements.
+
+Let's revisit the example with the two <div> elements and demo z-index by adding one more #div-c element:
+div {
+  width: 200px;
+  height: 200px;
+}
+
+#div-a {
+  background-color: red;
+}
+
+#div-b {
+  background-color: blue;
+  position: relative;
+  left: 25px;
+  bottom: 25px;
+  z-index: -1;
+}
+
+#div-c {
+  background-color: lightgreen;
+}
+
+22. Absolute Removal
+# position: absolute
+- If we position an element with absolute, we break it out of the page's flow. If we then give the element a top, right, bottom, and/or left property, it is placed according to the top-left of its closest non-static element.
+
+Because the #blue element is inside of another positioned element, it is absolutely positioned in the top-left corner of #outer-div when top and left are set to zero.
+
+
+** Remember that position: absolute removes the element from the normal flow of the page. It's positioned relative to the closest parent element that has a position other than static.
+
+23. Fixed Banner
+# position: fixed
+- The fixed position works similar to absolute by taking an element out of the normal flow of the page. However, fixed elements stay where they are placed on the screen even when you scroll up and down of the page.
+
+- If we wanted to ensure the ul unordered list element was always on the page no matter where we scrolled on our site
+ul {
+  background-color: lightyellow;
+  border: 2px solid;
+  padding: 2px;
+  list-style-type: none;
+  position: fixed;
+}
+
+div {
+  height: 75vh;
+}
+
+#about > h2 {
+  background-color: lightseagreen;
+}
+
+#projects > h2 {
+  background-color: orange;
+}
+
+Add z-index: 1; to place the header above whatever scrolls past it. (it can not be not showing for whatever reason.)
+
+24. Sticky Elements
+# position: sticky
+- Alternatively, the sticky option keeps the element in flow with the other elements. As you scroll the page, the element will stay in its normal spot until it is a certain distance from the top of its containing element (after which it will stick to a place).
+
+div {
+  height: 100vh;
+}
+
+h2 {
+  position: sticky;
+  top: 0;
+}
+
+- By setting the top of the h2 with the sticky position, and because the page body is its nearest scrolling container, each heading gets "stuck" to the top of the screen until we've scrolled past its most direct container div element.
+
+Like with relative and absolute, a common side-effect of using the fixed and sticky positions is the rendered elements may not appear right while scrolling through the page.
+
++ The unordered list has a fixed position and is taken out of flow with the rest of the elements (including the sticky headers).
++ The HTML for our fixed element is written before the HTML for our sticky element(s).
+
+25. Art Gallery
+Setting how elements appear on the screen with the display property.
+Understanding how elements follow a normal flow on the page, by default.
+Using the position to place elements elsewhere on the page (either inside or outside the normal flow).
+---------------------------------
+V. Flexbox
+26. In the Flex
+
+- So far, we've practiced using display and position to control how content and media appear on a page.
+- However, the display and position properties were originally designed for document layout with flowing text, headings, paragraphs. They weren't designed for arranging interface elements like navbars, card grids, or sidebars..
+
+------- Flexbox, short for Flexible Box Layout, is a CSS layout system designed to make it easier to arrange and align elements on a page, both in one dimension (row or column) and with dynamic spacing. 
+
+## Flex Container and Items
+Flexbox works with a two-level structure: a parent and its children.
++ The flex container is the parent element. This is where most of the flexbox properties live.
++ The flex items are the direct children of that container. They respond to the rules the container sets.
+
+<div class="card-row">          <!-- flex container -->
+  <div class="card">1</div>    <!-- flex item -->
+  <div class="card">2</div>    <!-- flex item -->
+  <div class="card">3</div>    <!-- flex item -->
+</div>
+
+.card-row {
+  display: flex;
+}
+
+27. Directions
+# Flexbox Axes
+Flexbox operates on two axes:
+
+The main axis is the direction flex items are laid out.
+The cross axis runs perpendicular to it.
+
+- Almost every Flexbox property targets one of these two axes. They shift depending on one property: flex-direction.
+
+## flex-direction
+- flex-direction sets which direction the main axis runs, determining where your flex items flow.
+.card-container {
+  display: flex; /* enables flexbox */
+  flex-direction: column;
+}
+flex-direction accepts four values:
+
+row: items flow left to right (this is the default)
+row-reverse: items flow right to left
+column: items flow top to bottom
+column-reverse: items flow bottom to top
+
++ For flex-direction: row:
+The main axis is horizontal (left → right).
+The cross axis is vertical (top → bottom).
+
++ For flex-direction: column:
+The main axis is vertical.
+The cross axis is horizontal.
+
+## flex-wrap
+By default, flexbox keeps everything on one line, even if that means shrinking or overflowing. You can change this with flex-wrap.
+
+nowrap: all items stay on one line, shrinking if needed (default)
+wrap: items spill onto new lines when they run out of room
+wrap-reverse: same as wrap, but new lines appear above instead of below
+
+.book-row {
+  display: flex;
+  flex-wrap: wrap; /* remove this and the books will shrink onto one line */
+}
+
+28. Spacing
+# Spacing Things Out
+- When a flex container is wider than the total width of its items, there's leftover space. By default, Flexbox leaves that space sitting at the end of the row.
+
+ The justify-content property moves the leftover space to the start, end, center, or between the items, controlling the main axis.
+.card-row {
+  display: flex;
+  justify-content: flex-start; /* default */
+}
+
+flex-start: items bunch up at the start of the main axis (default)
+flex-end: items bunch up at the end
+center: items are centered with equal space on both sides
+space-between: items spread out with space between them, none on the edges
+space-around: items get equal space on each side, so edge gaps are half the inner gaps
+space-evenly: items spread out with perfectly equal space everywhere, including edges
+
+# Gap
+- While justify-content distributes leftover space, gap sets a fixed amount of space between items regardless of the container size.
+
+.card-row {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+- row-gap and column-gap let you control each direction independently when wrapping is on!
+
+# gap vs. justify-content
+Both gap and justify-content are used to control the spacing between flex items. However, they work differently. As we've learned,
+
++ justify-content moves the leftover space to the start, end, center, or between the items, controlling the main axis.
++ gap sets a fixed amount of space between items regardless of the container size.
+/* gap: fixed spacing between items, regardless of container size */
+.gap-example {
+  display: flex;
+  gap: 2rem;
+}
+
+/* justify-content: items respond to available space */
+.justify-example {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* using both together */
+.both-example {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+29. Cross Axis
+# Cross Axis
+We've been working with changing the main axis with justify-content, but now let's look at the other axis: the cross axis!
+
+The main property is align-items, and it works on the container just like justify-content does, except it targets the perpendicular direction, or how flex items are laid out along the cross axis on the current line.
+
+.card-row {
+  display: flex;
+  align-items: stretch; /* default */
+}
+
+stretch: items stretch to fill the container's cross axis height (default)
+flex-start: items align to the start of the cross axis
+flex-end: items align to the end of the cross axis
+center: items are centered on the cross axis
+baseline: items align so their text baselines line up with each other
+
+# align-self
+- align-items aligns all items at once. But what if you want just one card to behave differently?
+
+align-self is written on the item itself, not the container, and overrides align-items for that one element.
+
+.card-row {
+  display: flex;
+  align-items: center;
+}flex-wrap
+
+.card-special {
+  align-self: flex-end;
+}
+
+justify : main axis
+Align: cross axis
+
+30. Flexible Sizing
+# Flex Items Grow and Shrink
+This is controlled by three properties: flex-grow, flex-shrink, and flex-basis.
+
+## flex-basis
+flex-basis sets an item's starting size before any leftover space is distributed. Think of it as the item's "ideal" size:
+
+.card {
+  flex-basis: 200px;
+}
+
+## flex-grow
+Once flex-basis is set, there may be leftover space in the container. flex-grow determines whether an item is allowed to grow to fill that space, and by how much relative to its siblings.
+.card {
+  flex-grow: 1;
+}
+
+
+## flex-shrink
+flex-shrink is the opposite! It controls whether items are allowed to shrink when there isn't enough space.
+
+.card {
+  flex-shrink: 1;
+}
+
+A value of 1 means the item can shrink if needed (default)
+A value of 0 means the item refuses to shrink and will overflow the container before getting smaller
+
+# flex shorthand
+.card {
+  flex: 1;
+  /* shorthand for: flex-grow: 1, flex-shrink: 1, flex-basis: 0 */
+}
+flex: 1: Grow and shrink equally, starting from 0
+flex: auto: Grow and shrink, starting from the item's natural size
+flex: none: Don't grow, don't shrink

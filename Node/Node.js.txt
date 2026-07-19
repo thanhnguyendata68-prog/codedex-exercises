@@ -1,0 +1,312 @@
+01. What is Node.js?
+# Node.js
+- Node.js is an environment that lets you run JavaScript on a server or your computer instead of in the browser. Basically, it’s a way of using JavaScript to run your own server and do server-based tasks like interacting directly with your operating system!
+
+-  Node was created to solve a fundamental problem in web development: handling multiple simultaneous connections efficiently.
+
+- Backend development required different languages like PHP, Ruby, or Java. With Node, JavaScript could run on the server, making fullstack development possible with a single language (JavaScript!).
+
+- It’s super useful for web developers, whether you’re making a chat application, a password manager, or even a multiplayer mini-game! Fun fact: a lot of our site is built with Node! It’s the server-side glue that holds everything together, including this page that you’re on right now!
+
+- Node.js is an important part of the web development stack. You might see Node.js in the context of the MERN stack (MongoDB/Express/React/Node) — don’t worry about all that right now.
+
+02. Getting Started
+# Running JavaScript vs Node.js
+
+==== JavaScript
++ runs on the web browser
++ can’t read or write files on your computer
++ can’t create a full web server
++ can’t interact with your operating system directly
++ can handle asynchronous tasks (like API requests) but processes them one at a time, which limits handling multiple connections at once
+
+
+==== JavaScript with Node.js
++ runs directly on your computer or on a server
++ can read and write files on your computer
++ can create a full web server and handle requests from other computers
++ interacts with your operating system (running commands, managing processes)
++ can handle many connections at once, making it great for building web servers that need to manage lots of requests
+
+----> If the browser is a kitchen, JavaScript is a chef. The chef can only cook in the kitchen, unless you give the chef a food truck. Node.js is the food truck that lets the chef cook anywhere!
+
+03. Average Joe
+# Opening a REPL with Node
+- One of the unique features of Node.js is the ability to run JavaScript code directly in the terminal, without needing to create a separate JavaScript file!
+
+We're able to do this with a REPL (Read-Eval-Print Loop), which is a programming environment that allows us to write, evaluate, and see the results of code. 
+
+Follow the prompt that appears! Type .help, and you'll see a bunch of additional functionality:
+.break    Sometimes you get stuck, this gets you out
+.clear    Alias for .break
+.editor   Enter editor mode
+.exit     Exit the REPL
+.help     Print this help message
+.load     Load JS from a file into the REPL session
+.save     Save all evaluated commands in this REPL session to a file
+
+Press Ctrl+C to abort current expression, Ctrl+D to exit the REPL
+> 
+
+The REPL allows us to write in-line JavaScript directly in the terminal. Think back to our basic web stack of HTML, CSS, and JavaScript. You can write CSS and JavaScript directly inside an HTML file, by using the <style> and <script> elements respectively. The REPL lets you do something kind of similar, directly in the terminal!
+
+Since we already started up Node.js using the node command earlier, we can start writing JavaScript directly in the terminal.
+
+
+04. Favorite Lyrics
+# Running a JavaScript File with Node
+- In the last exercise, we learned that the node command opens up a REPL.
+- But suppose we already have a JavaScript file, we can also do node [filename] to execute the file, using the Node.js runtime.
+- Let’s say we have a JavaScript file called hello.js. If we open the terminal, navigate to the folder containing the hello.js file, and type the command:
+	node hello.js
+
+So suppose the hello.js file contains: console.log('Hello world!');
+-------------> Then the file would output Hello world!.
+
+So, if it’s just a JavaScript file, why do we need to run Node.js anyway? Well, the terminal can’t understand JavaScript code on its own – it needs a runtime environment like Node.js to interpret the code into a format that the terminal can understand and execute. Node.js acts as a translator for the terminal.
+
+Note: When working in node.js, console.log() will print text in the terminal rather than in the browser console!
+
+05. Golden Record 
+
+Node.js is a JavaScript runtime environment that lets you run your own server and interact with your operating system
+How to install and verify installation for Node.js
+How to run a file that writes a message with Node.js
+
+------------------------------------------------------------------------
+II. Modules
+06. Built-In Module
+# Built-In Modules
+- Modules allow us to add specific functionality to our programs. Think of them like mini-libraries containing reusable code that can be called in Node.js file.
+
+- Built-in modules come with node.js and are automatically included during installation. We just need to import them using require().
+
+Module					What it lets you do
+
+fs (File System Module)			read, write, and manipulate files
+path (Path Module)			work with file paths
+os (Operating System Module)		retrieve info about your operating system
+
+
+# Require
+- So, what does require() actually do? Well, in order to use any of these built-in modules, we need to load them with require().
+
+For example, to load the fs file system module (we will learn about fs in the next exercise), we need to first write:
+
+const fs = require('fs');
+
+-- When we write the code above, Node.js looks for the fs module in its core (built-in) modules. When Node.js finds the fs module, it loads it and returns an object containing all of the fs functions. Then, we can use fs methods in our script!
+
+
+07. Dear Diary
+# Reading Files
+- Let’s zoom in on fs, or the File System module.
+
+--> The fs module lets you read, write, and manipulate files. It allows you to see what’s inside an existing file, create a new file, and even delete a file or change what’s inside it.
+
+- For now, let’s focus on reading files with the fs.readFile() method. With Node.js, you can write JavaScript that allows you to read the content of any text file accessible on your computer.
+Here’s the basic syntax:
+		fs.readFile(path, options, callback);
+
+So there are three parameters:
++ path: The file path you want to read from.
++ options (optional): You can specify the encoding like 'utf8'.
++ callback: A function that is executed after the operation is complete and lets us know if the operation was successful or if there was an error.
+
+Note: UTF-8, short for Unicode Transformation Format, is the most widely-used character encoding standard on the web.
+
+So, for example, suppose we have a hello.txt file with some text inside.
+Reading from and logging that hello.txt file:
+
+const fs = require('fs');
+
+fs.readFile('/Users/julien/Desktop/hello.txt', 'utf8', (err, data) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  console.log(data);
+});
+
+
+'/Users/julien/Desktop/hello.txt' is the path.
+'utf8' is the options.
+(err, data) => { … } is the callback.
+
+
+Inside the callback, the control flow goes something like this:
++ If there’s an error, like the file not existing, or not being in the correct folder, it’ll log the error and return early without executing the remainder of the function.
++ Otherwise, it’ll print the contents of the hello.txt file in the terminal.
+
+And the error might look like this:
+Error: ENOENT: no such file or directory, open '/Users/julien/Desktop/hello.txt'
+
+
+08. Unwritten
+# Writing Files
+- Similar to how we used fs.readFile() to read the seventh-grade.txt file, we can use fs.writeFile() to write data to that file. 📝
+
+- If the file exists, we can use fs.writeFile() to overwrite whatever is inside it. If that file doesn’t exist, fs.writeFile() creates a new file and writes data to it.
+Here’s the basic syntax:
+	fs.writeFile(path, data, [options], callback);
+
+
+There are four parameters:
++ path: The file path.
++ data: The content you want to write (for our purposes, this will be a string).
++ options (optional): Encoding (like 'utf8') or other settings.
++ callback: A function that is executed after the operation completes that lets us know if the operation was successful or if there was an error.
+
+Suppose we have an example.txt file.
+Writing to that file would look like:
+
+const fs = require('fs');
+
+fs.writeFile('example.txt', 'Hello, world!', (err) => {
+  if (err) {
+    console.error('Error writing to file:', err);
+  } else {
+    console.log('File written successfully!');
+  }
+});
+
+- In this example, fs.writeFile() tells Node.js to overwrite the contents of example.txt with ”Hello, world!”. Then the code either logs that there was an error or that the file was written successfully.
+
+
+The callback function’s control flow goes like this:
++ If we had an existing example.txt file, fs.writeFile() would overwrite the contents of that file with “Hello, world!”.
++ If we didn’t have an existing example.txt file, it would create a new file with the name example.txt and write “Hello, world!” inside it.
+
+
+We could also store the string inside the data parameter in its own variable, which would make it easier to write something longer:
+
+const fs = require('fs');
+
+const message = '⋆˚✿˖° Hello, world! It\'s bright and sunny out today. ౨ৎ˚₊✩‧₊';
+ 
+fs.writeFile('hello.txt', message, (err) => {
+  if (err) {
+    console.error('Error writing to file:', err);
+  } else {
+    console.log('File written successfully!');
+  }
+});
+
+
+09. Blank Page
+# Deleting Files
+- You’ll want to be careful with this command, as the deleted file truly disappears – you won’t even find it in your recycling bin. 🗑️
+
+- We can use the fs.unlink() method to delete a file from the computer’s file system. This helps delete files, whether we’re cleaning up temporary files generated by our program, or deleting larger unwanted files from our project.
+
+Like fs.readFile() and fs.writeFile(), the fs.unlink() method executes a callback function once it completes the deletion to let us know where it successfully deleted the file or encountered an error.
+Here’s the basic syntax:
+		fs.unlink(path, callback);
+
++ path: The path to the file you want to delete.
++ callback: A function that is executed after the operation completes that lets us know if the operation was successful or if there was an error.
+
+In order to delete the file, we need to input the full path to the file, or just the name of the file if it’s in the same folder as your app.js file. Just like with fs.readFile() and fs.writeFile(), we need to write an if statement that checks for an error:
+
+const fs = require('fs');
+
+// Delete the file if it exists
+fs.unlink('shopping-list.txt', (err) => {
+  if (err) {
+    console.error('Error deleting file:', err);
+    return;
+  }
+  console.log('sample.txt has been deleted.');
+});
+
+--> If the file exists, it’ll print that the file has been deleted. If there’s an error (the file doesn’t exist, it’s not in the path you specified, etc) it’ll print an error message.
+
+
+Bonus: If you want to take it a step further, you can also try to redact the diary entry! Try using data.replace(/[A-Za-z]/g, "█"); which uses some regex (Regular Expresssions) to replace the Latin characters in the entry with rectangular blocks! This is more JavaScript than Node, but still fun to try. ✨
+
+
+10. Chaotic Desktop
+# Path Module
+- The path module is another built-in module in Node.js, which often plays nicely with fs. path solves the problem of working with file and directory paths on your computer.
+
+- In Node.js, working with the file system often requires handling file paths. However, file path structures differ between operating systems—Windows uses backslashes (\), while macOS and Linux use forward slashes (/). The path module provides a reliable way to manage file paths consistently across platforms.
+
+
+Some useful path functions include:
++ path.join() – for combining paths into one path, regardless of the operating system
+	For example, taking in ('home', 'users', 'Documents', 'file.txt') and outputting '/home/users/Documents/file.txt'
++ path.extname() – for getting file extensions
+	For example, taking in '/home/users/app.js' and outputting .js
+
+Let’s take a look at path.join(), which combines file paths:
+const path = require('path'); 
+
+const fullPath = path.join('users', 'julien', 'secret', 'my_passwords.txt'); 
+console.log(fullPath)
+
+The output would be: users/julien/secret/my_passwords.txt
+
+Now, let’s take a look at path.extname(), which allows us to get just the extension name (like .jpg, .png, etc) from a file:
+
+const path = require('path');
+
+const filename = 'photo.jpg';
+const extension = path.extname(filename);
+console.log(extension);
+
+The output would be:  .jpg
+
+11. SleepyOS
+# OS
+- The os module allows us to interact directly with your computer’s operating system.
+- We can also use the os module to gather OS-specific information about file paths. This includes things like the system’s default directory for temp files, which looks different across Windows vs. Mac vs. Linux.
+
+- Here are some useful os functions
+os.platform() returns a string telling you what the operating system platform is
+os.totalmem() returns an integer that tells you the total amount of system memory in bytes
+os.freemem() returns an integer that tells you the amount of free system memory in bytes
+os.uptime() returns the system uptime aka how many seconds the computer has been running since being turned off or restarted
+
+Here’s a simple program that tells us some info about our operating system:
+const os = require('os');
+
+// Get OS type and convert 'Darwin' to 'macOS'
+let osType = os.type();
+
+if (osType === 'Darwin') {
+  osType = 'macOS';
+}
+
+console.log(`Operating System: ${osType}`);
+console.log(`Platform: ${os.platform()}`);
+// Convert bytes to gigabytes
+console.log(`Total Memory: ${(os.totalmem() / 1e9).toFixed(2)} GB`);
+
+
+On my computer, this outputs:
+Operating System: macOS
+Platform: darwin
+Total Memory: 34.36 GB
+
+It’s like having your computer look in a mirror! 🪞
+We can also find out how many seconds our computer has been awake without restarting or shutting down using the os.uptime() method.
+const os = require('os'); // Import the OS module
+
+const uptimeInSeconds = os.uptime(); // Get system uptime in seconds
+console.log(`I, your humble computer, have been awake for ${uptimeInSeconds} seconds.`);
+
+On my computer, this outputs:
+I, your humble computer, have been awake for 402522 seconds.
+
+
+
+12. Affirmations
+# Congrats!
+To recap, here’s what we learned in this chapter:
++ The three modules that let us interact with files and our operating system:
+	fs module to read 📖, write ✍️, and manipulate files 🗑️
+	path module to work with file paths 📁
+	os module to retrieve info about your operating system 🖥️
++ You can use any of these modules alone or in combination with each other.
++ These modules allow you to combine the full functionality of JavaScript with the power of Node.js, allowing you to bridge the gap between JavaScript and your machine!
+

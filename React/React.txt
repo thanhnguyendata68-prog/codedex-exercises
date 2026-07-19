@@ -1,0 +1,303 @@
+I. First React App
+1. First Reaction
+# The Rebirth
+- React is a JavaScript library used for building websites with reusable components. It lets you create a multi-page website and not have to update things repeatedly in different files.
+
+Some of React's most useful features include:
+
++ An interesting flavor of JavaScript called JSX.
++ An efficient way to update parts of your site.
++ It's fast and scalable!
+
+Before React, updating your website meant changing the same element in every file. With React, you change a single element in one place and that change applies everywhere!
+
+# A Brief History
+Fun fact: Instagram is one of the earliest web apps to use React. Since then, many platforms like Netflix, Airbnb, and Codédex 😛 have followed.
+
+02. Our Workstation
+# Hot Reloading
+- Hot reloading is a feature in React that allows developers to instantly see changes made to their code in real time. The output gets updated with every character we type in the code editor.
+
+# File Structure
+If you click the 📂 folder icon in the editor, you'll see the following files:
+
++ 📁 public
+	📄 index.html: HTML with the root of the React app (i.e., <div id="root"></div>).
++ 📄 App.js: Our React code, written in a cool JavaScript syntax called JSX.
++ 📄 index.js: The place where our React app is started from.
++ 📜 package.json: A list of Node packages that help this app run, including React.
++ 📄 styles.css: Base styles for the React app.
+
+----> React is a library that can be installed from a node package manager like npm.
+
+# The Root
+The index.html file features a single element with an id of "root", from where our React app is run.
+
+const container = document.getElementById("root")
+
+--- Create React : yarn create vite client
+--- Run : yarn dev -- to run 
+
+03. Writing React
+# React Syntax
+When we import React from the "react" library, we can use JavaScript Syntax Extension (or "JSX").
+let heading = <h1 id="welcome-heading">Welcome!</h1>
+(Notice anything familiar? Wait, that looks just like an HTML element... inside JavaScript?)
+
+- JSX is really more like "syntactic sugar" because it looks like HTML, but it's actually JavaScript! 💡
+- We can define JSX either in a .js file or a .jsx file. For this course, we're using .js files!
+
+When you run your code, JSX gets transpiled, or translated into plain JavaScript and then read by the browser.
+
+// Before being transpiled
+let heading = <h1 id="welcome-heading">Welcome!</h1>;
+
+// After being transpiled
+let heading = React.createElement("h1", { id: "welcome-heading" }, "Welcome!");
+
+Fortunately, JSX simplifies things with its friendly syntax!
+
+
+04. Building Blocks
+# What Apps Are Made Of
+- Another core feature of React are components.
+- Components are defined like functions that return JSX content.
+- If JSX is like the "language" of React, then components are like the "building blocks" of the website's user interface.
+
+import React from "react";
+
+export default function Greetings() {
+  return (
+    <div>
+      <h1>Hello, World!</h1>
+      <p>Nice to meet you. 😊</p>
+    </div>
+  )
+}
+
+In the example above:
+
++ We import React to be able to use JSX and write components.
++ Then, we define the component as a JavaScript function that returns something.
++ Lastly, we return a heading and paragraph wrapped in a <div> element.
+
+Note: Your returned JSX must be wrapped in a single element.
+
+
+While defining the <Greetings> component, we attached the export default keywords. This lets us use the component in other files!
+
+To add an imported component to another component's return statement:
+
+import Greetings from "path/to/Greetings.js";
+
+export default function App() {
+  return <Greetings />
+}
+
+
+When referencing another component, we write like a self-closing HTML element with a / slash.
+
+Also, the export default keywords were used for the <App> component. This means it can be used in another file!
+
+
+05. Social Post
+
+Woohoo on making it to the end of chapter 1! 🔥
+
+Got introduced to React and why it's popular.
+Started working with the built-in editor.
+Learned about some of the core files we're gonna use.
+Created our first component with JSX!
+
+------------------------------------------------------------------
+II. JSX & Components
+06. Band Tour
+# A New Way to JavaScript
+
+let header = <header>Compiler Coffee ☕</header>;
+
+07. Embedded JS
+# The "JS" in JSX
+
+-  If we place a JavaScript variable in our JSX and render it, its value 
+
+Say we were updating an article. We could add the following information like this:
+const articleJSX = (
+  <article>
+    <h1>As We May Think</h1>
+    <p>by Vannevar Bush</p>
+    <p>Read by 750</p>
+  </article>
+)
+
+Note: If your JSX is multi-line, wrap it in parentheses to make it more readable!
+
+
+But with a little more code, we can use curly braces to add JS to our JSX:
+const articleTitle = "As We May Think";
+const articleAuthor = "Vannevar Bush";
+const readNumber = 750;
+
+const articleJSX = (
+  <article>
+    <h1>{articleTitle}</h1>
+    <p>by {articleAuthor}</p>
+    <p>Read by {readNumber}</p>
+  </article>
+)
+
+# Conditional JSX
+JSX can be assigned to variables as a value or it can be returned from a function. . But we can also use conditional statements to determine exactly what JSX should be displayed.
+
+Imagine signing into a website. We could use an if/else statement to conditionally assign JSX to a variable that points to the right page markup:
+let page = null;
+let signedIn = true;
+
+if (signedIn) {
+  page = <div>User dashboard</div>
+} else {
+  page = <div>Sign-in page</div>
+}
+
+export default function App() {
+  return (
+    <div>
+      {page}
+    </div>
+  )
+}
+
+Note: By the way, JSX comments look unique and interesting: {/* Right?! */}
+
++ If you want what is inside the JSX tags to be conditionally set, we can use a ? : ternary operator:
+
+let page = <div>{signedIn ? {/* User dashboard */} : {/* Sign-in page */}}</div>
+
++ If no else condition is present, we can use the && "and" or || "or" operators:
+
+let page = <div>signedIn && {/* User dashboard */}</div>
+
+
+export default function App() {
+  const name = "Van Thanh Nguyen";
+  return (
+    <div>
+      My name is {name}!
+    </div>
+    );
+}
+
+or 
+const name = "Van Thanh Nguyen";
+export default function App() {
+  
+  return (
+    <div>
+      My name is {name}!
+    </div>
+    );
+}
+
+08. Travel Gallery 
+# Attributes & Names
+const selfie = <img src="username/camera/recents/today.png" alt="a selfie" />
+
+- This selfie variable contains a JSX image with two attributes: src and alt. Any valid HTML and their associated attributes are supported in JSX…mostly.
+
+- One of the most widely used attributes in HTML is class:
+<button class="login-button">
+  Submit
+</button>
+
+- However, the JSX-equivalent to this is className:
+<button className="login-button">
+  Submit
+</button>
+
+In JavaScript, "class" is actually a reserved keyword. Therefore, we use className!
+Ex: 
+export default function App() {
+  const barcelonaImage = <img src={"https://i.imgur.com/qaQNzqi.png"}  alt="Barcelona" />;
+  const tokyoImage = <img src={"https://i.imgur.com/OAx1wzO.png"}  alt="Tokyo" />;
+  const ohioImage = <img src={"https://i.imgur.com/CxJjltu.png"}  alt="Ohio" />;
+
+  const imageGallery = [
+    <li>{barcelonaImage}</li>,
+    <li>{tokyoImage}</li>,
+    <li>{ohioImage}</li>
+  ]
+  return <ul>{imageGallery}</ul>;
+}
+
+
+09. Hot Takes Pt. 1
+# Components
+Components are pieces of JSX that make up most of the website. They can be anything from labels to buttons to navigation menus.
+
+Below is an example of a component defined with a function keyword.
+import React from "react";
+
+export default function FunctionComponent() {
+  return (
+    <div>
+      {/*This is a comment*/}
+      <h1>Here's some markup!</h1>
+    </div>
+  )
+}
+
++ The name of the component must begin with a capital letter, and be in "PascalCase".
++ The JSX returned by a component is bundled under a single element and rendered as a single part, or component, of a website.
+
+# Using Components
+First, we can set them up to be used in other components with the following:
+
+export default function FunctionComponent() {
+
+
+}
+----> We use the export default keywords so the component can be used in other files.
+
+
+Then, to import the component for use in another component file:
+
+import FunctionComponent from "file/path/to/FunctionComponent.js";
+
+
+We can refer to them the same way we refer to any JSX, with angle brackets!
+function App() {
+  return (
+    <FunctionComponent />
+  )
+}
+
+Every React application must be rendered from a root component. It is usually done like this:
+import React from "react";
+import { createRoot } from "react-dom/client";
+
+export default function App() {
+  return (
+    <div>
+      {/* Returned JSX here */}
+    </div>
+  )
+}
+
+const container = document.getElementById("root");
+
+const root = createRoot(container);
+
+root.render(<App />);
+
+
+First, we import the createRoot() at the top of the .js file. Then, we define our component (usually named <App> or <Home>).
+
+10. Hot Takes Pt. 2 |
+Niiiiiice! You got through the second chapter! 🎈🎈
+
+In this chapter, you got to learn more about how React code is written, including:
+
+Writing HTML-like JavaScript code with the JSX syntax extension.
+Creating JSX with conditional statements and operators.
+Using JSX attributes like we do with HTML, but with some exceptions.
+Building function components with JSX and rendering them on your browser.

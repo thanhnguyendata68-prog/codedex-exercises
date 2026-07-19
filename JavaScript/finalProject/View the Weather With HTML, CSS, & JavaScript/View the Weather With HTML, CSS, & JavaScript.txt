@@ -1,0 +1,54 @@
+By the end of this tutorial, you will have learned to:
+
+Fetch asynchronous data with an API key.
+Organize content with a CSS layout model.
+Change what's on the rendered page.
+
+
+# Step 1: Project Setup
+mkdir weather-app
+cd weather-app
+touch index.html styles.css script.js
+
+# Step 2: Get API Key From OpenWeather
+API KEY of Weather : f14c33c870a44cea4061b99826da8f30
+
+# Step 3: Write HTML
+# Step 4: Write CSS
+# Step 5: Write JavaScript
+
+## Define Our Function
+function fetchWeather() {
+  // Previous code
+
+  async function getLonAndLat() {
+
+  }
+
+  async function getWeatherData(lon, lat) {
+
+  }
+}
+
+We need these functions to use two separate APIs from OpenWeather:
+- One gets a location's longitude and latitude coordinates from a typed name.
+- The other gets current weather data based on those coordinates.
+
+You may have noticed that these functions have the async keyword in front of them. We'll be using the companion await keyword, along with the fetch() function, to ensure we get valid weather information each time.
+
+- This returns a response object from the API. However, because this data is coming from another computer (probably a server), it may not be returned immediately. Also, the program is allowed to run ahead, even if there is no response yet.
+
+This is why we use async/await; the await-part prevents the associated async function from continuing until response data is returned from fetch(). We then store this in a response variable. If we get a bad response (i.e., !response.ok), then an error message is logged and nothing is returned.
+
+
+---- Next, we want to get the actual geocode data in JSON (or JavaScript Object Notation). We can use the response object's .json() to do this! And since the data is coming from the response, it is asynchronous and we must use the await keyword:
+
+const data = await response.json();
+
+
+## Write getWeatherData() Function
+- The getWeatherData() function accepts a lon and lat parameter that will be used in the API call for the current weather data. This information comes from the getLonAndLat() function we defined earlier.
+
+## Display Weather Data
+
+## Style Weather Data

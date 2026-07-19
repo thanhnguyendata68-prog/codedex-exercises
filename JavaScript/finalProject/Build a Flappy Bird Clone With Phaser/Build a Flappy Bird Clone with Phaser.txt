@@ -1,0 +1,130 @@
+# Getting Started
+
+First, let's make a folder called flappy_bird. Then, create two new files:
+
+index.html
+app.js
+- Create Live Server extension
+
+Selecting "Go Live" will launch the server, which will reload any time we make and save new changes to our files.
+
+# Setting Up the HTML
+
+# Creating the Background
+function preload() {}
+
+function create() {}
+
+function update() {}
+
++ A preload() function to bring in images for our application, such as the background.
++ A create() function to generate elements that will appear in our game, such as images that were brought in from the preload() function.
++ An update() function will be used to update the "bird"object in the game. For example, if we want it to fly up when we press the "up" arrow button, we will do this inside the 'update()' function. It runs continually, and will respond to any user interactions or variables that change.
+
+- Here, we are creating a game variable of a new instance of Phaser.Game to set up our game. We pass in the config object and specify these parameters about the game we want to create:
+
+The width and height of the game screen (800 x 600 pixels).
+
+The physics system of our game; we're using 'arcade'.
+
+A scene object with the functions we want to use in it, including preload(), create(), and update().
+
+
+- We are loading in the images from our assets folder. For our bird image, we load it as a 'sprite', not an image. In Phaser, a 'sprite' can be animated, and we will work on that soon!
+
+# Creating the Road
+
+The roads variable allows us to create a single, static road variable.
+With the setScale() method, we specify that we want the road to be twice as big as its original size
+
+# Creating the Columns
+const topColumns = this.physics.add.staticGroup({
+  key: "column",
+  repeat: 1,
+  setXY: { x: 200, y: 0, stepX: 300 },
+});
+
+const road = roads.create(400, 568, "road").setScale(2).refreshBody();
+
+As with roads, the columns we create from topColumns will be static
+
+In repeat, we create an additional column; there are two columns total./
+
+# Creating the Bird
+Since the bird is a sprite, it has a dynamic body. Because it has a dynamic body, the bird will have a gravity setting and will fall to the bottom of our scene.
+
+- We now see the bird, but it's falling down through the road.
+this.physics.add.collider(bird, road); : Let's make sure the bird lands on top of the road
+
+# Detecting When the Bird Hits the Ground
+let's define a hasLanded variable (outside of our create() function) and initialize to false:
+We want this variable to have a global scope, as we will later use it in both the create() and update() functions.
+
+- Here we are saying that when the bird hits the road, we will set hasLanded to true.
+We need to invoke the .overlap() method before '.collider()' or else it won't work.
+
+# Allowing the User To Move the Bird Upwards
+As Phaser's documentation explains, the .createCursorKeys() method "creates and returns an object containing 4 hotkeys for Up, Down, Left and Right, and also Space Bar and shift."
+
+Here, we are saying that if the user presses the "up" button, then give the bird an upward velocity of -160. This will move it upwards.
+
+- In 'Flappy Birds', we want the game to end if the bird hits the road. So let's prevent the user from being able to move the bird if it lands on the ground.
+
+# Getting the Bird to Move Right
+Now our bird moves right! However, the bird continues to move right even when it lands.
+
+function update() {
+  if (!hasLanded) {
+    bird.body.velocity.x = 50;
+  }
+  if (hasLanded) {
+    bird.body.velocity.x = 0;
+  }
+}
+
+If the bird hasn't landed, then give it a velocity of 50 in the x-direction.
+
+We also want the bird to stop moving when it hits a column. Right now, our bird simply moves right through the column when it hits it.
+function create() {
+  this.physics.add.collider(bird, topColumns);
+  this.physics.add.collider(bird, bottomColumns);
+}
+
+Now that we have a way of detecting when the bird has bumped into a column, let's make sure that it stops moving right if it bumps into a column:
+
+
+# Creating a Start Screen
+Right now, the bird starts moving as soon as the page loads. However, it would be better if the game started in response to a user action, so the user didn't have to start the game the moment the page loads.
+- Here, we are saying that if the user presses the space key, and the isGameStarted variable is false (its initial value), then we will set it to true and start the game.
+For this game, let's have it start when the user presses the enter key.
+
+To make sure the bird doesn't move right if the game has not started, let's revisit the following if statement in the update() method:
+if (!hasLanded && !hasBumped) {
+  bird.body.velocity.x = 50;
+} else {
+  bird.body.velocity.x = 0;
+} Let's revise it to this: 
+
+if (!hasLanded || !hasBumped) {
+  bird.body.velocity.x = 50;
+}
+
+if (hasLanded || hasBumped || !isGameStarted) {
+  bird.body.velocity.x = 0;
+}
+
+# Adding Game Instructions
+Right now, our game doesn't have any instructions. Let's display some instructions on the bottom of the screen.
+Let's create a 'messageToPlayer' variable and then get it text in the create() function::
+
+Right now, this text appears at the top-left corner of the screen.
+function create() {
+  Phaser.Display.Align.In.BottomCenter(messageToPlayer, background, 0, 50);
+}
+
+Once the game starts, the user needs to use the up arrow button to avoid hitting the columns or ground. Once the game starts, let's change the message.
+
+Once the bird hits the ground or bumps into a column, let's change the message to say that the bird has crashed, to let the user know that the game is over
+
+It's time to create an ending for our game.
+When the bird reaches the far right of the screen, let's display the message that says 'Congrats! You won!':

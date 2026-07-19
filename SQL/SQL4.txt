@@ -1,0 +1,168 @@
+IV. Multiple Tables
+22. Joins
+
+# Introduction
+- Imagine you are a Data Analyst at Spotify. There’s a table for artists, one for albums, one for songs, one for users, and one for playlists.
+
+Now someone on the team wants to know: Which users have added songs by Taylor Swift to their playlists?
+
+- The answer lies in the connections across multiple tables. That’s where SQL joins come in.
+
+---> A join lets us combine rows from two or more tables, based on a related column.
+
+- There are several types of joins in SQL, each serving a different purpose:
+JOIN
+LEFT JOIN
+RIGHT JOIN
+FULL JOIN
+UNION
+
+-------------------------------
+23. Locked In
+# Primary vs. Foreign Keys
+
+- A primary key is a column that uniquely identifies each row in a table. 🔑
+Think of it like a student ID number in a college database – no two students can have the same one.
+
+So suppose we have a users table in the database:
+id	username	level	rank	following	followers	signed_up
+1	@sonny		13	Gold	 147		918		2022
+2	@jackieisonline	9	Silver	 3		30		2023
+3	@lilybird	7	Silver	 50		101		2022
+4	@intelagense	12	Gold	 70		533		2022
+
+Here, the id column is the primary key. Each user (row) must have a unique id.
+
+- A foreign key, on the other hand, is a column in one table that refers to the primary key in another table. Unlike a primary key, it can have duplicate values. 🗝️
+
+Suppose we have a second projects table:
+project_id	name			user		user_id	likes	comments	staff_picks
+1001		Karaoke Nite		@sonny		1	21	  6		TRUE
+1002		Welp			@sonny		1	13	  1		TRUE
+1003		7 minutes in heaven	@jackieisonline	2	15	  3		TRUE
+1004		Chao Bing		@jackieisonline	2	13	  4		TRUE
+1005		ifeelsomuchsha.me	@jackieisonline	2	19	  6		TRUE
+1006		Wobble Digging Robot	@intelagense	4	15	  6		TRUE
+
+--> Here, the user_id column in the projects table is a foreign key that refers to the id column in the users table. So that’s how the two tables are connected. 🤝
+
+
+- Note: The projects table can also have its own primary key (maybe project_id). And it can have other foreign keys that link out to other primary keys in other tables (i.e. posts table, courses table).
+
+-------------------------------------------
+24. Inner Join
+# INNER JOIN
+- It’s time to go over each of the joins! We will start off with the basic one: JOIN.
+
+- JOIN, or sometimes known as the INNER JOIN, selects rows that have matching values in two tables.
+
+So instead of the usual:
+SELECT columns
+FROM table;
+
+
+We can join table1 with table2 with JOIN:
+SELECT columns
+FROM table1
+JOIN table2
+  ON table1.column1 = table2.column2;
+
+
+Or with INNER JOIN (the same thing):
+SELECT columns
+FROM table1
+INNER JOIN table2
+  ON table1.column1 = table2.column2;
+
++ We are selecting some columns from table1.
++ JOIN or INNER JOIN is how we are joining it with another table (table2).
++ ON a specific connection (table1.column1 = table2.column2).
+
+---> One new thing here is the . dot operator. The table1.column1 just means table1’s column1.
+
+
+Note: Joins are typically done between a primary key and a foreign key. So table1.column1 is likely a foreign key that references table2.column2, which is likely a primary key. But technically... SQL doesn't require the columns you're joining on to be foreign keys or primary keys. As long as the values match up, you can join them!
+
+Suppose we have two tables. Here’s a directors table:
+If we want to join directors with movies:
+
+SELECT name, year, country
+FROM directors
+INNER JOIN movies
+  ON directors.name = movies.director;
+
+Here, we are joining the two tables on the directors.
+
+Note: Nothing technically happens to the two tables when we join them. We are just looking at the results to find insights; the database doesn’t actually change.
+
+-------------------------------------------------
+25. LEFT JOIN
+# LEFT JOIN
+
+So we just learned the regular JOIN / INNER JOIN, but what if we want to combine two tables and keep some of the un-matched rows?
+
+- A LEFT JOIN, also known as the LEFT OUTER JOIN, will keep all rows from the left table, plus matched rows in the right table.
+
+Here’s the pseudo code:
+SELECT columns
+FROM table1
+LEFT JOIN table2
+  ON table1.column1 = table2.column2;
+
+
+So in our last example with directors table and movies table, it would be:
+SELECT name, year, country
+FROM directors
+LEFT JOIN movies
+  ON directors.name = movies.director;
+
+So what’s the difference between JOIN and LEFT JOIN?
+
+JOIN:
++ Returns rows where there’s a match in both tables.
++ If there’s no match, that row is excluded.
+
+LEFT JOIN:
++ Returns all rows from the left table, and matched rows from the right.
++ If there’s no match on the right, you’ll still get the left row... but with NULLs for the right-side columns.
+
+-----------------------------------------------
+26. Students & Teachers
+# UNION
+- Now that we learned joins, there’s another simple way to combine tables: UNION.
+
+The UNION operator in SQL combines two tables into one list, without duplicates.
+SELECT columns
+FROM table1
+UNION
+SELECT columns
+FROM table2;
+
+
+Suppose we go back to the movies and directors database and we do:
+SELECT name
+FROM directors
+UNION
+SELECT name
+FROM movies;
+
+--------------------------------
+27. Online Shop
+Here’s a recap:
+
++ Primary keys vs. foreign keys to connect two tables.
++ JOIN / INNER JOIN to return rows that have matching values in two tables.
++ LEFT JOIN / LEFT OUTER JOIN to return all rows from the left table and matched rows from the right table.
++ UNION to combine the results of two queries into a single result… stacking rows like pancakes.
+
+
+
+What are the best selling items? What are the most underperforming ones?
+SELECT p.name, COUNT(o.id) AS total_sold
+FROM products p
+LEFT JOIN orders o ON p.id = o.item_id
+GROUP BY p.name
+ORDER BY total_sold DESC;
+
+
+What are all the orders the customers bought?

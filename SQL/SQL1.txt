@@ -1,0 +1,158 @@
+I. Queries
+1. Introduction
+# SQL
+SQL (short for Structured Query Language) is a programming language designed to manage and retrieve data stored in databases.
+
+- It’s a staple in both Data Science and Web Dev.
+
+There are seven columns: id, name, genre, stream, year, seasons, and tomatometer.
+
+SQL statements, or queries, are instructions that the database understands. In other words, queries allow us to retrieve information from a database.
+
+02. SELECT
+# The Asterisk *
+- The SELECT statement we ran is core to SQL: 	SELECT * FROM shows;
+
+The semicolon ; determines the end of a SQL statement. So here, we broke the statement into two lines, and it still does the same thing: 
+
+SELECT *
+FROM shows;
+
+- SELECT retrieves data from a database.
+
+* asterisk means all columns.
+FROM keyword followed by the table name.
+shows is the name of the table we are requesting data from.
+; we end the statement with a semicolon.
+
+# Specific Columns
+The * grabs all the columns in a table, but what if we want to select just a few of the columns?
+
+SELECT column1, column2, column3
+FROM table_name;
+
+example for : 
+SELECT id, name, genre
+FROM shows;
+
+We only select the id, name, and genre columns from the shows table.
+
+03. Streaming Wars
+# Unique Values
+- When analyzing a database, we may want to view just the unique values within a column.
+
+- DISTINCT is used to return just the unique values in a column, so no duplicates.
+
+Here's how we select all the genres from shows:
+SELECT genre
+FROM shows;
+
+We'd get 50 rows of genres for each TV show with a bunch of duplicates.
+
+SELECT DISTINCT genre
+FROM shows;
+
+---> Only the unique genres in the shows table will be returned.
+
+04. Rotten Tomatoes
+# WHERE
+Now what if we wanted to filter information based on a condition? We can use the WHERE clause.
+
+- We can use the WHERE clause to filter for information based on a condition:
+SELECT *
+FROM shows
+WHERE id = 23; 
+
+id = 23 is the condition. Only shows with an id equal to 23 will be returned.
+
+Here’s another example:
+SELECT *
+FROM shows
+WHERE year > 2020;
+
+Note: The WHERE keyword always goes after the FROM part of the query.
+
+# Comparison Operators
+Here are all the SQL comparison operators that we can use in a condition:
+= equal to
+!= not equal to
+> greater than
+< less than
+>= greater than or equal to
+<= less than or equal to
+
+We use them to compare two values in the WHERE clause.
+
+05. LIKE
+# LIKE
+The LIKE operator can be used to search for a pattern in a column. It’s used in the WHERE clause:
+
+SELECT * 
+FROM shows 
+WHERE name LIKE 'T%';
+
+- This statement filters the result to only include shows with names that begin with the letter 'T'.
+
+
+The percentage sign % is a wildcard character that can be used with LIKE. You can use it to match characters to a pattern of your desired query.
+
+The % can be used in different ways:
+
+A% matches values that begin with letter 'A'.
+%z matches values that end with 'z'.
+
+We can also use % both before and after a pattern:
+SELECT * 
+FROM shows 
+WHERE name LIKE '%the%';
+
+06. Golden Age
+# BETWEEN
+- The BETWEEN operator is used in a WHERE clause to filter the result set within a certain range. The range must be separated by an AND keyword.
+
+SELECT *
+FROM shows
+WHERE year
+BETWEEN 2020 AND 2025;
+--> When the values are text, BETWEEN filters the result within the alphabetical range.
+
+In this statement, BETWEEN filters the result to only include shows with names that begin with the letter 'A' up to 'D':
+SELECT *
+FROM shows
+WHERE name
+BETWEEN 'A' AND 'D'; 
+
+Note: BETWEEN stops at the second letter, but doesn’t include values that begin with the second letter.
+
+So if a show’s title is just 'D', it would be returned, whereas 'Dragon Ball Super' will not.
+
+Have you seen any of those?
+
+07. ORDER BY
+# ORDER BY
+We've learned a lot about how to filter data up until this point. Now, let's learn how to sort them
+
+The ORDER BY statement sorts rows of data in ascending or descending order. By default, this command sorts the data in ascending order.
+
+SELECT name, genre, stream, year
+FROM shows
+ORDER BY year;
+
+--> This results into selecting 4 columns from our table but if you look closely, the year column is sorted into ascending order. (lowest to highest.)
+
+Let’s say we want to get all the latest shows this time, we will have to sort the year column into descending order using the DESC command: (highest to lowest.)
+SELECT name, genre, stream, year
+FROM shows
+ORDER BY year DESC;
+
+08. NYC Restaurants
+SELECT selects data FROM a database.
+SELECT * selects all the columns.
+DISTINCT returns unique values in a column.
+WHERE filters results based on a condition.
+Comparison operators: =, !=, >, <, >=, <=.
+LIKE operator searches for a specific pattern.
+BETWEEN operator matches values in a range.
+ORDER BY sorts data (ascending/descending).
+
+Relational Databases

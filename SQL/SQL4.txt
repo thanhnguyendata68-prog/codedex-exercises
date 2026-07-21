@@ -158,6 +158,9 @@ Here’s a recap:
 
 
 What are the best selling items? What are the most underperforming ones?
+Câu 1: Sản phẩm nào bán chạy nhất? Sản phẩm nào ế nhất? (Best & Underperforming Selling Items) 
+- Để biết sản phẩm nào bán chạy, chúng ta cần đếm số lần sản phẩm đó xuất hiện trong bảng orders, sau đó nhóm theo tên sản phẩm (products.name).
+
 SELECT p.name, COUNT(o.id) AS total_sold
 FROM products p
 LEFT JOIN orders o ON p.id = o.item_id
@@ -166,3 +169,32 @@ ORDER BY total_sold DESC;
 
 
 What are all the orders the customers bought?
+Câu 2: Khách hàng đã mua những đơn hàng nào? (All orders bought by customers)
+- Để có một danh sách đầy đủ hiển thị tên khách hàng đi kèm với thông tin đơn hàng và tên sản phẩm họ đã mua, chúng ta sẽ thực hiện Double Join (Nối 3 bảng lại với nhau).
+
+SELECT c.name AS customer_name, o.id AS order_id, o.date, p.name AS product_name
+FROM customers c
+INNER JOIN orders o ON c.id = o.customer_id
+INNER JOIN products p ON o.item_id = p.id
+ORDER BY c.name;
+
+
+What days had the highest sales? And the lowest?
+- Câu 3: Ngày nào có doanh số cao nhất? Và thấp nhất? (Highest & Lowest sales days)
+Doanh số (Sales) được tính bằng cách lấy tổng giá tiền của các sản phẩm được bán ra trong ngày đó (SUM(products.price)).
+
+Ngày có doanh số cao nhất (Highest Sales Day):
+SELECT o.date, SUM(p.price) AS daily_revenue
+FROM orders o
+JOIN products p ON o.item_id = p.id
+GROUP BY o.date
+ORDER BY daily_revenue DESC
+LIMIT 1;
+
+Ngày có doanh số thấp nhất (Lowest Sales Day):
+SELECT o.date, SUM(p.price) AS daily_revenue
+FROM orders o
+JOIN products p ON o.item_id = p.id
+GROUP BY o.date
+ORDER BY daily_revenue ASC
+LIMIT 1;

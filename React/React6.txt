@@ -1,0 +1,163 @@
+VIII. Routing
+37. Know Your Routes
+# Routing
+- All routes lead to React! 🛣️
+- Thus far, we've been building single-page applications with React. But like books, websites usually have more than one page! ⭐
+
+- You might be wondering, how do we build out multi-page applications that we can go back and forth between? Drumroll… 🥁 …with routing!
+
+- In React, routing is used to determine which components to render based on a URL. With react-router-dom, we can use its provided components to navigate to different pages in our web application.
+
+For this chapter, we'll cover how to use the following components:
+
+<BrowserRouter>
+<Routes>
+<Route>
+<Link>
+
+- Since react-router-dom is not a part of the core React library, it needs to be imported at the top of the file.
+
+import { /* Components here */ } from "react-router-dom";
+
+----------------------------------------------------
+38. Bowser
+# Rendering
+- Web content is rendered either on the client (inside the browser) or from a server (outside the browser). The react-router-dom library performs routing on the client side, allowing navigation to different URLs without causing a full-page reload! This helps with making our web app feel faster and more responsive.
+
+# Routing Wrapper
+- The <BrowserRouter> component is typically placed at the root level of the component tree.
+- This means that all the child components within the application will have access to routing features provided by the react-router-dom library. Typically, this will be in the index.js file.
+
+// index.js
+import React, { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import "./styles.css";
+
+import App from "./App";
+
+const root = createRoot(document.getElementById("root"));
+root.render(
+  <StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </StrictMode>
+);
+
+- We're wrapping our <App> component within the <BrowserRouter> component, and now we’re all set up to start with routing! 🛣️
+
+-------------------------------------------------
+39. Paper Route
+# Route Structure
+- Now that the application's router is set up, let's jump into how we can configure our paths to navigate to new pages!
+
+- The react-router-dom library has the <Routes /> component that holds individual <Route>s. You'll typically see a structure like the one below set for page routes:
+
+<Routes> 
+  <Route path="/" exact element={<Home />} /> 
+  <Route path="/about" exact element={<About />} /> 
+  <Route path="/contact" exact element={<Contact />} />
+</Routes>
+
+To break this down:
++ path="/" refers to the URL path that the route should match
++ The exact keyword ensures the route is only matched if the URL exactly matches the specified path; “/contact/person” wouldn’t be matched here.
++ element={} defines the component that renders when the route matches the URL
+
+---------------------------------------------
+40. Link to the Path
+# Links
+- We often use the <a> anchor element to link to other pages inside and outside our web pages. We have a similar component in react-router-dom called the <Link> component!
+
+- <Link> is specifically designed for use in React applications. Unlike the <a> tag, the <Link> component works directly with react-router-dom to avoid a full-page reload, which makes it perfect for us to use!
+
+You'll typically find these components within a navigation bar at the top of a home page.
+
+// NavBar.js
+import React from "react"; 
+import { Link } from "react-router-dom"; 
+
+export default function NavBar() { 
+  return ( 
+    <div> 
+      <Link to="/">Home</Link> 
+      <Link to="/about">About</Link> 
+      <Link to="/contact">Contact</Link>
+    </div> 
+  ); 
+};
+
+The to attribute sets the link's route when clicked. You're able to import the navigation bar to the top of your App.js file and have clickable links that navigate to different pages!
+
+Note: The <Link> component should be using a path that you have already defined in the <Routes> component that we mentioned last exercise.
+
+--------------------------------------------
+41. PonoPlayer
+
+Client and server-side rendering with react-router-dom.
+How to use the <BrowserRouter> component.
+How to set up page routes with the <Routes> and <Route> components.
+How to create navigable links with the <Link> component.
+
+-------------------------------------------
+useNavigate()
+
+- Routing in React has proven to be essential for page navigation in web applications! As you know, the <Link /> component has proven to be essential when navigating a user to different pages in an application, but how might we access different page routes across a variety of state changes and components?
+
+- Unlike the <Link /> component, useNavigate() carries a special path that can be used in functions to handle when a button or other components are clicked or interacted with!
+
+Let's explore a new way to handle URL changes with React Router's useNavigate() hook.
+
+# Configuration
+As a reminder, to locally install react-router-dom use the following command in your terminal:
+
+		npm install react-router-dom
+
+- The useNavigate() hook returns a function for navigating different routes in your app. It should be imported and used with other components from the react-router-dom library.
+
+- You can store the returned function in a variable typically called navigate.
+import { useNavigate } from "react-router-dom";
+const navigate = useNavigate();
+
+useNavigate() is now ready to help you navigate your app!
+
+# Navigation
+- Just like any digital map in a video game that teleports you to and from locations, useNavigate() works just the same! You can jump from one page to another very quickly.
+
+## Back to Home
+- If you're writing a blog or a long scroll page, you might want a user to navigate back to the home page or the menu. To do so, we'll create a function that handles the navigation to take a user back to the home route when they click a button.
+
+import { useNavigate } from "react-router-dom";
+const navigate = useNavigate();
+
+function handleClick() {
+  navigate("/home");
+}
+
+return <button onClick={handleClick}>Back to Home</button>;
+
+---> In addition to static routes like the home page, we can also use dynamic routes to navigate between various content dynamically, allowing users to navigate to specific blog posts or sections of a page.
+
+
+## Back and Forth
+- As you go through your friend's latest stories on social media, each story is saved in the stack, or trail of pages you left behind, that your browser remembers!
+
+- For example, you start at Story 1, then go to Story 2, then Story 3, and so on.
+At Story 4, you decide you want to go back to the last story you just saw, in our case, story 3. useNavigate() has special syntax that lets you dynamically allow a user to go back to the previous page or story they were just on in their trail or "history".
+
+
+Let's take a look at how this would work:
+function handleClick() {
+  navigate(-1);
+}
+
+return <button onClick={handleClick}>Go Back</button>;
+
+- The -1 notation lets the user go back to the last page they were just on! Similarly, the same works for 1 to go forward in your history stack.
+
+function handleClick() {
+  navigate(1);
+}
+
+return <button onClick={handleClick}>Go Forward</button>;

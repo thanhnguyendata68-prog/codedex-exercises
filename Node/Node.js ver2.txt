@@ -1,0 +1,23 @@
+III. Servers
+13. Tiny Server
+# Built-In Modules
+- In the last chapter, we learned about the fs, path, and os modules, which help us interact with files, file paths, and our operating system directly. However, Node.js can do so much more! As we mentioned, one of the ways that Node.js changed the web development landscape forever was its ability to handle multiple simultaneous connections efficiently.
+
+- Now in this chapter, we will build our own server with Node.js, learn about how HTTP works, and put it all together!
+
+- This is achieved by drumroll please 🥁… the http module!
+
+Here’s a breakdown of the http module, along with the modules we learned in the previous chapter:
+Module					What it lets you do
+
+fs (File System Module)			read, write, and manipulate files
+path (Path Module)			work with file paths
+os (Operating System Module)		retrieve info about your operating system
+http (HTTP Module) 🆕					Create, configure, and manage web servers
+
+The http module is foundational because it allows us to create a web server quickly! It handles HTTP incoming requests and also responses.
+
+You may be wondering – what is an HTTP request or response?
+
+📩 An HTTP request is what happens when your browser sends a request to a server for a resource.
+📤 An HTTP response is what the server sends back to your browser after it gets your request.

@@ -50,8 +50,8 @@ export default function App() {
     const elementKeys = Object.keys(counts);
     return elementKeys.length > 0
       ? elementKeys.reduce((topElement, currentElement) =>
-          counts[topElement] >= counts[currentElement] ? topElement : currentElement
-        )
+        counts[topElement] >= counts[currentElement] ? topElement : currentElement
+      )
       : "Fire";
   }
 

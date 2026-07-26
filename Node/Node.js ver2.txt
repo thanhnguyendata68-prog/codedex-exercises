@@ -21,3 +21,298 @@ You may be wondering – what is an HTTP request or response?
 
 📩 An HTTP request is what happens when your browser sends a request to a server for a resource.
 📤 An HTTP response is what the server sends back to your browser after it gets your request.
+
+------------------------------------------------
+14. Deep Dive
+# How HTTP Works
+Ever wonder why we type http or https in a URL like https://www.netflix.com? Well, they tell your browser how to communicate with the website you're trying to visit.
+
+HTTP stands for HyperText Transfer Protocol. It's the protocol (aka the set of rules) browsers and servers use to talk to each other. Again:
+
+📩 An HTTP request is what happens when your browser sends a request to a server for a resource.
+📤 An HTTP response is what the server sends back to your browser after it gets your request.
+
+## Clients vs. Servers
+- Okay, the words clients and servers get thrown around a lot in the world of web dev.
+
+- At a basic level, a server is a computer or system that provides resources, data, or services to other computers – known as clients – over a network.
+
+Here are some examples of different type of servers:
++ A web server sends websites to your browser and others’ browsers.
++ A file server lets you and others upload or download files.
++ A game server manages multiplayer game worlds.
+
+
+So in the normal context:
+- The client is typically your browser (e.g., Chrome or Safari).
+	+ It sends a request to a server for a web page.
+	+ Like "Hey server, can you send me the homepage of https://www.netflix.com?"
+- The server is a computer that listens for these requests.
+	+ It sends back responses, like HTML, images, or data from a database.
+	+ Like "No prob! Here’s the Netflix homepage you asked for!"
+
+But in the Node.js world, since you are building your own server, the roles are flipped:
+- The client is other people’s browsers making a request to you.
+- The server is YOU 🫵, or at least the code you write in Node.js that listens and responds.
+
+You’re no longer just ordering drinks…you’re running the whole shop. Pretty cool, right? :)
+
+## HTTP Request
+- An 📩 HTTP request is made by the client when it wants something from the server. It’s made up of a few different parts.
+
+First, let’s touch on the methods:
+- GET is used to request data from a server.
+	+ Example: View the webpage of the URL you typed in.
+- POST is used to send data to a server. Unlike GET, which only lets you retrieve data, POST lets you send info that the server can process or store.
+	+ Example: User input forms like usernames/passwords.
+DELETE is used to remove a resource from a server.
+	+ Example: Delete an inappropriate or spammy comment.
+
+
+Let’s also discuss some examples of routes:
+/login
+/home
+/about
+/api/users
+
+- Routes are URLs within a main site that take us to specific pages! Some routes are self-explanatory, like /login, /home, or /about. For example, https://netflix.com/login takes us to a login page.
+
+- Other routes, like api/users contain information that isn’t legible as a normal webpage, but contains data that is used internally in a website. Here is an example site, which outputs the api/users route as a JSON file of sample users: https://reqres.in/api/users
+
+Part				Example
+Method			GET, POST, DELETE
+URL			/login, /home, /about, /api/users
+Headers			HTML/1.1
+Body (Optional)		Data sent to the server
+
+A simple request might look like this:
+GET /about HTTP/1.1
+
+Host: temu.com
+User-Agent: Mozilla/5.0
+Accept: text/html
+
+--> The request above is asking for the "About" page from temu.com, using a Mozilla browser, and expecting an HTML response.
+
+If we’re in the U.S. and we go to Temu, a Chinese discount store, our browser sends this request ☝️ and it travels through undersea fiber optic cables across the ocean, in a snap of a finger.
+
+
+Note: We will never see this request text casually browsing a website, but your browser is sending a HTTP request in this structure under the hood when you visit a webpage, only viewable using Developer tools.
+
+
+## HTTP Response
+- An 📤 HTTP response is sent by the server back to the client, with the data requested.
+Part					Example
+Status Code			200 OK, 404 Not Found, 500 Internal Server Error
+Headers				Content-Type: text/html
+Body				HTML, image, JSON, etc.
+
+--> That’s where the classic 404 page comes from!
+
+Here’s an example of a response:
+
+HTTP/1.1 200 OK
+Content-Type: text/html
+
+<!DOCTYPE html>
+<html>
+  <body>
+    <p>Welcome to Temu!</p>
+    <p>Best selling items...</p>
+  </body>
+</html>
+
+-- This basically says: Here you go! Everything’s fine (200 OK). This is the HTML web page you requested.
+
+--> And if the HTML is more complete, this is what you see when the page loads the response you requested.
+
+---------------------------------------------------
+15. Emoji Story
+# Request Objects
+- When building a web server in Node.js using the HTTP module, we need a way to handle incoming requests from clients (like browsers). This is where the request object comes in.
+
+- The request object represents the HTTP request made by a client. It contains important details, such as:
++ The URL the client is requesting (like /about, /contact, /login)
++ The HTTP method used (like GET, POST, DELETE)
++ Headers that provide additional information (like browser type, content type)
+
+- In a basic Node.js server, the request object is available inside the callback function of http.createServer().
+const http = require('http');
+
+const server = http.createServer((request, response) => {
+  console.log('Requested URL: ' + request.url);
+  console.log('Request Method: ' + request.method);
+
+  response.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+  response.end('Request received!');
+});
+
+What’s happening in this code?
++ The request object holds details about the request.
++ request.url logs which page the client is trying to access (e.g., /home, /about).
++ request.method logs how the request was made (e.g., GET, POST).
+
+- In the Tiny Server exercise, when we run the script, nothing appears in the terminal. This code makes sure that the server responds with a plain text message confirming the request.
+
+server.listen(3000, function () {
+  console.log('Server running at http://localhost:3000');
+});
+
+- Localhost refers to your own computer – specifically, it’s the address your computer uses to refer to itself when hosting a website locally.
+
+Why is the request object important? By using request, we can:
++ Serve different pages based on the requested URL.
++ Handle user input from forms (POST requests).
++ Read headers to customize responses (e.g., detecting the user's browser).
+
+---> The request object is the starting point for handling user requests and building interactive web applications in Node.js!
+
+
+# Running a Server
+- First thing first, to use the powerful http module, we need to import it:
+	const http = require('http');
+
+- Then, we can turn our computer into a server using the .createServer() method:
+	const server = http.createServer((request, response) => {
+  
+	});
+
+(request, response) => {} part is a callback function that runs every time someone visits our server.
+	📩 request is the request (what the visitor sends, like "Give me this page!").
+	📤 response is the response (what the server sends back, like "Here’s your page!").
+
+
+So if we write:
+const server = http.createServer((request, response) => {
+  response.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+  response.end('Message in the bottle received! Loud and clear, captain! 🫡'); 
+});
+
++ response.writeHead(200, {...}) prepares the response.
++ 200 stands for status code 200 OK (means everything is good).
++ { 'Content-Type': 'text/plain; charset=utf-8' } tells the browser "I’m sending plain text that may include letters from any language and emojis."
+
+
+Next, send a response when the user visits the server.
++ response.end('Hello, World!') sends back the message "Hello, World!" and ends the response. This is what the user sees in the browser when they visit the server.
+
+Remembers that this essentially creates:
+HTTP/1.1 200 OK
+Content-Type: text/html
+
+Message in the bottle received! Loud and clear, captain! 🫡
+
+- In our last three lines of code, we start the server.
+server.listen(3000, () => {
+  console.log('Server running at http://localhost:3000/');
+});
+
++ server.listen(3000, () => {...}) tells the server to start listening for requests on port 3000.
++ The console.log() statement prints a message in the terminal to let us know the server is running.
+
+
+The localhost just means your own computer and 3000 port number like door 3000.
+Here’s how the code looks all together:
+
+const http = require('http'); // Import the http module
+
+// Create a server
+const server = http.createServer((request, response) => {
+  response.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+  response.end('Hello, World!'); 
+});
+
+// Start the server and listen on port 3000
+server.listen(3000, () => {
+  console.log('Server running at http://localhost:3000');
+});
+ For the final part, we need to run this using node filename.js in the terminal. If everything worked correctly, you should see the message Server running at http://localhost:3000/ in your terminal.
+
+---------------------------------------------------------
+16. Cyber Ramen Shop
+# Response Object
+- We just learned about the request object, now let's go over the response object.
+
+- The response object is what we use to send data (HTML, plain text, JSON, or other formats) back to the client (such as a browser).
+
+Remember that this is an example of a response:
+HTTP/1.1 200 OK
+Content-Type: text/html
+
+<!DOCTYPE html>
+<html>
+  <body><strong>Ayoooo, who let the devs out?</strong></body>
+  <img src="https://i.imgur.com/7P1BnOY.jpeg">
+</html>
+
+- The response object represents the server’s reply to a request. It contains methods and properties that allow us to control what gets sent back to the client.
+
+With the response object, we can:
++ Set headers like Content-Type to tell the client what kind of data it’s receiving, aka whether it’s receiving HTML, plain text, JSON, or another format, and specify encoding (optional).
++ Write content using response.write().
++ Finalize and send the response with response.end().
+
+
+# Headers
+- By default, Node.js does not specify what type of data it’s sending. We need to set the Content-Type so the browser knows how to interpret the response.
+
+Here are the types of data we can specify in the Content-Type:
++ 'text/plain' - The response is plain text.
++ 'text/html' - The response contains HTML.
++ 'application/json' - The response is JSON data.
+
+And within those types of data, we can specify encoding:
+- charset=utf-8 - this is the one we always use, because it can represent every character in the Unicode standard (which includes most written characters from all human languages, and emojis! 🤗).
+
+Note: If you don't specify encoding, Node.js or your browser may default to a legacy encoding that doesn't support emojis or non-Latin alphabets.
+
+We use response.writeHead to specify the Content-Type.
+response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+
+
+Let's break this down step by step:
+- The code above is part of the response object, which is used to send a response back to the client.
+		response.writeHead(statusCode, headers)
+
+.writeHead() is a method that sets the status code and headers for the HTTP response before sending data.
+
+- The first argument is the HTTP status code. Here are some common examples of status codes:
++ 🟢 200 means OK; Sent when the request was successful.
++ 🔴 404 means Not Found; Sent when the page you’re looking for in not found
++ ⚫️ 500 means Internal Server Error; Sent when there’s a problem with the server trying to service the request.
+
+- The second argument is an object containing response headers. Headers provide metadata about the response.
++ Here, 'Content-Type': 'text/plain' tells the browser that the response is plain text instead of HTML, JSON, or other formats.
++ When this runs, the server sets the response headers before sending any data. The browser knows to interpret the response as plain text instead of trying to render HTML.
+
+---> After calling response.writeHead(), you can use response.write() and response.end() to send the actual response content.
+
+# Write and End
+- The response.write() method lets us send a part of the response before ending it.
+
+We can call it multiple times to send multiple chunks of data.
+	response.write('Hello, visitor!');
+	response.write('Hope you are having a great day!');
+
+The response.end() method sends the final response and tells the client that there is no more data coming. We can also send data directly inside response.end(), like this:
+	response.end('This is the end of the response!');
+
+-- Once response.end() is called, no more data can be written to the response.
+
+Here they are combined:
+const server = http.createServer((request, response) => {
+  response.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+  response.write('Hello, visitor! ');            // Sending the first part
+  response.write('Hope you are having a great day!');            // Sending another part
+  response.end();                // Ends the response
+});
+
++ response.writeHead()sets the status code and headers for the HTTP response before sending data.
++ response.write() sends part of the response and can be called multiple times.
++ response.end() sends the final response and closes the connection.
+
+
+So, when do we use response.write() versus response.end()? Well:
++ If you use response.write(), you must call response.end() to finish the response.
++ If you use only response.end(), you don’t need response.write().
+

@@ -1,0 +1,85 @@
+III. Servers
+17. Dreamhouse
+- In the last exercise, we learned how to run our own simple server to display a single page. Because we only needed to access one page on the entire website, our server only sent one response.
+- What if we wanted our website to have multiple pages, each of which could be accessed by typing in different URLs?
+
+- To achieve this, we use routes. A route is a way of giving the server directions for where to go. Some common routes include / for the homepage, /about for an about page, and /contact for a contact page. However, we could name our routes just about anything.
+
+We can create routes using a series of if statements, each containing a response header and response end, before we start the server.
+
+For example:
+if (request.url === '/') {
+    response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    response.end('<h1>Home Page</h1><p>The most fun way to learn tech skills!</p>');
+  } else if (request.url === '/about') {
+    response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    response.end('<h1>About Page</h1><p>Codédex is a brand new way to learn to code online.</p>');
+  } else if (request.url === '/contact') {
+    response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    response.end('<h1>Contact Page</h1><p>Email us at help@codedex.io</p>');
+  } else {
+    response.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+    response.end('<h1>404 Not Found</h1><p>Page does not exist.</p>');
+  }
+
+Let’s break it down:
++ request.url checks which page the user is visiting.
+	/ goes to the Home page
+	/about goes to the About page
+	/contact goes to the Contact page
+	any other url is not a valid url and goes to the 404 Not Found page
++ response.end sends the final response to the browser for that page.
+
+-- While this approach works just fine, you'll notice that we’re repeating the same response.writeHead() for every route. This isn’t a problem for small projects, but it can get messy as your site grows.
+
+To make our code cleaner and easier to manage, we can move the shared .writeHead() logic outside the if statements. Since most of our pages use the same status code (200) and content type (text/html; charset=utf-8), we can set the headers once at the top. Then, only write a separate header for special cases—like a 404 Error.
+
+Here's how a more efficient approach would look:
+const server = http.createServer((request, response) => {
+  // Default response settings
+  let statusCode = 200;
+  let contentType = 'text/html; charset=utf-8';
+  let content = '';
+
+  // Determine content based on the requested route
+  if (request.url === '/') {
+    content = '<h1>Home Page</h1><p>The most fun way to learn tech skills!</p>';
+  } else if (request.url === '/about') {
+    content = '<h1>About Page</h1><p>Codédex is a brand new way to learn to code online.</p>';
+  } else if (request.url === '/contact') {
+    content = '<h1>Contact Page</h1><p>Email us at help@codedex.io</p>';
+  } else {
+    // If the route doesn't match, send a 404 error
+    statusCode = 404;
+    content = '<h1>404 Not Found</h1><p>Page does not exist.</p>';
+  }
+
+  // Send the final response
+  response.writeHead(statusCode, { 'Content-Type': contentType });
+  response.end(content);
+});
+
+--- As you can see above, we can write inline HTML to format our text! You can use this to load images hosted on the web using the image tag we learned in the HTML course!
+
+
+As a refresher, here’s how you would do so:
+if (request.url === '/') {
+    response.end(`
+      <h1>Home Page</h1>
+      <p>Welcome to our website!</p>
+       <img src="https://i.imgur.com/6A7wcPo.png" alt="Angelina Jolie promoting the Hackers movie">
+    `);
+}
+
+-----------------------------
+18. Pokémon Center
+# Congrats!
+To recap, here’s what we learned in this chapter:
+
++ The http module lets you create your own web server and handle requests + responses.
++ Request object (request) contains details about the incoming request (URL, method, headers, etc.).
++ Response object (response) is used to send data back to the client.
++ You can set headers using Content-Type to define the type of content being sent (like plain text, HTML, JSON).
++ response.write() sends part of the response (can be called multiple times).
++ response.end() sends the final response and closes the connection.
++ Routes are URLs that can return different responses (e.g., /about shows an About page).

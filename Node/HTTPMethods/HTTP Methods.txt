@@ -1,0 +1,177 @@
+IV. HTTP Methods
+19. Oh, CRUD
+# What is CRUD?
+- What if we wanted to take in data, send back specific information, or even delete something? That’s where CRUD comes in.
+
+CRUD, which stands for Create, Read, Update, and Delete, is a concept around these four actions:
++ Create: Add new data.
++ Read: Retrieve existing data.
++ Update: Change existing data.
++ Delete: Remove data.
+
+CRUD is not really tied to any language or tool, it's more like a fundamental programming idea that you will see in a lot of places in software. It was coined in the 1980s when dealing with databases.
+
+Let's look back at the different parts of an HTTP request from the last chapter:
+Part				Example
+
+Method			GET, POST, DELETE, 🆕PUT/PATCH
+URL			/login, /home, /about, /api/users
+Headers			HTML/1.1
+Body (Optional)		Data sent to the server
+
+- See that part in Method like GET, POST, DELETE, and PUT/PATCH (new ones)? It's kinda similar to CRUD!
+
+Each HTTP method is mapped directly to a CRUD operation when building servers.
+
+CRUD		HTTP Method			What it does
+
+Create		POST			Add new data (e.g. publish a post to the grid)
+Read		GET			Retrieve data (e.g. view a list of the people who have liked your post)
+Update		PUT or PATCH		Edit existing data (e.g. edit the caption of your post)
+Delete		DELETE			Remove data (e.g. delete an offensive comment or delete your post entirely)
+
+
+So, while CRUD describes the type of data operation, HTTP methods are the methods you use to make that operation happen over the web. In other words, CRUD is like the what, the HTTP methods are the how.
+
+--------------------------------------------------------------------
+20. GET Counter
+# GET Requests
+
+A GET request only asks for data, it doesn't change data.
+
+It’s just asking for information, like:
++ a webpage
++ some JSON data
++ an image or file
+
+Let's take a look at some code where we make a GET request:
+
+const http = require('http');
+
+const server = http.createServer((request, response) => {
+  if (request.method === 'GET') {
+    response.end('Hello from the GET request!');
+  }
+});
+
+server.listen(3000, () => {
+  console.log('Server is running at http://localhost:3000');
+});
+
+- What's going on here? Some of it should look familiar, but some of it is brand new.
+The overall structure looks familiar:
+
++ Used the require() to include the HTTP module at the top.
++ Created a server (and some new code inside!) in the middle.
++ Told the server to start listening on port 3000 at the bottom.
+
+Let's zoom in on the if statement inside where we create our server. This part’s new!
+if (request.method === 'GET') {
+  response.end('Hello from the GET request!');
+}
+
++ request.method === 'GET' is a condition that checks if the incoming request is a GET request. It checks: “Did the client ask to GET something?” If yes, it responds with a message.
++ response.end('Hello from the GET request!'); sends a response back to the client and ends the response. When the request checks “Did the client ask to GET something?” it responds with the string "Hello from the GET request!".
+
+- If the request method is GET, we write a message with the end response. We could also use it to perform mathematical operations, or even change the value of a variable!
+
+# Variables and GET Requests
+- We'll create a variable to represent the number of likes
+let likes = 30;
+
+and then we'll increment it inside the if statement:
+if (request.method === 'GET') {
+    likes++;
+    console.log(`likes: ${likes}`);
+  }
+
+This time though, instead of writing it to the end response, we're logging it to the console so it can see it update without needing to refresh the page.
+
+- Since we removed the end response, nothing will ever load to the browser, but the console.log() statement will increment the value of likes each time the page is refreshed.
+
+-----------------------------------------------------------------
+21. POST Tweet
+# POST Requests
+- A POST request is how you send data to a server. Think of it like saying “Hey server, here's something new. Please take it and maybe save it!”
+
+- Let's break down the difference between GET and POST. The purpose of GET is to, well, get data! Like, "show me the homepage." The purpose of POST is to send data. Like, "here's my signup info."
+
+POST is used when you want to:
+
++ Create a new post or comment
++ Submit a signup or login form
++ Send a message
+
+We structure POST requests pretty similarly to GET requests, but there are a few key differences.
+const http = require('http');
+
+const server = http.createServer((request, response) => {
+  if (request.method === 'POST') {
+    let message = '';
+
+
+    request.on('data', (chunk) => {
+      message += chunk;
+    });
+
+    request.on('end', () => {
+      console.log('New message:', message); // Log the message to the console
+
+      response.writeHead(200, { 'Content-Type': 'text/plain' });
+      response.end('Message received!');
+    });
+  } else {
+    response.writeHead(404, { 'Content-Type': 'text/plain' });
+    response.end('Go back to your terminal!');
+  }
+});
+
+server.listen(3000, () => {
+  console.log('Server is running at http://localhost:3000');
+});
+
+Woah! What's all this? The if statement looks familiar, but we're introducing some new syntax, like data, chunk, and request.on. Let's break it down!
+
+if (request.method === 'POST')
+
+Checks if the method is POST (meaning the client is sending data). The client will always send it in chunks. If it is, we’ll collect and process the incoming message.
+let message = '';
+request.on('data', (chunk) => {
+  message += chunk;
+});
+
+Collects the message data. message will hold the body of the POST request (the message someone is sending). request.on('data', ...) collects the chunks of data that the client sends. We add them together (+= chunk) in case it arrives in pieces (this can happen if a large amount of data is sent, and Node.js breaks it down into small packets for the server to collect).
+
+After the message is fully received, we write:
+request.on('end', () => {
+  console.log('New message:', message);
+  ...
+});
+
+--> This runs when all the data has been received, and it logs the full message to the console.
+
+# cURL
+- For POST requests, we need to use something called cURL, which stands for Client for URLs. The difference between using node app.js and using cURL to run a file is:
+			node app.js
+
+- is how you start your server. When you type node.app.js, you're telling Node.js to run your code (in app.js) so your server starts and begins listening for requests.
+
+- Think of it like “Lights, camera, action!” 🎬 where you're turning on the server.
+
+But, using methods like POST, PUT, PATCH, and DELETE requires you to send a request to your server, using cURL.
+
+cURL is a tool you use in the terminal to talk to a server. It stands for "client URL". It was created in 1997 as a way to fetch currency exchange rates from a web page.
+
+Think of it like this:
+
+You = the user 👩‍🎤
+Node.js = the server 🖥️
+cURL = the way you send messages (like "Hey, here's some data!") 📤
+
+-----> The flow is slightly different than we're used to, but we'll still start with the terminal!
+
+As usual, start the server with node app.js.
+
+Then, open a second terminal window (wild, I know) and send a request using:
+		curl -X POST http://localhost:3000 -d "This is a message"
+

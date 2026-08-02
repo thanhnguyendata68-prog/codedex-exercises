@@ -53,3 +53,13 @@ The "react" package lets you write React code.
 The "react-dom" package lets you render that React code. 
 
 npm install react-router-dom 
+
+- Download mongoose and bcryptjs
+		npm install mongoose bcryptjs
+- And updates package.json : 	
+		"dependencies": {
+  			"bcryptjs": "^2.4.3",
+  			"mongoose": "^8.0.0"
+		}
+
+npm install express cors dotenv

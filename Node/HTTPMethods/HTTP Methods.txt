@@ -397,3 +397,20 @@ Files
 
 
 In this basic version, we don’t use request.on('data') because we don’t need to receive any new info — we’re just saying goodbye to something that already exists. 👋
+
+---------------------------
+24. Mood Tracker
+
+- To recap, here's everything we've learned about CRUD:
+
++ GET is how we read data from the server.
+	See a list of people who liked your post 🩷
++ POST is for sending data to the server.
+	Publish a post to the grid 📰
++ PUT fully replaces existing data with new data.
+	Replace the entire caption of your post ✍️
++ PATCH makes partial updates to data.
+	Fix a typo on part of your post 🔧
++ DELETE removes something from the server.
+	Remove your post 🗑️
++ cURL is the tool we use to send requests (like POST, PUT, PATCH, DELETE) to the server from the terminal.

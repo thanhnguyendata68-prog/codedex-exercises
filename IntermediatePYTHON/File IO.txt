@@ -235,3 +235,5 @@ with open('filename.txt', 'r') as file:
     # Work with files here
   except Error:
     # Catch errors here
+
+

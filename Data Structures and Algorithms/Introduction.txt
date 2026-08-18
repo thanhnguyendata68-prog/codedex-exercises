@@ -1,0 +1,209 @@
+01. Welcome
+# Data Structures & Algorithms
+- This is the essence of Data Structures & Algorithms (DSA).
++ 🔢 Data structures is the way we choose to organize our data efficiently.
++ 📈 Algorithms is the step-by-step procedure to solve a problem using a data structure.
+
+
+# Why Are DSA Important?
+- DSA is core to Computer Science. It’s typically the second course CS majors take.
+
++ Problem-Solving: Not about memorization, but learning how to think. Studying different approaches helps recognize patterns and break problems into manageable steps.
+
++ Scalability: Software in today’s world needs to handle large amounts of data. A site with 1,000 users may run fine, but at a million? Suddenly, performance matters a lot.
+
++ Technical Interview: Tech companies also test you on it during the hiring process.
+
+It's also found in the real world:
+Social media platforms like Instagram and TikTok analyze your interests to show the most relevant videos. Search engines like Google structure data to return results instantly. E-commerce sites like Amazon use data structures to organize products efficiently. Ride-sharing apps like Uber and Lyft match you with the nearest ride and the fastest route.
+
+Whether you're taking a college DSA class, grinding LeetCode problems, or preparing for technical interviews, this course will help you master the fundamentals.
+
+--------------------------------------------------------
+02. Data Structures
+# What are Data Structures?
+- Data structures are fundamental concepts in computer science that define how data is stored, organized, and manipulated efficiently. 🔢
+
+## Lists
+- Lists store items in a specific order, allowing you to add, remove, and access items by their position (index).
+
+A list can be created using square brackets [ ], with items separated by commas:
+
+cafe_menu = ['Coffee', 'Espresso', 'Cappuccino', 'Latte', 'Tea']
+breakfast_menu = ['Coffee Cake', 'Cinnamon Roll', 'Bagel']
+
+cafe_menu.append('Bubble Tea')  # Adds Bubble Tea to the list
+print(cafe_menu[2])             # Output: Cappuccino
+
+It’s a simple way to store numbers or a small amount of data.
+
+## Dictionaries
+- Dictionaries store key:value pairs, making it easy to look up values by their associated key.
+
+It can be created using curly brackets { }, with pairs separated by commas:
+
+book = {
+  'title': 'The Song of Achilles',
+  'author': 'Madeline Miller',
+  'genre': 'Historical Fiction',
+  'year': 2011
+}
+
+print(book['title'])            # Output: The Song of Achilles
+
+It’s a great way to store books, movies, songs, user info, etc.
+
+Note: The keys of a dictionary must be unique.
+
+## Sets
+- Sets store unique values in an unordered collection. You can quickly check if an item is in the set and add new items, but there are no duplicates.
+
+- It can be created using curly brackets { }, with items separated by commas:
+fruits = {'🍎 apple', '🍌 banana', '🍒 cherry'}
+
+fruits.add('🍊 orange')         # Adds orange to the set
+print('🍎 apple' in fruits)     # Output: True
+
+- These data structures are just the beginning. Throughout this course, we'll be building our own data structures that can help solve specific types of problems.
+
+------------------------------------------
+03. Algorithms
+# What are Algorithms?
+- Now that we've explored data structures, let's talk about algorithms. 📈
+
+In recent years, the word "algorithm" has become synonymous with content recommendation. You might hear someone say, "My TikTok algorithm keeps showing me alien videos!" While content recommendation is quite complex, it's a great example of how algorithms work.
+
+- At its core, an algorithm is a step-by-step procedure that takes some input and produces an output. For TikTok's algorithm, we might have:
+
+Input: Data associated with your account, like:
+	+ 👀 Videos you've watched
+	+ ⏰ How long you watched them
+	+ 💖 Your likes and follows
+Output: A video that the algorithm predicts you'll enjoy.
+
+Some algorithms are tricky to evaluate for correctness. For TikTok's algorithm, how do they know if the best possible video was recommended? Could there have been a better choice? And how do they define “best”? The amount of time you watched the video? Whether or not you followed the account? These are complex questions, but thankfully, many other algorithms are much easier to evaluate.
+
+## Shortest Path Algorithms
+- Imagine you’re meeting a friend at a restaurant and need the fastest route. You open Google Maps, enter the address, and get directions. What’s happening behind the scenes?
+
++ Input: The starting location, the ending location, possible roads, traffic conditions, etc.
++ Output: The quickest route.
++ Correctness Evaluation: The recommended route should take the smallest amount of time. It will be somewhat difficult to prove that the algorithm gave you the best route out of all possible routes, but it is possible!
+
+## Sorting Algorithms
+- You’ve just downloaded the final version of your resume. Unfortunately, your Downloads folder is a mess with 500+ files, all sorted by size. To find your resume quickly, you sort by name.
+
++ Input: An unordered list of file names.
++ Output: An alphabetized list of file names.
++ Correctness Evaluation: This is an easier algorithm to evaluate for correctness. If the output list isn't correctly alphabetized, then the algorithm isn't correct!
+
+- For an algorithm to be truly correct, it must work for all possible inputs. For example, consider a sorting algorithm. If a sorting algorithm correctly sorts the list ['c', 'b', 'a'], but mysteriously fails at sorting the list ['d', 'b', 'a'], then there is a mistake!
+
+--- It can be tricky to prove that an algorithm is correct for all possible inputs, but keep that in mind as you continue through this course.
+
+----------------------------------------
+04. Efficiency
+
+# Algorithmic Efficiency
+- When designing algorithms, efficiency is just as important as correctness. An algorithm that always finds the right answer isn’t useful if it takes forever to get there!
+
+Let's play a game – I'm thinking of a number between 1 and 100. Your job is to guess it! Each time you guess, I’ll tell you if you’re too high or too low.
+
+Here are two different strategies:
+
++ Algorithm 1: Guess 1. If that's wrong, guess 2. If that’s wrong, guess 3... Keep going until you find the number.
++ Algorithm 2: Guess the middle number - 50. If it’s too high, eliminate everything from 50 to 100 and guess halfway through the remaining numbers (25). If 50 is too low, eliminate 1 to 50 and guess 75. Keep repeating this process until you find the number.
+
+Both of these algorithms are correct. They will both eventually find the right number. However, the second algorithm is much more efficient. If you’re guessing between 1 and 100:
+
+Algorithm 1 could take up to 100 guesses. 🐢
+Algorithm 2 never takes more than 7 guesses! 🐇
+
+That's the power of algorithms. :)
+
+
+## Time Isn't Everything
+
+## The Worst Case Scenario
+
+## Big Numbers Matter
+
+import random
+
+# Algorithm 1
+def linear_search(arr, target):
+    guesses = 0
+    for i in range(len(arr)):
+        guesses += 1  # Counting each guess
+        if arr[i] == target:
+            print(f"Found {target} in {guesses} guesses using linear search.")
+            return i
+    print(f"{target} not found after {guesses} guesses using linear search.")
+    return -1
+
+# Algorithm 2
+def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    guesses = 0  # Counting guesses
+
+    while left <= right:
+        guesses += 1
+        mid = (left + right) // 2
+
+        if arr[mid] == target:
+            print(f"Found {target} in {guesses} guesses using binary search.")
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    print(f"{target} not found after {guesses} guesses using binary search.")
+    return -1
+
+# Change these values
+range_low = 1
+range_high = 100
+
+numbers = [i for i in range(range_low, range_high + 1)]
+random_num = random.randint(range_low, range_high)
+
+print(f"Your secret number is {random_num}")
+
+linear_search(numbers, random_num)
+binary_search(numbers, random_num)
+
+
+We've implemented two number-guessing algorithms in Python:
+
+linear_search() (Algorithm 1)
+binary_search() (Algorithm 2)
+For now, don’t worry about how these algorithms work—just focus on their results.
+
+Step 1: Compare Their Performance
+
+Run the code multiple times. Each time, a new secret number between 1-100 is chosen.
+Look at the number of guesses each algorithm takes to find the secret number.
+Did linear_search() ever get lucky and find the number faster than binary_search()?
+
+Step 2: Increase the Range
+
+Scroll to the bottom of the code and find the variable range_high.
+Change range_high to a much larger number, like 100000. This means the secret number will now be between 1 and 100000.
+Run the code a few times and compare the number of guesses.
+
+------------------------------
+05. Amazon Delivery
+- Before we move forward, let’s review what we’ve learned so far and get a sneak peek at what’s coming next!
+
+One of the biggest advantages of programming is the ability to solve complex problems quickly and efficiently. Computers can tackle tasks that would be too time-consuming for humans, such as: finding the fastest route between two locations, recommending videos/songs/articles based on user preferences, or sorting millions of names in just seconds.
+
+No matter what problem you want to solve, there’s a way to write code for it!
+
+In this chapter, we learned:
+
++ Data Structures are how we store and organize data (lists, dictionaries, sets).
++ Algorithms are a series of steps that, given an input, produce the desired output.
+
+In the later chapters, we’ll explore custom data structures like Stacks, Queues, and Graphs. Each data structure has its strengths and choosing the right one makes it much easier to write an algorithm to solve the problem.
+

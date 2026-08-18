@@ -1,0 +1,296 @@
+II. List Algorithms
+06. Favorite Shows
+# Introduction
+
+- As we continue your Data Structures & Algorithms journey, you might have a to-do list of tasks that you want to accomplish:
+
++ ✅ Start Data Structures & Algorithms course
++ 🔲 Pass the DSA college class
++ 🔲 Grind LeetCode problems
+
+- By creating a list, you're already using a data structure! Lists are used to store multiple items in a single variable.
+
+- In this chapter, we will use lists to explore our first algorithms such as:
+
++ 🔎 Linear search
++ 🔎 Binary search
++ 📶 Selection sort
+
+## Quick Recap: Lists
+- Lists are created using square brackets [ and ]. And the items are separated by , commas.
+
+grocery = ['🥚 Eggs', 
+           '🥑 Avocados', 
+           '🍪 Cookies', 
+           '🌶 Hot Pepper Jam', 
+           '🫐 Blueberries', 
+           '🥦 Broccoli']
+
+- An index is an item's position in a list. In Python, indices start at 0:
+
+print(grocery[0])     # Output: 🥚 Eggs
+print(grocery[1])     # Output: 🥑 Avocados
+print(grocery[2])     # Output: 🍪 Cookies 
+print(grocery[3])     # Output: 🌶 Hot Pepper Jam
+print(grocery[4])     # Output: 🫐 Blueberries
+print(grocery[5])     # Output: 🥦 Broccoli
+
+-- We can retrieve a segment of a list using slicing.
+
+- Rather than using name[index], we can use name[start:end]. This will return the values in the list between the indices start (inclusive) and end (exclusive):
+
+signs = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces']
+
+print(signs[1:4])     # Output: ['Taurus', 'Gemini', 'Cancer']
+
+Now that we have a list created, let's look at some of the list methods that we can use:
+
++ .append() adds an item to the end of the list.
++ .insert() adds an item to a specific index.
++ .pop() removes an item from a specific index. If no index is provided, it removes the last item.
+
+We can get the length of the list by using len() function.
+
+to_do = ['🧺 Put on laundry', '🌳 Take a walk', '🍵 Make some tea']
+
+to_do.append('💻 Complete DSA chapter 2')
+to_do.insert(2, '💖 FaceTime mom')
+to_do.pop(4)
+
+print(len(to_do))    # Output: 4
+
+---> Lists are our first data structure, but remember, the reason why we care about data structures is that they allow us to write algorithms that solve cool problems!
+
+-----------------------------------
+07. Linear Search
+# Linear Search
+
+- Imagine you've built an awesome new app. Users are signing up like crazy, and now you have a long list of user emails. Manually checking if a specific email is in the list would take way too long.
+- Instead, let's write an algorithm to handle this for us: linear search, the simplest method of searching for a value in a list.
+
+- 🔎 Linear search goes through each item in the list one by one from the beginning, checking if it's the value we're looking for.
+
++ If it finds the value, it returns True.
++ If it gets to the end without finding it, it returns False.
+
+---> To remember this, “linear” means a straight line, one after the other. 💡
+
+## How It Works
+- Before we jump into writing code, let’s break down our approach:
+
+- Input:
+	+ A list of emails.
+	+ A target email we want to find.
+- Output: True if the list contains the target email, False if not.
+
+So here's our step-by-step plan:
+1. Start at the first item in the list.
+2. Compare it to the target email.
+3. If they match, return True. We found it! 🥳
+4. If not, keep checking until we reach the end of the list.
+5. If we got to the end of the list and never found the email, return False.
+
+In pseudo-code, this might look something like:
+
+Linear search function with inputs of email list and target:
+  Loop through every item in email list:
+    if the item is our target:
+      return True
+  if we finish looping and never found it, return False
+
+-- There are two main ideas that we'll have to convert into code: looping through every item in the list, and checking if the item is our target email.
+
+
+## Looping Through a List
+- To check each email one by one, we’ll use a for loop. In Python, looping through a list looks like this:
+
+numbers = [4, 8, 15, 16, 5]
+
+for item in numbers:
+  print(item)
+
+-- This prints each number in the list individually. We’ll use the same approach to search through our list of emails.
+
+So in this case:
+
+def linear_search(input_list, target_value): 
+
+  for item in input_list: 
+    if item == target_value: 
+      return True 
+
+  return False
+
+
+So if we use it:
+
+balls = ['🏀', '⚾️', '🎾', '⚽️', '🏐', '🏈']
+
+print(linear_search(balls, '🏈')) # True
+print(linear_search(balls, '🥎')) # False
+
+
+## Efficiency
+- Before we implement our search, let’s think about efficiency. Our usual measure of efficiency is speed, aka how long an algorithm takes to produce its result.
+
+So how much "work" does this algorithm do?
+
++ In the best case, the email we’re looking for is the first item in the list. Our algorithm checks one value and immediately returns True. Super fast!
++ In the worst case, the email isn’t in the list at all. Our algorithm has to check every single value before returning False. There’s no way to know for sure without checking them all!
+
+We'll think of ways to improve the Efficiency with other algorithms.
+
+-----------------------------------------------
+08. Binary Search
+# Binary Search?
+- Congrats on writing your first algorithm! Linear Search will tell you whether an item is in a list with 100% accuracy. It never gets it wrong. Unfortunately, like we said, linear search is a bit slow. It could take quite a while if our list has millions of emails.
+
+- So maybe we can do better with a different choice of data structure. It turns out that if your list of emails is sorted alphabetically, then we can use a more efficient algorithm: binary search.
+
+- 🔎 Binary search is an efficient algorithm for finding an item in a sorted list. It works by repeatedly dividing the search in half until the item is found (or not).
+
+To remember this, “binary” means two (divide everything into two halves). 💡
+
+## How Does Binary Search Work?
+- The best strategy for finding my number is to begin by guessing 50. There's a chance that you get lucky and immediately find the number. But let's say you're wrong, and I tell you that your guess was too low. This means that you can eliminate all numbers below 50. You know the number must be between 51 and 100.
+
+Now, if you guess the exact middle again (in this case 75), you'll either be correct, or eliminate half of the possible number again.
+
+Instead of checking every number one by one, you eliminate half the possibilities with every guess. That's the power of binary search!
+
+
+Binary search takes a sorted list and a target value as input
+  if the number in the middle of the list is the target
+    return True, we're done!
+  if the number in the middle of the list is higher than the target
+    perform binary search again, but only on the lower half of the list
+  if the number in the middle of the list is lower than the target
+    perform binary search again, but only on the upper half of the list
+  if there are no items in the list, return False
+
+  Set "left" to the first index (0) and "right" to the last index of the list.
+  Repeat the following steps while left is less than or equal to right:
+    Calculate the mid index as the average of left and right.
+    if the number in the middle of the list is the target:
+      return True, we're done!
+    if the number in the middle is less than the target:
+      move left to mid + 1 (search the right half)
+    if the number in the middle is greater than the target:
+      move right to mid - 1 (search the left half)
+  if the loop ends without finding the target, return False
+
+
+-----------------------------------------------
+09. Selection Sort I
+# Selection Sort?
+- So far, we’ve seen that sorted lists are powerful – they let us upgrade slow linear search into the much faster binary search. But lists don’t magically sort themselves – we need to put some work into getting this powerful data structure!
+
+- That means it’s time to write our own sorting algorithm. When we talk about sorting, it just means turning a list like [5, 2, 9, 1] to [1, 2, 5, 9].
+
+- There are a ton of different sorting methods, each with its own pros and cons.
+
+# How Does Selection Sort Work
+- Imagine you shuffle a deck of cards and lay them out in a row. How would you sort them from lowest to highest? 🃏
+
+- One is the following algorithm:
++ Find the lowest card in the row and move it to the front.
++ Find the next lowest card and place it right after the first.
++ Keep repeating this process until the entire row is sorted.
+
+This is exactly how selection sort works!
+
+📶 Selection sort is a sorting algorithm where we repeatedly select the lowest value and move it to the sorted portion of the list.
+
+## 1. Finding the Lowest Value
+- The first step in selection sort is to find the index of lowest value in the list. 🔎
+- For example, let's say we're trying to sort the list [8, 15, 4, 2]. The lowest value is 2, which is at index 3.
+
+- We’ll use a for loop to find the lowest value. But instead of looping through the values directly, we’ll loop through the indices:
+
+my_list = [8, 15, 4, 2]
+
+for i in range(len(my_list)):
+  print(my_list[i])
+
+- Rather than looping through the values of the list, we're now looping through the indices of the list, using this variable i.
+
++ The first time through the loop, i equals 0, so print(my_list[i]) prints 8 (the value at index 0).
++ Then, the next time through the loop, i increases to 1, so we print the value at index 1 (in this case, 15).
+
+By looping through the indices rather than the values, we can keep track of which index holds the lowest value!
+
+
+## 2. Swapping Values
+- Once we find the lowest value, we need to swap it with the first item in the list. Instead of physically "moving" values, swapping is a better approach.
+
+- Let’s say we found that 2 is the lowest value in the list [8, 15, 4, 2]. We can now swap the 2 with the first value in the list – in this case, the 8. This would give us [2, 15, 4, 8].
+
+- The first "round" of selection sort is complete! ✅
+
+When writing algorithms, it's often a good idea to break separate ideas, like this "swap" idea, into distinct helper functions. In this case, we'll write the function swap() that takes three parameters:
+
++ A list
++ The 1st index that we want to swap
++ The 2nd index that we want to swap
+
+For example, if we wrote swap(), we could use it like this:
+
+my_list = [8, 15, 4, 2]
+
+my_list = swap(my_list, 3, 0) # Swaps the values at indices 3 and 0
+
+print(my_list)                # Output: [2, 15, 4, 8]
+
+
+We'll break this into concrete steps. Remember, it can be helpful to test each step with print() statements before moving onto the next one. Feel free to change the values in the list that you are sorting if you want to test multiple scenarios.
+
+------------------------------------------------
+10. Selection Sort II
+- To do this, we need to repeat our sorting logic for every item in the list. Sounds like a perfect job for a loop! We'll wrap our existing logic inside a loop. This means we’ll have a loop inside a loop – also known as nested loops.
+
+
+Let's see what that might look like in pseudo-code:
+
+For every item in the list:
+  Set the lowest index to the first unsorted value
+  Loop through the unsorted values:
+    If a new lowest value is found, update the lowest index
+  Swap the values at the lowest index and the first unsorted value
+
+
+## Which Values To Swap?
+In the previous exercise, we always swapped the lowest value with the value at index 0. But that only works for the first pass.
+
+The second time through, we should swap with index 1, then index 2, and so on.
+
+This way, we build a sorted section on the left side of the list while keeping the unsorted section on the right. We'll need to slightly edit our code to do this.
+
+## The Outer For Loop
+- The outer loop will keep track of which part of the list is sorted:
+for j in range(len(my_list)):
+
+This j variable will act as a marker between the sorted and unsorted parts of the list.
+
+The first time through, j = 0, meaning the first value is being sorted.
+The next time, j = 1, meaning the second value is being sorted, and so on.
+
+
+## The Inner For Loop
+We'll now put the code from the previous exercise in this outer loop. Recall, this is what this code looked like:
+
+lowest_index = 0
+
+for i in range(len(my_list)):
+  if my_list[i] < my_list[lowest_index]:
+    lowest_index = i
+
+my_list = swap(my_list, lowest_index, 0)
+
+
+We'll have to make some small tweaks to the places where we've hard-coded in a 0:
+
++ We set the starting lowest index to be 0. This made sense on the first pass through the algorithm, but once the first value is sorted and placed in slot 0, we'll want to ignore that value. For example, when we're trying to sort the second lowest value, we'll want the starting lowest index to be 1. This is exactly what the value j does! It starts at 0 and goes up by 1 every time we sort a value.
+
++ When we called swap, we swapped the value at the lowest index with the value at index 0. Again, this worked for the first pass, but on the second pass, we'll want to swap the value at the lowest index with the value at index 1. Again, we can just replace that 0 with j.
+
++ There was an implicit hard-coded 0 in our for loop: for i in range(len(my_list)) starts i at 0. We used this to loop through the entire list looking for the lowest value. But once the first item is swapped into index 0, we no longer want to look through the entire list. We want to look through the list starting at index 1. And then the next time, we would want to start at index 2. We can achieve this by using for i in range(j, len(my_list)). This will make i start at j's value. The first time, that will be 0. But then it will increase to 1, and then 2, and so on!

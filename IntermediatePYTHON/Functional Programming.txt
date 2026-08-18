@@ -1,0 +1,255 @@
+11. Full Circle
+# Functional Programming
+
+# Pure Functions
+- A pure function is a function whose output derives solely from its input values, without side effects. They always return the same result, making them reliable and testable.
+
+- Global variables are defined outside of a function, making them easy to find and change values. Pure functions do not use or refrence global variables. You can always count on pure functions to act the same.
+
+Here is an example of an impure function vs. a pure function:
+
+def impure_squared(number):
+  result = number ** 2
+  print('The square of', number, 'is', result)
+  return result
+
+def pure_squared(number):
+  return number ** 2
+
+
+Pay attention to the syntax:
++ The pure function only returns the squared value of number.
++ The impure function prints something to the terminal (the side effect).
+
+----------------------------------------
+12. Hola
+# Higher Order Functions
+- In functional programming, higher-order functions can take other functions as arguments or return functions as results. Like Swiss Army knives, higher-order functions are versatile and efficient. They enable us to create powerful and reusable Python code.
+
+# Example
+- Consider a scenario where you have a list of numbers, and you want to perform the same operation on each number. Don't fret about the "what ifs" and trust the process. Higher-order functions are here to help!
+
+# Define the Higher-order function 
+def apply_operation(operation, numbers):
+  result = []
+  for num in numbers:
+    result.append(operation(num))
+  return result
+
+# Example operation
+def double(x):
+  return x * 2
+
+# List of numbers
+numbers_list = [1, 2, 3, 4, 5]
+
+# Using the higher-order function
+doubled_numbers = apply_operation(double, numbers_list)
+
+# Displaying the outcomes
+print('Original Numbers:', numbers_list)
+print('Doubled Numbers:', doubled_numbers)
+
+
+This will return:
+Original Numbers: [1, 2, 3, 4, 5]
+Doubled Numbers: [2, 4, 6, 8, 10]
+
+Giải thích chi tiết từng dòng
+def apply_operation(operation, numbers):
+
+Khai báo hàm apply_operation với 2 tham số:
+
+operation: Tên một hàm xử lý (được truyền vào như một biến).
+
+numbers: Danh sách các phần tử cần xử lý.
+
+result = []
+
+Khởi tạo một danh sách rỗng result để lưu trữ các giá trị sau khi đã biến đổi.
+
+for num in numbers:
+
+Dùng vòng lặp duyệt qua từng phần tử num có trong danh sách numbers.
+
+result.append(operation(num)) (Dòng cốt lõi)
+
+operation(num): Gọi hàm operation và truyền giá trị num hiện tại vào làm đối số để tính toán/biến đổi.
+
+result.append(...): Lấy kết quả vừa tính được đưa vào cuối danh sách result.
+
+return result
+
+Sau khi duyệt hết tất cả các phần tử trong danh sách, hàm trả về danh sách result hoàn chỉnh chứa các giá trị mới.
+
+In this example:
++ apply_operation() is our higher-order function.
++ A function takes another function (double()) as an argument and applies it to each item in numbers_list.
++ The result is a fast and customizable way to transform the numbers based on the chosen operation.
+
+-----------------------------------------------------------
+13. Grammys
+# Transformation
+
+- In Python, we can transform data using three powerful functions: map(), filter(), and reduce(). These functions allow us to manipulate, select, and aggregate data efficiently. Let's explore each one!
+
+## map()
+- Let's look at the map() function first:
+
+	map(function, data)
+
+- map() applies the given function to each element in the data and returns a new list. It's perfect for when you need to perform the same operation on every item in a list, tuple, or data set.
+
+- Here's an example of map() being used to divide each number in a list by 2:
+
+def divide_by_2(x):
+  return x / 2
+
+halved_numbers = map(divide_by_2, [1, 2, 3, 4, 5])
+
+print(list(halved_numbers))
+# Output: [0.5, 1.0, 1.5, 2.0, 2.5]
+
+--> Note: In order to get the actual list, we need to use the list() function. This also goes for the filter() function, which we'll cover next.
+
+## filter()
+- Next up is the filter() function:
+
+	filter(function, data)
+
+- Here, we select elements from the data that satisfy the given condition specified by the function and return a new list. It helps extract specific items from a dataset based on the criteria you define. The input function in filter() must return a boolean.
+
+Say we want to extract only even numbers from a list:
+
+def filter_even(x):
+  return x % 2 == 0
+
+even_numbers = filter(filter_even, [1, 2, 3, 4, 5])
+
+print(list(even_numbers)) # Output: [2, 4]
+
+--> In this example, the function will go through the list of number and if x % 2 ==0 the function filter_even is true it will print the number.
+
+## reduce()
+- Lastly, there's the reduce() function:
+
+	from functools import reduce
+	reduce(function, data, initial)
+
+Note: Unlike the previous two functions, we must import reduce() from the functools module.
+
+-- reduce() takes a collection of iterable data and combines its elements into a single value via a function. An optional initial value can be used, as well.
+
+This function is ideal for tasks like summing up a list of numbers.
+
+- reduce() Example:
+
+from functools import reduce
+
+def multiply(x, y):
+  return x * y
+ 
+product = reduce(multiply, [1, 2, 3, 4, 5])
+
+print(product) # Output: 120
+
+--> After importing reduce() from functools, we successively multiply each number in the list with a multiply() function we defined separately. This results in a final, cumulative product of 120.
+
+
+from functools import reduce
+
+# List of songs with their durations (in minutes)
+
+playlist = [('What Was I Made For?', 3.42), ('Just Like That', 5.05), ('Song 3', 6.55), ('Leave The Door Open', 4.02), ('I Can\'t Breath', 4.47), ('Bad Guy', 3.14)]
+
+
+
+def longer_than_five_minutes(song):
+
+  return song[1] > 5.00
+
+-- Hàm filter(hàm_điều_kiện, danh_sách) sẽ duyệt qua từng phần tử, giữ lại phần tử nào làm cho hàm_điều_kiện trả về True và loại bỏ phần tử trả về False.
+
+
+Hàm map(hàm_biến_đổi, danh_sách) biến đổi từng phần tử trong danh sách sang một giá trị mới theo công thức được định nghĩa.
+
+def minutes_to_seconds(song):
+
+def minutes_to_seconds(song):
+    duration = song[1]                  # Lấy thời lượng (ví dụ: 3.42)
+    minutes = int(duration)             # Lấy phần nguyên phút: int(3.42) = 3
+    seconds = (duration - minutes) * 100 # Lấy số giây: (3.42 - 3) * 100 = 0.42 * 100 = 42
+
+    return minutes * 60 + round(seconds) # Đổi phút ra giây + giây lẻ: 3 * 60 + 42 = 222
+
+-- Hàm reduce(hàm_gộp, danh_sách, giá_trị_ban_đầu) dùng để tính toán tích lũy (gộp toàn bộ danh sách thành một giá trị duy nhất).
+
+def add_durations(total, song):
+    duration = song[1]      # Lấy thời lượng của bài hát hiện tại
+    return total + duration # Cộng dồn vào tổng đã tích luỹ trước đó
+
+filtered_song = filter(longer_than_five_minutes, playlist)
+
+convert_to_seconds = map(minutes_to_seconds, playlist)
+
+total_playtime = reduce(add_durations, playlist, 0)
+
+
+print(list(filtered_song))
+
+print(list(convert_to_seconds))
+
+print(total_playtime)
+
+--------------------------------------
+14. Mental Math
+# List Comprehensions
+- If loops make you dizzy, let me introduce the art of list comprehension. Imagine transforming complex loops into elegant one-liners, making your code more readable and efficient. 😎
+
+- List comprehensions can transform data, filter elements, and even create nested lists. In functional programming, they let us transform list data concisely and expressively.
+
+# Syntax
+- Here is how we write list comprehensions in Python:
+
+	[expression for item in dataset if condition]
+
+Let's break down each piece, from left to right:
+
+1. The expression is applied to each item.
+2. A for..in statement loops through each item.
+3. An optional if condition can filter out items.
+
+-- The dataset can be something iterable like a list or tuple. List comprehensions do not change the original list.
+
+Note: A list comprehension works with for loops but not while loops.
+
+Let's see list comprehensions in action:
+
+# Original approach using a loop
+numbers = [1, 2, 3, 4, 5]
+squares = []
+for num in numbers:
+  squares.append(num ** 2)
+
+# Using a list comprehension to square each number
+squared_numbers = [num ** 2 for num in numbers]
+
+# Displaying the outcomes
+print('Original Numbers:', numbers)
+print('Squared Numbers:', squared_numbers)
+
++ The expression num ** 2, calculates the square of each number.
++ The item: num, represents each number in the numbers list.
++ The data set: numbers is the original list of numbers.
+
+In this example, we used a list comprehension to create a new list containing the squares of each number in the original list. It's a concise and elegant way to achieve the same result as using a loop, but with less code.
+
+# Write code below 💖
+
+numbers = [57, 10, 82, 36, 89, 46, 13, 23, 92, 48]
+
+even_numbers = [num for num in numbers if num % 2 == 0]
+print('Original Numbers: ', list(numbers))
+print('Even Number: ', even_numbers)
+
+-------------------------------------------

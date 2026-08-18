@@ -1,0 +1,136 @@
+I. Hello World
+01. Playing It COOL
+- C# (pronounced “C sharp”) was created in 1999 at Microsoft during the development of the .NET Framework. It was originally named COOL, aka "C-like Object Oriented Language", but that name was scrapped due to trademark issues. I know… we wish it was still COOL!
+
+- These days, C# is used for a bunch of things, including:
++ Game Development in Unity
++ Web APIs
++ Desktop Apps
++ Cloud Computing
+
+- It’s heavily used in the Microsoft .NET ecosystem and in Computer Science classes worldwide.
+
+Fun fact: The hashtag symbol in the C# name is actually four plus signs (++++). So in a sense, C# is C++++, a funny nod to the incremental improvement to the language C++.
+
+-----------------------
+02. Baby Names
+# Program Structure
+
+using System;
+
+class FirstProgram
+{
+  static void Main()
+  {
+    Console.WriteLine("Hey there!");
+  }
+}
+
+- using System; gives us access to built-in tools that C# provides.
+
+- C# organizes code inside a class. You can think of a class as a container that holds your program. Every console program needs one. So class FirstProgram is just a class we're naming FirstProgram.
+
+- Main() is the starting point of every C# console program. The word static is required so the program can run it immediately when it starts.
+
+- When you run the program, C# begins inside those curly braces and executes the code from top to bottom. So whatever is inside those curly braces { } is what runs.
+
+- In this course, we will mainly write code inside the Main() method.
+
+Inside Main(), we have:
+Console.WriteLine("Hey there!");
+
+This line tells the computer to print the text "Hey there!" to the console.
++ Console is the program’s output window, which you can find on the bottom right.
++ .WriteLine() prints the text inside the parentheses and moves to the next line.
++ "Hey there!" is the text being printed.
++ ; ends the instruction. We put it at the end of every statement in C#.
+
+When you run it, you see this appear in the terminal:
+	Hey there!
+
+-----------------------------------
+03. Dream Journal
+# Multi-line Text
+- In C#, every time you use:
+	Console.WriteLine("Text");
+
+- It prints text and then moves to the next line. So if you want multiple lines, you just write multiple Console.WriteLine() statements.
+
+using System;
+
+class Program
+{
+  static void Main()
+  {
+    Console.WriteLine("This is line 1");
+    Console.WriteLine("This is line 2");
+    Console.WriteLine("You guessed it... this is line 3");
+    Console.WriteLine("... and so on");
+  }
+}
+
+- The program will read each line in order, so the output for the code above would look like this:
+
+This is line 1
+This is line 2
+You guessed it... this is line 3
+... and so on
+
+--------------------------------------------------------
+04. Hot Take
+# Single-line Comments
+- A comment is a note written in your code that the computer completely ignores. It’s there for humans to understand the code, not for the program to do anything with.
+
+- Comments help explain what's going on in the code. They are especially helpful for code that a developer will come back to later, or code they're working on with someone else.
+
+- In C#, a single-line comment starts with two forward slashes //. Anything on the same line after // is ignored by the program.
+			// This is a comment
+
+- A comment can be used to explain the code below it.
+	// Description of the temperature today
+	Console.WriteLine("It's 40 degrees Fahrenheit today.");
+
+- The program will only run the code below the comment. It won't run anything in the comment itself, so it'll only output the text inside the Console.WriteLine():
+	It's 40 degrees Fahrenheit today.
+
+
+# Multi-line Comments
+- Sometimes, we may want to write comments that span multiple lines.
+
+One way to do this is to write multiple lines of single-line comments, like so.
+// This is a comment
+// This is also a comment
+// Hey, this is a comment too
+
+- That can be taxing though.
+
+- A more efficient way to write multi-line comments is to use /* and */ with the content of the comment in between the slashes and asterisks.
+
+/* This is a comment
+This is still part of the same comment
+Everything inside this multi-line comment will be ignored by the program
+This comment will only end when I close it */
+
+---------------------------------
+05. Personal Billboard
+
+Structure a C# program:
+using System;
+
+class Program
+{
+  static void Main()
+  {
+    Console.WriteLine("Welcome to C#!");
+  }
+}
+
+Use Console.WriteLine() to print a message
+Write single line comments with // this is a single-line comment
+Write multi-line comments with
+
+/* This is 
+a multi-line 
+comment */
+
+	

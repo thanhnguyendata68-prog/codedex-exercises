@@ -1,0 +1,246 @@
+II. Variables
+
+07. Typecast
+# Variables
+- A variable is a container that stores information. It's like a box with a label on it, holding something inside. Each variable has a data type, a variable name, and stores a value.
+
+
+Let's look inside the fridge.
+
+string milkType = "Oat";
+int milkCartons = 1;
+double fluidOunces = 24.5;
+bool fresh = true;
+
+- We have 1 (int) carton of milk with 24.5 (double) fluid ounces inside the container. It's Oat milk (string), and it's true (bool) that it's still fresh. 🥛
+
+
+# Data Types
+
+## Int
+- An int, aka an integer, is a whole number. It has no decimal point, and includes the number 0 and of positive and negative counting numbers. So the number of people in a smoothie shop would be an int. So would a positive or negative weather temperature.
+
+	int customers = 10;
+	int blueTeam = -3;
+
+## Double
+- A double, aka a floating-point number, is a decimal number. Doubles are numbers that are in between integers, like fractional numbers. Doubles can be positive or negative. For example, height can be measured in doubles. So can a discount on an item in a shop.
+
+	double width = 5.7;
+	double discount = -0.2;
+
+## String
+- A string is a data type that is used to store text as a sequence of characters. We wrote strings when we wrote Console.WriteLine() statements. Since strings in C# are based on Unicode, they can be used for almost any language and modern emojis.
+
+	string message = "Happy birthday! 🎂";
+	string greeting = "Привіт, як справи? ʕっ•ᴥ•ʔっ";
+
+## Bool
+- A bool is a boolean data type, which stores a value that can only be true or false. It's always written with lowercase letters. Booleans are great for yes/no, on/off, etc.
+
+	bool drankCoffee = true;
+	bool sleepy = false;
+
+-------------------------------------------
+07. Party Animal 
+# Declare a Variable
+- To do so, we'll need to give it a data type (like int, double, string, or bool) and a variable name.
+
+Let's say we're counting how many chocolate chips we want in each cookie:
+	int chocolateChips;
+
++ int is the data type. We usually only have whole numbers worth of chocolate chips.
++ chocolateChips is the name of the variable.
++ ; is the syntax to end the statement.
+
+
+# Initialize a Variable
+- Most of the time, when we declare a variable, we also initialize it at the same time by assigning it a value. A variable must be assigned a value before it can be used.
+	int chocolateChips = 6;
+
+- 6 feels like the correct number of chocolate chips per cookie, right?
+
+
+- Initializing looks a little different for different data types.
+
+string flavor = "Jasmine Milk Tea"; 
+double sweetnessLevel = 0.75;
+int bobaPearls = 15;
+bool lactose = false;
+
+
+Here, we declared and initialized four variables:
++ string variable named "flavor" with a value of "Jasmine Milk Tea"
++ double variable named sweetnessLevel with a value of 0.75
++ int variable named bobaPearls with a value of 15
++ bool variable named lactose with a value of false
+
+
+There are some standards for naming variables in C#:
++ Names can contain letters, digits and the _ underscore character
++ Names must begin with a letter or underscore
++ Names should start with a lowercase letter, and cannot contain whitespace
++ Name with multiple words in them should be written in camelCase, using a lowercase first + word and uppercase second word
++ Names are case-sensitive (myCar and mycar are different variables)
++ C# keywords, such as int or double cannot be used as names
+
+
+-----------------------------------------------
+08. Celebrity Crush
+# Storing Values
+
+- A cool thing about variables is that when we declare and initialize them, we're actually using them to store information!
+
+- C# keeps track of the value of variables throughout the program.
+
+- We can use Console.WriteLine() to log the value of a variable to the console.
+
+If we write:
+
+	int tattoosAmount = 10;
+
+	Console.WriteLine(tattoosAmount);
+
+Then we'll see the value of tattoosAmount in the console: 10
+
+
+# String Concatenation
+- We can actually make our Console.WriteLine() statements more descriptive by combining text with variables, like so:
+
+	Console.WriteLine("He has " + tattoosAmount + " tattoos! 😎");
+
+- Then we'll see the text and the value of tattoosAmount in the console:
+		He has 10 tattoos! 😎
+
+
+- This is called String Concatenation, a way of combining two or more strings to create a new, combined string.
+
+- Any text we write inside of Console.WriteLine() has to be inside of quotation marks. Use the plus sign + to combine it with variable values.
+
+- Make sure to add whitespace between text and variables so that the output is readable!
+
+--------------------------------
+09. Math Is Mathing
+# PEMDAS
+
+P -please
+E -dont
+M -yell
+D -at
+A -me
+S -im sensitive and will cry
+
+Ok, that's not actually what it stands for.
+
+- PEMDAS is an acronym used to remember the order of operations in mathematical equations.
+
+() Parentheses
+** Exponents
+* Multiplication
+/ Division
++ Addition
+- Subtraction
+
+- Operators are applied from left to right, with division/multiplication having equal priority, followed by addition/subtraction. Our code will follow these math rules when evaluating expressions.
+
+For this equation:   	5 + 2 * 3
+
+The answer would be 11, not 21. We multiply 2 times 3 before we add 5.
+
+PEMDAS might be called BODMAS depending on which country you're in, but it works the same way!
+
+# Modulo
+- Sometimes, you need to calculate the remainder of something. That's where modulo, or % comes in. It gives you the remainder after division.
+
+int result = 10 % 3;
+
+Console.WriteLine(result);
+
+Output: 1
+
+This is because 10 ÷ 3 = 3, remainder 1
+
+Think of it like leftovers! If you have 10 slices of pizza and each box holds 3 slices:
+
+You fill 3 boxes (9 slices)
+You have 1 slice left over
+That leftover slice = 10 % 3
+
+-- Modulo is often used to calculate leftover or check whether a number is even or odd.
+
+- In relation to PEMDAS, modulo fits in at the same time as Multiplication and Division.
+
+# Equations Inside Variables
+In C#, variables can store the output of an equation.
+
+This equation: 
+
+	int result = 5 + 2 * 3;
+	Console.WriteLine(result);  Would output 11.
+
+However, this equation: 
+
+	int result = (5 + 2) * 3;
+	Console.WriteLine(result);
+
+Would output 21, because the math inside the parentheses happens first.
+
+
+# Equations Using Variables
+- Now, let's level up.
+
+We can use int variables to store individual values, and then use a separate int variable to calculate the result of an equation.
+
+int a = 10;
+int b = 5;
+int c = 2;
+int result = a + b * c;
+
+Console.WriteLine(result);
+
+- This would output 20 in the console.
+
+--------------------------------------------
+10. Year if the X
+# Collecting User Input as String
+- So far we've only output text to the user with .WriteLine(). What if we want to receive inputs from the user?
+
+- In C#, Console.ReadLine() lets the user enter their own input. The value they type is always read by C# as a string even if they type a number.
+
+	string input = Console.ReadLine();
+
+- We just created a string variable called input that collects the user's input and stores it in that input variable.
+
+If we wanted to ask a user their name, we would say
+	Console.WriteLine("What's your name?");
+
+	string name = Console.ReadLine();
+
+	Console.WriteLine("Nice to meet you, " + name + "!");
+
+
+# Collecting User Input as Int
+- If we want to do math with it, we have to convert the string to an int.
+
+string input = Console.ReadLine(); 
+int convertedValue = int.Parse(input);
+
+- int.Parse() takes the string collected from the user, and converts it to an int. convertedValue is a new int variable that stores that converted input.
+
+- If the user input was 14, the variable input would read it as a string as "14", and then convertedValue would convert it back to an int as 14.
+
+- We can do mathematical operations with these converted int values.
+
+Console.WriteLine("Give me a number and I'll convert it!");
+
+string input = Console.ReadLine(); 
+int convertedValue = int.Parse(input); 
+int result = convertedValue * 5;
+
+Console.WriteLine("The converted value of your number is: " + result);
+
+---> result would output the user's input times 5. So, result is 14 * 5 = 70.
+
+
+---------------
+11. Giant Plushie

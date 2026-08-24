@@ -4,7 +4,6 @@ II. Variables
 # Variables
 - A variable is a container that stores information. It's like a box with a label on it, holding something inside. Each variable has a data type, a variable name, and stores a value.
 
-
 Let's look inside the fridge.
 
 string milkType = "Oat";
@@ -53,13 +52,11 @@ Let's say we're counting how many chocolate chips we want in each cookie:
 + chocolateChips is the name of the variable.
 + ; is the syntax to end the statement.
 
-
 # Initialize a Variable
 - Most of the time, when we declare a variable, we also initialize it at the same time by assigning it a value. A variable must be assigned a value before it can be used.
 	int chocolateChips = 6;
 
 - 6 feels like the correct number of chocolate chips per cookie, right?
-
 
 - Initializing looks a little different for different data types.
 

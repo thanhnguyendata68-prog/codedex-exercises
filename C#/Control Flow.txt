@@ -1,0 +1,201 @@
+12. Weekend Plans
+# Control Flow
+- So far, our programs have been running line-by-line, from top to bottom. They execute the code straightforwardly based on what we tell it to do.
+
+- In the real world, the programs we use daily make different decisions based on inputs. That’s where control flow comes in!
+
+-- Control flow describes the factors that go into those decision-making processes.
+
+We actually use this process all the time in our day-to-day lives. For example:
++ 🌧️ If it's raining outside, we'd invite friends over for a movie nite.
++ ☀️ But if it's sunny outside, we'd have a picnic!
+
+-----------------------------------------------------
+13. The Reaper
+# If Statements
+
+- In the last exercise, we used the word "if" to describe the different outcomes for weekend plans depending on the weather.
+
+- In C#, we can use if statements to do the same in a program.
+
+- An if statement runs code only if a condition is true.
+
+- Let's say we have an int variable named number with a value of 10, and we want the program to write something to the console only if the value of number is greater than 5.
+
+int number = 10;
+
+if (number > 5)
+{
+  Console.WriteLine("The condition was true");
+}
+
+-- The program checks whether the condition inside the if statement is true. If it's true, it'll write "The condition was true" to the console. If it's false, it will skip the code inside the curly brackets.
+
+-- In this case, number is greater than 10, so the condition is true, and the program will write "The condition was true" to the console.
+
+# Comparison Operators
+- In C#, if statements use symbols called comparison operators to determine whether a statement is true or false. The > (greater than) sign we used above is an example.
+
+- They're similar to the mathematical operators that we use in equations, but they are used specifically to evaluate whether conditions inside of a statement are true or false.
+
+== equal to
+!= not equal to
+> greater than
+< less than
+>= greater than or equal to
+<= less than or equal to
+
+-------------------------------------------------
+14. Plot Twist
+# Else
+- We can use else to handle that case.
+
+int grade = 42;
+
+if (grade > 60)
+{
+  Console.WriteLine("Pass");
+}
+else
+{
+  Console.WriteLine("Fail");
+}
+
+- Only one of these blocks will run.
+
+Since grade is not greater than 60, the program will skip the curly braces after the if statement.
+
+Then, it'll check whether the else statement is true, and since it is, it'll write "Fail" to the console.
+
+-------------------------------------------
+15. Basement Show
+# Else If
+
+- That's where else if comes in.
+
+int score = 63;
+
+if (score >= 90)
+{
+  Console.WriteLine("A");
+} 
+else if (score >= 80)
+{
+  Console.WriteLine("B");
+}
+else if (score >= 70)
+{
+  Console.WriteLine("C");
+}
+else if (score >= 60)
+{
+  Console.WriteLine("D");
+}
+else
+{
+  Console.WriteLine("F");
+}
+
+The program checks conditions from top to bottom.
+
+First, it checks if score >= 90. Since 63 is not 90 or higher, it skips this block.
+Next, it checks if score >= 80. Since 63 is not 80 or higher, it skips this block.
+Next, it checks if score >= 70. Since 63 is not 70 or higher, it skips this block.
+Finally, it checks if score >= 60. Since 63is 60 or higher, it executes the code in that block, and writes "D" to the console.
+
+Once a condition is true, the program stops checking the rest. That means the final else is ignored!
+
+--------------------------------------------------
+16. Invite Only
+# Logical Operators
+
+- That’s where logical operators come in.
+
+&&: AND (both must be true)
+||: OR (at least one is true)
+!: NOT (flips true ↔ false)
+
+## AND
+- Sometimes we need to combine conditions.
+- Use && when everything must be true for your code to run.
+
+int temperature = 72;
+bool hasJacket = true;
+
+if (temperature < 60 && hasJacket)
+{
+  Console.WriteLine("You’re prepared for the cold.");
+}
+
+- How this works:
+	+ temperature < 60 is false (it’s 72) ❌
+	+ hasJacket is true ✅
+
+Because both conditions are not true, the code inside the if won’t run.
+
+---> With &&, even one false condition stops everything.
+
+## OR
+- Use || when only one condition needs to be true.
+
+bool isWeekend = true;
+bool isHoliday = false;
+
+if (isWeekend || isHoliday)
+{
+  Console.WriteLine("No school today!");
+}
+
++ isWeekend is true ✅
++ isHoliday is false ❌
+
+--> At least one condition is true, so the code runs.
+
+With ||, you only need one win.
+
+## NOT
+- Let's say we want to display a message for a user who is not logged in to a website.
+
+bool isLoggedIn = false;
+
+if (!isLoggedIn)
+{
+  Console.WriteLine("Please log in first.");
+}
+
++ isLoggedIn is false
++ !false becomes true ✅
++ The program writes "Please log in first." to the console.
+
+-------------------------------
+17. Aura Checker
+# User Input and Conditions
+- So far, our programs have made decisions using hardcoded values, but the program can actually make decisions based on a user input.
+
+We can use Console.ReadLine() to get input, and then use that input in our conditions.
+
+Console.WriteLine("Enter a number:");
+
+string input = Console.ReadLine();
+int number = int.Parse(input);
+
+if (number > 0)
+{
+  Console.WriteLine("Positive number");
+}
+else
+{
+  Console.WriteLine("Zero or negative");
+}
+
+-------------------------------
+18. Love Hate Relationship
+
+Instead of running top-to-bottom with no variation, your code can now:
+
++ Respond to conditions using an if/else statement
++ Handle alternatives using else
++ Branch into multiple paths using else if
++ Combine conditions using logical operators (&&, ||)
++ React to user input using Console.ReadLine()
+

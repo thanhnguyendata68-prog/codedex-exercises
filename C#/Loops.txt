@@ -1,0 +1,206 @@
+19. Tickle Monster
+# Loops 
+- In programming, a loop is used to repeat a block of code until a specified condition is satisfied. It's another incredibly powerful tool that's used a ton!
+
+In this chapter, we are going to learn two types of loops:
+
+while loops.
+for loops.
+
+----------------------------------------------
+20. Disappearing Act
+# Infinite Loops
+- A loop must eventually stop!
+
+- This one won’t:
+
+int number = 1;
+
+while (number <= 3)
+{
+  Console.WriteLine(number);
+}
+
+--> Since number is less than or equal to 3, and it never changes, the condition is always true, and it creates an infinite loop.
+
+----------------------------------
+21. Robocaller
+# While Loop
+- The first kind of loop that we are going to learn is the while loop.
+
+- A while loop lets your program repeat code as long as a condition is true. 🔄
+
+You can think of the while loop like a traffic circle. A car will loop over and over again until it can't do so anymore.
+
+while (condition)
+{
+  // Some code
+}
+
+Here’s a Guess the number program:
+Console.WriteLine("Guess the number: ");
+string input = Console.ReadLine();
+
+while (input != "67")
+{
+  Console.WriteLine("Guess the number: ");
+  input = Console.ReadLine();
+}
+
+The program keeps running while input does not equal "67"
+Each time, it waits for new input from the user
+The loop only ends when the user types "67" into the console
+
+The output would look something like:
+Guess the number: 25
+Guess the number: 100
+Guess the number: 67
+
+---> This is especially useful when you don’t know ahead of time how many times the loop should run.
+
+----------------------------------------------
+21. In The Spotlight
+# For Loops
+- A for loop is a compact way to repeat something a specific number of times.
+
+It combines:
++ a starting value
++ a condition
++ an update step
+
+All in one line:
+​​for (int i = 0; i < 3; i++)
+{
+  Console.WriteLine("Looping...");
+}
+
+Hold up, what is i and where did it come from?
+- i is acting like a counter - it keeps track of how many times the loop has run.
+
+- It's a local variable contained within the loop. It could be named any valid int variable name, but we use i as a shorthand for "index" or "iterator".
+The for loop runs 3 times.
+
+It starts at i = 0.
+It runs while i < 3.
+It increments i each time.
+
+--> The loop runs while it's is 0, 1, and 2 it stops before it reaches 3.
+
+The output would be:
+Looping…
+Looping…
+Looping…
+
+-- A for loop is perfect when you know exactly how many times something should run. It’s perfect for counting! We should use a for loop instead of a while loop when we know exactly how many times we want to iterate.
+
+You might be wondering, why can't we just repeat the code?
+
+- While we could write Console.WriteLine() three times, we'd run into issues as soon as we had to run something a larger number of times.
+
+-------------------------------------------
+23. Uno Reverse 
+# Decrementing Loops
+- for loops don’t only count up, they can count down too. Uno reverse!
+
+Instead of increasing a value (i++), we can decrease it each time (i--).
+for (int i = 3; i > 0; i--)
+{
+  Console.WriteLine(i);
+}
+This prints : 
+
+3
+2
+1
+
+
+The loop runs while i > 0
+Each time, it prints the current i
+Then decreases it with i--
+
+---------------------------------------------
+24. Mystery Machine
+# Variables Inside Loops
+- Variables can change inside loops every time the loop runs.
+
+- Let’s simulate the classic math question:
+
+Would you rather take $1 million today, or 1 penny that doubles every day for a month?
+- We’ll model the doubling penny option:
+
+double total = 0.01;
+
+for (int i = 0; i < 31; i++)
+{
+  Console.WriteLine(total);
+  total = total * 2;
+}
+
+This outputs:
+0.01
+0.02
+0.04
+0.08
+...and so on.
+--> Right now, the amount of money looks tiny, but it accelerates fast.
+
+By the end, it'll climb to over 5 million dollars.
+Day 10: 5.12
+Day 20: 5242.88
+Day 30: 5368709.12
+
+Each time the loop runs:
+
+It takes the current value of total
+Multiplies it by 2 (it doubles)
+Stores it back into total
+
+---> So the value grows by compounding, meaning each new value depends on the previous one instead of increasing by a fixed amount.
+
+--------------------------------------
+25. Say Uncle
+# Loops with User Input
+- Some loops don’t run a fixed number of times. Instead, they run until the user says to stop.
+
+To do this, we store the user’s input in a variable and keep checking it inside the loop.
+
+string text = "";
+
+while (text != "stop")
+{
+  text = Console.ReadLine();
+}
+
+text starts empty
+The loop keeps running while text != "stop"
+Each time, the program waits for new input
+When the user types "stop", the loop ends.
+
+-----------------------------------------------
+26. Best Kept Secret
+
+You’ve made it to the end of this chapter! Let’s do a recap of what we've learned:
+
+A while loop iterates over and over again while the condition is true.
+A for loop iterates for a certain number of times.
+How to update values over time
+How to combine loops with input
+
+
+while loop:
+int counter = 1;
+
+while (counter <= 5)
+{
+  Console.WriteLine("Iteration: " + counter);
+  counter++;
+}
+
+for loop:
+​​for (int i = 0; i < 3; i++)
+{
+  Console.WriteLine("Looping...");
+}
+
+Your programs can loop and iterate through things easily.
+

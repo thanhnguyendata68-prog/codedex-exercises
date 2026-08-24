@@ -155,14 +155,11 @@ print(product) # Output: 120
 
 --> After importing reduce() from functools, we successively multiply each number in the list with a multiply() function we defined separately. This results in a final, cumulative product of 120.
 
-
 from functools import reduce
 
 # List of songs with their durations (in minutes)
 
 playlist = [('What Was I Made For?', 3.42), ('Just Like That', 5.05), ('Song 3', 6.55), ('Leave The Door Open', 4.02), ('I Can\'t Breath', 4.47), ('Bad Guy', 3.14)]
-
-
 
 def longer_than_five_minutes(song):
 
@@ -172,8 +169,6 @@ def longer_than_five_minutes(song):
 
 
 Hàm map(hàm_biến_đổi, danh_sách) biến đổi từng phần tử trong danh sách sang một giá trị mới theo công thức được định nghĩa.
-
-def minutes_to_seconds(song):
 
 def minutes_to_seconds(song):
     duration = song[1]                  # Lấy thời lượng (ví dụ: 3.42)
@@ -201,7 +196,7 @@ print(list(convert_to_seconds))
 
 print(total_playtime)
 
---------------------------------------
+-----------------------------------------
 14. Mental Math
 # List Comprehensions
 - If loops make you dizzy, let me introduce the art of list comprehension. Imagine transforming complex loops into elegant one-liners, making your code more readable and efficient. 😎
@@ -253,3 +248,80 @@ print('Original Numbers: ', list(numbers))
 print('Even Number: ', even_numbers)
 
 -------------------------------------------
+Decorators & Generators
+
+# Understanding Decorators
+- Decorators are functions that affect the behavior of other functions. They allow us to wrap a function with another function, adding functionality before or after the original function's execution without modifying their code directly.
+
+# Define the decorator function
+def my_decorator(func):
+  def wrapper():
+    print('Before function execution')
+    func()
+    print('After function execution')
+  return wrapper
+
+
+In this example, we define a my_decorator() function that then takes another function func() as its argument.
+Inside my_decorator(), we define an inner wrapper() function that adds behavior before and after calling the original function (func()).
+
+# Apply the decorator to a function
+@my_decorator
+def say_hello():
+    print('Hello, decorators!')
+
+# Call the decorated function
+say_hello()
+
+- The @my_decorator syntax refers to the function we defined earlier. It is applied to the say_hello() function, which means that it acts as the wrapper() function.
+
+- When say_hello() is called, it actually invokes wrapper, which in turn calls the original say_hello function and executes additional code before and after its execution. 
+
+- We use a decorator to enhance the behavior of the original function without modifying it directly.
+
+# Define a decorator function
+def my_decorator(func):
+  def wrapper():
+    print('Before function execution')
+    func()
+    print('After function execution')
+  return wrapper
+
+# Apply the decorator to a function
+@my_decorator
+def say_hello():
+  print('Hello, decorators!')
+
+# Call the decorated function
+say_hello()
+
+
+# Exploring Generators
+- Generator functions are defined with the def keyword like a regular function, but instead of using return statements, it uses yield statements to produce a series of values.
+
+- Let’s start by defining a generator function with a descriptive name (square_generator()) that takes one or more parameters (limit in this case) to control its behavior.
+
+- Inside the generator function, use a loop (or any other logic) to compute each value. Instead of using return, use yield to generate the current value of interest (num ** 2 in this case) back to the caller.
+
+- Now, let's use the generator square_generator() to iterate over the squares of numbers up to a specified limit (5 in this example) and print each square.
+
+# Use the generator to iterate over squares
+for square in square_generator(5):
+  print(square)
+---> The for loop iterates over the values yielded by square_generator(5).
+
+- For each iteration, the next square value (1, 4, 9, 16, 25...) is generated and printed within the loop. The final code should look something like this:
+# Define a generator function
+def square_generator(limit):
+  num = 1
+  while num <= limit:
+    yield num ** 2
+    num += 1
+
+# Use the generator to iterate over squares
+for square in square_generator(5):
+  print(square)
+
+
+
+

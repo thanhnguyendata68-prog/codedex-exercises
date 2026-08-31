@@ -1,0 +1,161 @@
+16. Rainbow Nums
+# Loops
+
+- You might have noticed that we've had to repeat ourselves several times while writing our programs to get results! 🫠
+
+---------------------------------------
+17. All the While
+# While loops
+
+- The most simple loop in Java is called the while loop!
+
+- This is the loop you used in the last exercise to create a counter that outputs numbers 1-10. This is because the while loop is a block of code constantly re-running.
+
+int i = 0;          // Initialize the loop counter
+
+while (i <= 10) { 
+    System.out.println("Are we there yet?");
+    i = i + 1;   
+}
+The output would be:
+Are we there yet?
+Are we there yet?
+...
+Are we there yet?
+Are we there yet?
+
+In the example above, you can read the code as "While the 'condition' is true, execute the following…"
+
+We are tracking how often the loop runs by using the statement i = i + 1. That way, when the loop has run 10 times, we can stop it, and exit the loop.
+
+	while (condition) {
+    		// runs code until false
+	}
+
+This logic is quite similar to the way we used if statements earlier! The difference is that instead of executing once an if condition is true, the while loop executes again and again while that condition is true.
+
+# String Concatenation
+- We can also combine variables and strings in our print statements using string concatenation! This allows us to combine things in our print messages with the + plus sign.
+
+We can use a while loop to show the squares of numbers, for example:
+int i = 1;
+
+while (i <= 5) {
+    System.out.println("The square of " + i + " is " + (i*i)); 
+    i = i + 1;
+}
+
+The output would be:
+
+The square of 1 is 1
+The square of 2 is 4
+The square of 3 is 9
+The square of 4 is 16
+The square of 5 is 25
+
+-------------------------------------------------------------------
+18. Affirmations
+
+# Loop Iterators
+You might have noticed that we have this random i < number condition or expression in our loops. This variable is called an iterator, because we are using this iterator value to repeat the loop.
+
+int i = iterator;
+
+while (condition) {
+    // Do something
+    // Update the i iterator variable
+}
+
+The i variable keeps track of the number of times we are iterating or going over lines of code. Our code loops until the i variable changes and sets our condition to false, at which point we exit the loop!
+
+# for loops
+- Another type of loop is the for loop! It typically starts at 0, and the iterator variable i increases (or decreases) until it meets a specific condition.
+
+for loops are perfect when you know exactly how many times you want to repeat something. For example:
+
++ Limiting password attempts to 3 tries.
++ Counting up or down.
++ Generating multiple rows in a table for a web page.
++ Repeating an animation frame a fixed number of times.
+
+for (let i = initialValue; condition; updateIterator) {
+    // Code here
+}
+
+Let's use an example!
+int num = 1;
+
+for (int i = 0; i < 3; i++) {
+    System.out.println("This is iteration " + num);
+    num++;
+}
+
+Inside the parentheses,
+
++ int i = 0: We declare our iterator and make it start at 0.
++ i < 3: We test the i in the condition statement. If this is true, we run the code block. + Otherwise, we exit the loop.
++ i++: means that we are incrementing our iterator every time, similar to when we used i = i + 1
+
+The output would be:
+
+This is iteration 1
+This is iteration 2
+This is iteration 3
+
+-- In the code block above, we start our iteration value at 0 and run the block. The iterator increases and will loop until i is no longer less than 3.
+
+---------------------------------------------------------------
+19. Hit the Breaks
+
+# break
+- As you can tell, loops have the potential to run over and over again, sometimes forever! This is called the infinite loop. 😯
+
+// DO NOT TRY THIS AT HOME ⚠️
+int num = 3;
+
+while (num < 5) {
+    System.out.println("Hello darkness my old friend.");
+}
+
+The output would look something like:
+	-- Allowed Output limit reached --
+	-- Allowed Output limit reached --
+
+In the example above, the variable num holds the number three, which will always be less than five. This program will theoretically run forever!
+
+- We can use the Java keyword break to terminate a loop when specific criteria are met!
+
+Let's take a look at how this works:
+
+for (int i = 1; i <= 5; i++) {
+    System.out.println("i = " + i);
+    if (i == 3) {
+        break; // Exit the loop
+    }
+}
+
+System.out.println("Loop ended.");
+
+-- The loop “breaks” when the value of i is equal to 3. The output will look like this:
+i = 1
+i = 2
+i = 3
+Loop ended.
+
+=====================================================================
+20. Playing Cards
+
+Loops are one of the most essential concepts in programming, and you'll be practicing them even more as you learn Java.
+
+To recap, you've learned:
+
+How to create a while loop
+The most common loop, a for loop
+String concatenation using +
+Breaking a loop using break
+
+Let's start addressing some loopholes in a program using… loops! ➿
+
+-------------------------------------------------------
+case-sensitive
+scope

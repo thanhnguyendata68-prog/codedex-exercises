@@ -1,0 +1,67 @@
+01. First Program
+# Java
+- Java is a popular programming language designed by James Gosling to be “written once, run anywhere” with a Java Virtual Machine (JVM).
+
+Java is most known for powering Android OS and Android Development. It's also used for video games (Minecraft), websites (eBay), and the language of choice in high schools (AP Computer Science) and college CS classes around the world.
+
+Java files have the .java extension, and we'll use the code editor provided here to write our code. 👉
+
+---------------------------------------------------
+02. Hello World
+# Print Line
+- When you use System.out.println(), short for “print line”, Java sends a specified text to what we call the console as long as it is inside the main method.
+
+	System.out.println("Hello, World!");
+
+To run any line of Java code, you need a class and a method. In the example below, we have a class called HelloWorld and a main() method.
+
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+
+Here, we are sending "Hello, World" to the console.
+
+	Hello, World!
+
+For now, we won't need to worry about what these do and only focus on what's inside the { } curly brackets!
+
+----------------------------------------------------------
+03. Cooking Mama
+# Line by Line
+- When writing Java code, each statement is read by the computer in order, one after the other.
+
+System.out.println("I walked through the door with you");
+System.out.println("The air was cold"); 
+System.out.println("But something about it felt like home somehow");
+
+The ln in System.out.println() lets the computer know to print the content and move everything after it to a new line!
+
+-------------------------------------------------------------
+04. Error Logs
+# Comments
+- Comments, while being invisible to the program, are lifesavers! 🛟
+
+As developers, sometimes we need to add clarity to code, add context to another programmer, or even temporarily remove code.
+
+## Single-line Comments
+- In Java, a single-line comment has two // forward slashes and looks like this:
+
+// Welcome message for users
+System.out.println("Hey there, friend!");
+
+It can also be an inline comment, and look like this:
+System.out.println("What is the current version?"); // Version 18.9.2
+
+
+## Multi-line Comments
+/*
+  System.out.println("The location can’t be updated.");
+  System.out.println("The location is not up to date.");
+*/
+System.out.println("The location is Chicago, IL");
+
+The output would be: The location is Chicago, IL. 🌃
+
+---------------------------------------------

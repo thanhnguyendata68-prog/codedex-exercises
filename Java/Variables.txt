@@ -1,0 +1,141 @@
+06. Storage Box
+# Variables
+
+- Your boxes can be given names that hold and store a value (numbers, letters, emojis, etc).
+
+int points = 22;
+System.out.println(points); // Output: 22
+
+You can then reference the variable name to access the value stored inside. In our print statement, points is the variable name, and 22 is the value stored inside.
+
+In this example:
+
++ int is the type (the variable will hold an integer).
++ points is the variable name.
++ = is the assignment symbol.
+
+# Naming
+- A common naming convention in Java is camelCase, in which the first word is written in all lowercase letters, and the following words start with an uppercase letter.
+
+int groupOfStudents = 20;
+int numberOfStudents = 10;
+
+-- Variable names typically start with a letter. You can use these names to access your data later in your program! 👏🏻
+
+Additionally, variable names must follow a few rules:
++ They are case-sensitive (Age and age are different variables).
++ They cannot contain whitespaces or special characters like !, #, %, etc.
++ They must begin with a letter; it can't start with a number.
+
+---------------------------------------------------------------
+07. ID Card
+# Data Types
+
+Here are the eight primitive types:
+
++ Integer values: byte, short, int, and long
++ Floating point values: float and double
++ Boolean values: boolean
++ Characters: char
+
+## integer
+- An integer is a whole number with no decimal points, including 0! This can include both negative and positive numbers.
+
+int age = 19;
+int cookies = 0;  // Did we finish a cookie pie? 🥧
+
+## double
+- A double is a high-precision decimal number, meaning it can represent numbers with a large number of digits both before and after the decimal point!
+
+double pi = 3.14;
+double megapixels = 34.674423;
+
+## Boolean
+- Booleans are a data type that stores a true or false value. In Java, a boolean is either true or false, all lowercase.
+
+boolean favColorBlue = true;
+boolean subscribed = false;
+
+## char
+- Java has the character data type to store a single character value, which can only be stored in single quotes.
+
+char theFirstLetter = 'a'; 
+char hashtag = '#';
+
+## strings
+
+A string is a sequence of characters or text. Strings are technically what we call a reference type. They do not store actual data but rather a reference (memory address) to the data. Strings are held in double quotes. But don't worry, for now, we'll use it very similarly to the rest of the data types we've learned about.
+
+String wordleWord = "TAKER";
+String artist = "Sabrina Carpenter";
+
+------------------------------------------------
+08. Operation 0
+# Operators
+- Java has the following operators to conduct mathematical operations with code:
+
+	+ Addition
+	- Subtraction
+	* Multiplication
+	/ Division
+	% Modulo (returns the remainder)
+
+We can use these operators to change variables and conduct math problems! Here is an example of how we use them:
+
+double result = 0; 
+
+result = 8 + 2;     // result is now 10
+result = 8 - 2;     // result is now 6
+result = 8 * 2;     // result is now 16
+result = 8 / 2;     // result is now 4
+result = 8 % 2;     // result is now 0
+
+
+System.out.println(result); // 0
+
+A 20% sale on your favorite video game doesn't seem bad, right? Let's see how much we'd be saving using operators:
+
+double originalPrice = 60.0;
+double discount = 20.0;              
+
+// Apply discount
+double finalPrice = originalPrice - (originalPrice * (discount / 100));
+
+System.out.println(finalPrice); // Output: 48
+
+----------------------------------------------------------
+09. Escape Room
+# User Input
+
+import java.util.Scanner;
+
+public class Greetings {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter your name: ");
+        String name = scanner.nextLine();
+
+        System.out.println(name);
+    }
+}
+
+## How it works
+- This import statement tells Java we want to use the scanner.
+
+	import java.util.Scanner;
+
+The scanner object: Scanner scanner = new Scanner(System.in); sets up the scanner to read input from the user.
+
+In our program example, we used the scanner.nextLine() method to read strings, but we can also use
+
++ scanner.nextDouble()
++ scanner.nextBoolean()
++ scanner.nextInt()
+
+to read and save double, boolean, and int data types to a variable.
+
+Don't worry about what an object or method means just yet! We'll come back to it. For now, just know we'll need it in our program.
+
+-------------------------------------------------------

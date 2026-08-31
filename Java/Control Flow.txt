@@ -1,0 +1,119 @@
+11. Oatmeal
+# Control Flow
+
+System.out.println("No one takes Alan's piece of cheese and gets away with it!");
+
+But in real life (and in programming), we are often making decisions based on varying factors and conditions. For example:
+
+It's sunny? Let's hike! Bring your snacks and hiking boots! 🥾
+It's raining? Boo... stay in and watch a movie! 🍿
+
+-----------------------------------------------------
+12. Cat Owner
+# If statements
+- This is the exact definition of an if statement!
+
++ If the condition evaluates to true, code in the if section is executed.
++ If the condition evaluates to false, code in the if section is skipped.
+
+int score = 85;
+
+if (score > 65) {
+  System.out.println("You passed the test! 🎉");
+}
+
+Above is an example of an if statement that outputs the result based on a mathematical expression.
+
+int peppers = 1;
+boolean isSpicy = peppers > 3;
+
+if (isSpicy) {
+  System.out.println("Careful! This is spicy fried rice.");
+}
+
+--- The example above works in the same way. Only this time, we are saving the conditional statement (peppers > 3) in a boolean variable that holds either true or false value.
+
+-- This value isSpicy holds can change based on the peppers variable. If the pepper amount is 1, the code in the if statement does not run.
+
+# else
+- There are times when you want to reach a conclusion if the if statement is false. We can use the else keyword.
+
+int spiceLevel = 1;
+boolean isSpicy = spiceLevel > 3;
+
+if (isSpicy) {
+  System.out.println("Careful! This is spicy fried rice.");
+} else {
+  System.out.println("Spice tolerance where?");
+}
+
+-- The else block makes sure that the if statement will always come to a decision, either one or the other.
+
+--------------------------------------------
+13. Dog Owner
+# Relational Operators
+- As you might have noticed, we often compare two values inside conditionals! We've seen the > symbol, which is a type of operator called a relational operator that compares values!
+
+== equal to
+!= not equal to
+> greater than
+< less than
+>= greater than or equal to
+<= less than or equal to
+
+int onlinePrice = 11;
+int storePrice = 11;
+
+if (onlinePrice == storePrice) {
+    System.out.println("The prices are the same!");
+}
+
+# else if
+
+int temp = 90;
+
+if (temp < 40) {
+    System.out.println("It may be snowing! ❄️"); 
+} else if (temp < 80) {
+    System.out.println("Enjoy the weather! 👌");
+} else {
+    System.out.println("Okay... It is getting a little hot in here. 🔥"); 
+}
+
+So here, the output would be: Okay... It is getting a little hot in here. 🔥
+
+-------------------------------------------------------------------
+14. Rollercoaster
+# Logical Operators
+- Logical operators combine and evaluate two conditions.
+
++ && and returns True if both conditions are True and returns False otherwise.
++ || or returns True if at least one of the conditions is True and False otherwise.
+
+
+int speedLimit = 30; 
+int drivingSpeed = 25;
+boolean schoolZone = false; 
+
+if ( drivingSpeed < speedLimit && schoolZone) {
+    System.out.println("You are being a safe driver!"); 
+} else if (drivingSpeed > speedLimit || schoolZone) {
+    System.out.println("Slow down!");
+} else {
+    System.out.println("Careful driving!"); 
+}
+
+
+In our example above, we have three different scenarios:
+
++ If the driver is under the speed limit AND it's a school zone, they are being a safe driver
++ If the driver is going above the speed limit OR it's a school zone, they need to slow down
++ Anything else
+
+A	B	A and B		A or B
+false	false	false		false
+false	true	false		true
+true	false	false		true
+true	true	true		true
+
+------------------------------------------------------

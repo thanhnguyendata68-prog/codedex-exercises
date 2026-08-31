@@ -1,0 +1,275 @@
+01. Introduction
+# ES6
+- It's time to turn the knobs up a notch. ⏫
+
+- Note: If you're using let and const for variables, you're already writing in ES6! 😀
+
+------------------------------------------------------------------
+02. Arrow Logic
+# Arrow Functions
+
+- Originally, JavaScript functions are written with the function keyword:
+
+function greet(name) {
+  return "Hello, " + name + "!";
+}
+
+console.log(greet("Naomi"));
+// Output: Hello, Naomi!
+
+--- But with ES6, you have a new way to write functions... with arrows! 🏹
+
+-- Arrow functions let us define functions in a concise way with its unique => syntax.
+
+- Here is the same example, but with arrow function syntax:
+
+const greet = (name) => {
+  return "Hello, " + name + "!";
+};
+
+console.log(greet("Asiqur"));
+// Output: Hello, Asiqur!
+
+- Arrow functions have parameters in parentheses, followed by the => symbol, and then the { } function body. They can be assigned to variables instead of defined with the function keyword.
+
+Note: While you can use let with arrow function, const may be a better fit since functions shouldn't change after being defined.
+
+## Implicit Returns
+- One notable benefit of arrow functions is you can implicitly return your values without using the return keyword.
+
+Wait, what?! That's right, you can return a value without the return keyword using an arrow function. Check it out:
+
+	const dadJoke = (text) => (text);
+
+Instead of using { } curly brackets after the arrow symbol, we use another set of ( ) parentheses with text passed in. When we run this code, JS knows this is returning the value of text.
+
+So if we try to log the following:
+console.log(dadJoke("I used to play piano by ear, but now I use my hands."));
+
+The value of text should appear on the console like normal!
+P.S. We advise you not to use this line in real life. 😂
+
+-----------------------------------------------------------
+03. 99 Bottles
+# Logging Strings
+- Remember one of the examples from the last exercise, where we log a string to the console?
+
+Here it is, again:
+
+const planetGreetings = (name) => {
+  return "Greetings from planet " + name;
+}
+
+console.log(planetGreetings("Earth 🌍"));
+// Output: Greetings from planet Earth 🌍
+
+In the return statement, we are concatenating, or adding, two strings together:
++ The "Greetings from planet " part.
++ The name string variable.
+
+# Template Literals
+- Template literals are special strings that are enclosed in backticks instead of quotes.
+
+Let's return to that function and see what this looks like:
+const planetGreetings = (name) => {
+  return `Greetings from planet ${name}`;
+}
+
+console.log(planetGreetings("Saturn 🪐"));
+// Output: Greetings from planet Saturn 🪐
+
+We got the same output!
+
+- With template literals:
+
+Strings are surrounded in backticks, not quotes.
+They start with a dollar sign followed by curly brackets ${ }.
+
+Anything inside the brackets is a placeholder for a value (e.g., name).
+
+-------------------------------------------------------
+04. Most Streamed Songs
+# for...of
+- ES6 also gave us a new way to do repetitive things. First is the for...of loop
+
+This loop is great for iterating over each item in a sequence such as a string:
+
+const name = "dumbo";
+
+for (let letter of name) {
+  console.log(letter);
+}
+
+/* Output:
+d
+u
+m
+b
+o
+*/
+
+
+You can also do this for an array:
+const boroughs = ["brooklyn", "manhattan", "the bronx", "queens", "staten island"];
+
+for (let borough of boroughs) {
+  console.log(borough);
+}
+
+/*
+Output:
+brooklyn
+manhattan
+the bronx
+queens
+staten island
+*/
+
+# for...in
+- Another fun loop to check out is the for...in.
+
+This is ideal for looping through objects. More specifically, you're looping through the object's keys:
+const person = {
+  name: "Austin",
+  age: 29,
+  occupation: "musician"
+}
+
+for (let info in person) {
+  console.log(person[info]);
+}
+
+/*
+Output:
+Austin
+29
+musician
+*/
+
+As you loop through each key in the person object, you access the paired value with [ ] bracket notation (i.e., person[info]).
+
+const fiveMostStreamedSongs = [
+  {
+    title: "Blinding Lights",
+    artist: "The Weeknd",
+    streams: 4260000000
+  },
+  {
+    title: "Shape of You",
+    artist: "Ed Sheeran",
+    streams: 3901000000
+  },
+  {
+    title: "Someone You Loved",
+    artist: "Lewis Capaldi",
+    streams: 3413000000
+  },
+  {
+    title: "Sunflower",
+    artist: "Post Malone (feat. Swae Lee)",
+    streams: 3345000000
+  },
+  {
+    title: "As It Was",
+    artist: "Harry Styles",
+    streams: 3278000000
+  }
+]
+
+// Iterate through each song here 💖
+for (let fiveMostStreamedSong of fiveMostStreamedSongs){
+  for (let songs in fiveMostStreamedSong ){
+    console.log(fiveMostStreamedSong[songs]);
+  }
+  console.log();
+};
+
+-------------------------------------------------------------------
+05. Pack Your Bags
+# The Spread Operator
+- When it comes to arrays, you can add them together:
+
+const groceryList = ["apples", "bananas", "milk", "eggs"];
+const householdItems = ["paper towels", "dish soap", "toothpaste"];
+
+const combinedList = [groceryList, householdItems];
+
+console.log(combinedList);
+
+/* Output:
+[
+  [ 'apples', 'bananas', 'milk', 'eggs' ],
+  [ 'paper towels', 'dish soap', 'toothpaste' ]
+]
+*/
+
+- Oh wait... the output is an array of two arrays. How can we combine them into a single array? We can use a handy tool called a spread operator!
+
+-- The spread operator lets you "unpack" items out of collections, like array elements or object properties, for use in other places. This allows us to do cool things, such as:
+
++ Apply zero or more arguments to a function.
++ Unpack items and add them to another array or object.
+
+-- To use the spread operator, we use three ... periods on the left side of the array name.
+
+From our last example, we can return a single array of the combined content with the spread operator:
+const combinedList = [...groceryList, ...householdItems];
+
+console.log(combinedList);
+
+/*
+Output: 
+[
+  'apples',
+  'bananas',
+  'milk',
+  'eggs',
+  'paper towels',
+  'dish soap',
+  'toothpaste'
+]
+*/
+
+-- Much better! The spread operator took everything out of the groceryList and householdItems arrays and placed them in a new combinedList array.
+
+# The Rest Operator
+- We can also use those same three dots to "pack" items into arrays and objects.
+
+- The rest operator collects zero or more items into objects or arrays, that can be used for things like:
+
++ Defining functions with zero or more parameters.
++ Help with destructuring arrays and objects.
+
+If we're defining a function but aren't sure how many arguments it should take, we can use the rest operator:
+
+const packGroceries = (...items) => {
+  return items;
+}
+
+const packedGroceries = packGroceries("apples", "bananas", "milk");
+const morePackedGroceries = packGroceries("eggs", "bread");
+
+console.log(packedGroceries);
+console.log(morePackedGroceries);
+/*
+Output:
+[ 'apples', 'bananas', 'milk' ]
+[ 'eggs', 'bread' ]
+*/
+
+
+Exercise :
+// Define planVacation() here 💖
+const planVacation = (destinationOne, destinationTwo, ...moreDestinations) => {
+  return [destinationOne, destinationTwo, ...moreDestinations];
+};
+
+const itinerary = planVacation(
+  "Tokyo, Japan",
+  "Reykjavik, Iceland",
+  "Cairo, Egypt",
+  "Buenos Aires, Argentina",
+  "Auckland, New Zealand"
+);
+
+console.log(itinerary);

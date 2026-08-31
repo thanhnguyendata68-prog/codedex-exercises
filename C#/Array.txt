@@ -1,0 +1,174 @@
+27. Array of Sunshine
+# Arrays
+- An array is a collection that stores multiple elements.
+
+string[] snacks = { "🍿 Popcorn", "🥨 Pretzels", "🪱 Gummy Worms" };
+
+Let's break this down:
++ string[] means this is an array of strings
++ snacks is the name of the array
++ { } contains all the values in the array
+
+--> Each value is separated by commas.
+
+Here, the snacks array holds 3 string elements: “Popcorn”, “Pretzels”, and “Gummy Worms”.
+
+Arrays are fixed size, which means the number of elements is decided when the array is created. They also must be of the same data type.
+
+string[] soda = { "Coca-Cola", "Diet Coke", "Sprit", "Dr Pepper", "Mountain Dew" };
+int[] temperature = { 77, 74, 87, 85, 92, 83, 78 };
+double[] prices = { 8.99, 11.99, 14.99, 19.99 };
+
+--------------------------------------------------------
+28. Soundtrack to My Life
+# Index
+- Each value in an array has a numbered position called an index.
+
+An index is an element’s position in an array.
+string[] animals = { "Cat", "Dog", "Frog" };
+
+-- Array indexes start at 0, not 1.
+
+This array looks like:
+
+Index 0 → "Cat"
+Index 1 → "Dog"
+Index 2 → "Frog"
+
+We can access a value using square brackets [ ]:
+Console.WriteLine(animals[1]);
+
+This prints:  Dog   (Because "Dog" is stored at index 1.)
+
+Here's another example: 
+string[] planets = { "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune" };
+
+Console.WriteLine(planets[0]);
+Console.WriteLine(planets[2]);
+
+Output: Mercury
+	Mars
+
+-------------------------------------------------
+29. Hidden Gems
+
+# Modifying Array Values
+- We can also change values inside an array.
+
+To update an element, use its index position.
+string[] moods = { "Sleepy", "Hungry", "Focused" };
+moods[1] = "Hangry";
+
+Console.WriteLine(moods[0]);
+Console.WriteLine(moods[1]);
+Console.WriteLine(moods[2]);
+
+We replaced the value at index 1. Now the array contains:
+Sleepy
+Hangry
+Focused
+
+Let's look at another example:
+string[] weather = { "Sunny 🌞", "Rainy 🌧️", "Cloudy ☁️" };
+
+Console.WriteLine(weather[0]);
+
+weather[0] = "Stormy ⛈️";
+
+Console.WriteLine(weather[0]);
+
+Output:
+Sunny 🌞
+Stormy ⛈️
+
+--> The old value gets replaced with the new value.
+
+--------------------------------------------
+30. World Cup
+# Empty Arrays
+- You can also create an empty array first:  int[] temperatures = new int[7];
+
+-- This creates an array with 7 spaces inside of it.
+
+Then we can assign values later:
+temperatures[0] = 72;
+temperatures[1] = 68;
+temperatures[2] = 75;
+
+-- This syntax is useful when we know the size of the array ahead of time, but we don't know (or don't want to specify) all the values yet.
+
+For example:
+
+int[] innings = new int[9];           // for 9 innings in a baseball game
+string[] roster = new string[26];     // for 26 players on a baseball team
+
+-- If we create an array with 3 spaces, what happens if we add a fourth element?
+
+Well, we can't! Arrays have a fixed size. If an array only has 3 spaces, there isn't a fourth spot to put another value.
+
+int[] marbles = new int[3];
+
+marbles[0] = 10;
+marbles[1] = 20;
+marbles[2] = 30;
+
+// This does NOT work:
+marbles[3] = 40;
+
+-- If we try to use an index that doesn’t exist, C# throws an IndexOutOfRangeException and the program crashes.
+
+------------------------------------------------------------------
+31. Notification Overload
+# Arrays + Loops
+- Arrays become really powerful when combined with loops. 🔄
+
+Instead of printing every value manually:
+Console.WriteLine(colors[0]);
+Console.WriteLine(colors[1]);
+Console.WriteLine(colors[2]);
+Console.WriteLine(colors[3]);
+Console.WriteLine(colors[4]);
+
+We can use a for loop:
+string[] colors = { "Red", "Blue", "Green", "Yellow", "Purple" };
+
+for (int i = 0; i < 5; i++)
+{
+  Console.WriteLine(colors[i]);
+}
+
+Output:
+Red
+Blue
+Green
+Yellow
+Purple
+
+Here's what happens:
++ i starts at 0
++ The loop continues while i < 5
++ Console.WriteLine(colors[i]);prints the value at that index
++ i++ increases the index each time
+
+--- This lets us move through the array automatically.
+--- If the array has, say, 20+ elements, then using a for loop is gonna save us a lot of time.
+
+----------------------------------------------------------------
+32. Emotional Support Plushie
+# The .Length Property
+- C# arrays have a built-in property called .Length that tells us how many elements are inside the array.
+
+string[] books = { "Dune", "Dracula", "Frankenstein" };
+Console.WriteLine(books.Length);
+
+Output:  3
+
+This is especially useful in loops: 
+for (int i = 0; i < books.Length; i++)
+{
+  Console.WriteLine(books[i]);
+}
+
+---> Now the loop automatically adjusts to the array size.
+
+If we add more books later, the loop still works correctly.

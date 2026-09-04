@@ -158,4 +158,4 @@ Let's start addressing some loopholes in a program using… loops! ➿
 
 -------------------------------------------------------
 case-sensitive
-scope
+block scope

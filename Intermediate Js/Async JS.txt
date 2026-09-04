@@ -1,0 +1,313 @@
+07. On The Side
+# Sync vs. Async
+
+- After you've ordered your food from a delivery app, what would you do?
+
++ 1. Follow your driver on the app until they get to you.
++ 2. Go do other stuff and wait for the app to notify you.
+
+Option 1 is synchronous because we're waiting until the food arrives before doing something else. 
+
+Option 2, however, is asynchronous because you can go do other stuff while waiting for the food to be delivered. 😅
+
+By default, JavaScript code runs from top to bottom, one line at a time. Many operations in JavaScript, such as creating a variable and logging it to the console, happen really fast when running the code:
+
+// This goes first
+let favoriteGameConsole = "Xbox 🎮";
+
+// This goes next
+console.log(favoriteGameConsole);
+
+But some operations might take longer to complete, including:
+
++ Setting timers. ⏰
++ Listening for events on a website. ⌨️
++ Fetching data from outside your code. 📦
+
+In this chapter, we will use asynchronous JavaScript for some tasks that might take a little more time.
+
+---------------------------------------------------------------------------
+08. Subscribe Button
+# Callbacks
+
+If you ever used event handling between your HTML and JS code, such as with "on-click" events, you've used callbacks. 😀
+
+-- Callback functions are passed as arguments into a parent function. We don't execute these functions directly. Instead, they are called in the parent function under some conditions.
+
+# Events & Timers
+- Two common examples of when callbacks are used asynchronously are events and timers:
+
+document.getElementById("btn").addEventListener("click", () => {
+  setTimeout(() => alert("Hello!"), 3000);
+});
+
+- The second argument for .addEventListener() is a callback function. Inside, we can do asynchronous stuff such as delaying an alert message by 3 seconds. ⏳
+
+The setTimeout() function also uses an async callback function that activates after 3 seconds (3000 milliseconds).
+
+
+// Subscribe Button ✅
+// Codédex
+
+const subscribeBtn = document.getElementById("subscribeBtn");
+const message = document.getElementById("message");
+
+subscribeBtn.addEventListener("click", () => {
+  // Show the message
+  message.classList.remove("hidden");
+  subscribeBtn.innerText = "Subscribed";
+
+  // Hide the message after 3 seconds (3000 milliseconds)
+  setTimeout(() => {
+    message.classList.add("hidden");
+  }, 3000);
+});
+-----------------------------------------------------------------
+09. Random Numbers
+# Promises
+- Promises are objects that represent asynchronous operations that are either successful or unsuccessful.
+
+They come in three states:
+
++ A "pending" state for an unfinished operation (default).
++ A "fulfilled" state for a successful operation.
++ A "rejected" state for an unsuccessful operation.
+
+Examples of these operations include fetching data and handling errors.
+
+We can make promises with the built-in Promise class:
+
+function getSomeData() {
+  const error = true;
+
+  return new Promise((resolve, reject) => {
+    if (!error) {
+      resolve(); // The operation was successful
+    } else {
+      reject("An error happened along the way.");
+    }
+  });
+}
+
+console.log(getSomeData());
+
+Inside the parentheses for new Promise(), we pass a single callback function that takes two parameters. These parameters, resolve and reject, are also functions. If the promise is fulfilled, the resolve() function activates. Otherwise, the reject() function activates.
+
+Note: We aren't invoking the callback directly. Instead, the returned promise is invoking the callback for us.
+
+// Random Numbers 🔢
+// Codédex
+
+function randomNumberPromise() {
+  return new Promise((resolve, reject) => {
+    const randomNumber = Math.floor(Math.random() * 10) + 1; // Random number between 1 and 10
+    if (randomNumber < 5) {
+      resolve(); // Resolve if the random number is less than 5
+    } else {
+      reject("Rejected"); // Reject with the random number if 5 or greater
+    }
+  });
+ }
+ 
+ const generateBtn = document.getElementById("generateButton");
+ 
+ generateBtn.addEventListener("click", randomNumberPromise);
+--------------------------------------------------------------------
+10. Jokebook
+# Chaining Promises
+
+function prepareOrder(callback) {
+  const result = "Preparing order 🧑‍🍳";
+  callback(result);
+}
+
+function serveOrder(result, callback) {
+  const result2 = `${result}, and now serving. Enjoy! 🍲`;
+  callback(result2)
+}
+
+// Calling the operations
+prepareOrder(function(result) {
+  serveOrder(result, function(result2) {
+    console.log(result2);
+  });
+});
+
+- This may not seem bad with just two steps. But if more steps were added, then there would be more callbacks. At a certain point, this becomes unreadable.
+
+- We can use promises to write out these async operations, with callbacks in a cleaner way. Enter chaining.
+
+-- Chaining promises uses the .then() and .catch() to work with async data in multiple steps:
+
+function prepareOrder() {
+  return new Promise((resolve) => {
+    const result = "Preparing order 🧑‍🍳";
+    resolve(result);
+  })
+}
+
+function serveOrder(result) {
+  return new Promise((resolve) => {
+    const result2 = `${result}, and now serving. Enjoy! 🍲`;
+    resolve(result2);
+  })
+}
+
+prepareOrder()
+  .then((result) => serveOrder(result))
+  .then((result2) => {
+    console.log(result2)
+  })
+  .catch((error) => {
+    console.log("Error:", error);
+  })
+
+
+Two major changes, but the second one is even more interesting:
+
++ First, our two defined functions now return new Promise objects that resolve with some result string.
++ We "chained together" our function calls with .then() and .catch().
+
+In .then(), you pass the next step you want to take with the promise data you have. Next, you have the .catch() statement that handles any rejected promise data.
+
+# Fetching Data
+- When we want to work with data outside our program, one way to do it is by fetching it from another computer. In JS, this is done with the following function:
+
+		fetch(url);
+
+- This fetch() function accepts a url argument. If it's a valid URL, this function returns a promise object with resolved data.
+
+- Many APIs (or application programming interfaces) offer URLs for public use. Some are free while some aren't. This course will use free ones!
+
+Here is an example of fetching from a free Dog API:
+
+fetch("https://dog.ceo/api/breeds/image/random")
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+  .catch((error) => console.error("Error:", error));
+
+
+When working with fetched data, it has to go through at least two .then() calls:
++ The first converts the data into JSON, an object-centered format that can be used in JS.
++ The second lets us access and use the data.
+
+
+const jokeContainer = document.getElementById("jokeContainer");
+const getJokeBtn = document.getElementById("getJokeBtn");
+
+function fetchJoke() {
+  // Fetch for joke data and use chaining here 💖
+  fetch("https://official-joke-api.appspot.com/random_joke")
+  .then((response) => response.json())
+  .then((data) => {
+    const joke = `<p>${data.setup}</p><p>${data.punchline}</p>`;
+    jokeContainer.innerHTML = joke;
+  })
+  .catch((error) => {
+    console.error("Error fetching joke:", error.message);
+    jokeContainer.innerHTML = 
+      "<p>Failed to fetch joke. Please try again later.</p>";
+  });
+}
+
+getJokeBtn.addEventListener("click", fetchJoke);
+
+---------------------------------------------------------
+11. Trivia Night
+# async/await
+- Chaining promises with .then()/.catch() made handling async data via callbacks more readable. But now there's another way to write it!
+
+- The async/await keywords (released after ES6) offer a more concise way of writing promises:
+
+function getSomeDataWithChain() {
+  fetch(someData)
+    .then((response) => response.json())
+    .then((data) => data)
+    .catch((error) => console.log("Something went wrong. 😦"));
+}
+
+async function getSomeDataWithAsync() {
+  const response = await fetch(someData);
+  if (response.ok === false) {
+    throw new Error("Something went wrong. 😦");
+  }
+  const data = await response.json();
+}
+
+-- The first function asks for promise data with .then() statements and handles any errors with .catch(). The second function does the same thing with async/await.
+
+-- First, the async keyword is added to the function definition. Then inside the function, any operation that returns a promise (like fetch() and .json()) can have an await next to it. This ensures that the next operation won't start until the promise is fulfilled or rejected.
+
+-- When a response object is made, we check if its .ok property is false (meaning the data fetch didn't succeed). If so, we throw an error with a message.
+
+-- When using async/await, we can check if promise came back with an ok property that is true or false:
+
+async function getSomeData() {
+  const response = await fetch(someData);
+  if (response.ok === false) {
+    throw new Error("A problem occurred while fetching the data.");  
+  }
+  const data = await response.json();
+}
+
+- If response.ok is false, then it can stop the function and throw a new Error with a message about what happened. This is used instead of .catch().
+
+-- By the way, it is totally valid to stick with .then()/.catch(). The async/await keywords are just syntactic sugar that accomplish the same thing, just with different words.
+
+
+const quizContainer = document.getElementById("quiz");
+const startButton = document.getElementById("startBtn");
+
+// Rewrite fetchTriviaQuestions() with async/await here 💖
+async function fetchTriviaQuestions() {
+  const response = await fetch("https://opentdb.com/api.php?amount=10");
+  if (response.ok === false ) {
+    throw new Error("Failed to get trivia questions");
+  }
+
+  const data = await response.json();
+  return data.results; /// important lline
+}
+
+function displayTriviaQuestions(questions) {
+  questions.forEach((question, index) => {
+    const questionElement = document.createElement("div");
+    questionElement.classList.add("question");
+    questionElement.innerHTML = `<p>${index + 1}. ${question.question}</p>`;
+
+    const radioGroupName = `question${index}`;
+
+    const answers = [...question.incorrect_answers, question.correct_answer];
+
+    answers.forEach((answer) => {
+      const answerElement = document.createElement("div");
+      answerElement.classList.add("answer");
+      answerElement.innerHTML = `
+        <label>
+          <input id="question-${index}" type="radio" name="${radioGroupName}" value="${answer}">
+          ${answer}
+        </label>
+      `;
+      questionElement.appendChild(answerElement);
+    });
+
+    quizContainer.appendChild(questionElement); // Move this line outside the inner loop
+  });
+}
+
+startButton.addEventListener("click", async () => {
+  startButton.disabled = true;
+  const questions = await fetchTriviaQuestions();
+  displayTriviaQuestions(questions);
+});
+
+---------------------------------------------------------
+12. Cosmic Birthday
+
++ Async JS is great for time-consuming tasks like data fetching.
++ Promise objects represent async operations, with pending, fulfilled, and rejected states.
++ Fulfilled and rejected promises always come back with data.
++ The fetch() function gets data from somewhere else.
++ This data is converted into JSON format before being read.
++ You can chain promises together with the .then() and .catch() methods.
++ You can simplify this process with the async and await keywords.
